@@ -57,6 +57,10 @@ public class LoginFrame extends JFrame {
 		this.getGf().getGamePanel().getTwoMark().addActionListener(ga);
 		this.getGf().getGamePanel().getThreeMark().addActionListener(ga);
 		this.getGf().getGamePanel().getNoMark().addActionListener(ga);
+		this.getGf().getGamePanel().getOutPoke().addActionListener(ga);
+		this.getGf().getGamePanel().getNoOut().addActionListener(ga);
+		this.getGf().getGamePanel().getHint().addActionListener(ga);
+		this.getGf().getGamePanel().getTrusteeship().addActionListener(ga);
 		
 	}
 	

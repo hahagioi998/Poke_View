@@ -1,5 +1,6 @@
 package com.qiu.controller;
 
+import com.qiu.model.Poke;
 import com.qiu.util.Util;
 import com.qiu.view.LoginFrame;
 
@@ -17,6 +18,7 @@ public class DealThread extends Thread {
 		while (true) {
 
 			if (Util.getKey() == 1) {// 当key值为1的时候就开始发牌
+//				Util.reStart = false;//主要用于游戏一半的时候重新开始
 				while (Util.player_Poke < Util.PLAYERE_POKE) {// 发牌的轮数
 					Util.player_Poke++;// 每发一次就自增1
 					// 给每个玩家发牌,并每发一次牌就排序
@@ -204,22 +206,32 @@ public class DealThread extends Thread {
 					e.printStackTrace();
 				}
 				if(Util.landowner == 1){//玩家一地主
-					while(Util.pokeList.size() != 0){//把底牌分给地主
-						Util.playerOne.getPlayerPoke().add(Util.pokeList.get(0));
-						Util.pokeList.remove(0);
+//					while(Util.pokeList.size() != 0){//把底牌分给地主
+//						Util.playerOne.getPlayerPoke().add(Util.pokeList.get(0));
+//						Util.pokeList.remove(0);
+//					}
+					//底牌接着显示
+					for(int i = 0; i < Util.pokeList.size(); i++){
+						Util.playerOne.getPlayerPoke().add(Util.pokeList.get(i));
 					}
 					Util.pokeSort(Util.playerOne);//排序
 					Util.setCoordinate(Util.playerOne.getPlayerPoke());
 				}else if(Util.landowner == 2){
-					while(Util.pokeList.size() != 0){
-						Util.playerTwo.getPlayerPoke().add(Util.pokeList.get(0));
-						Util.pokeList.remove(0);
+//					while(Util.pokeList.size() != 0){
+//						Util.playerTwo.getPlayerPoke().add(Util.pokeList.get(0));
+//						Util.pokeList.remove(0);
+//					}
+					for(int i = 0; i < Util.pokeList.size(); i++){
+						Util.playerTwo.getPlayerPoke().add(Util.pokeList.get(i));
 					}
 					Util.pokeSort(Util.playerTwo);
 				}else if(Util.landowner == 3){
-					while(Util.pokeList.size() != 0){
-						Util.playerThree.getPlayerPoke().add(Util.pokeList.get(0));
-						Util.pokeList.remove(0);
+//					while(Util.pokeList.size() != 0){
+//						Util.playerThree.getPlayerPoke().add(Util.pokeList.get(0));
+//						Util.pokeList.remove(0);
+//					}
+					for(int i = 0; i < Util.pokeList.size(); i++){
+						Util.playerThree.getPlayerPoke().add(Util.pokeList.get(i));
 					}
 					Util.pokeSort(Util.playerThree);
 				}
@@ -227,8 +239,63 @@ public class DealThread extends Thread {
 			}else if(Util.key == 4){
 				
 				lf.getGf().getGamePanel().addMouseListener(lf.getGm());
-				while(true){
-					
+				if(Util.landowner == 1){
+					Util.callPlayer = 0;
+				}else if(Util.landowner == 2){
+					Util.callPlayer = 2;
+				}else if(Util.landowner == 3){
+					Util.callPlayer = 1;
+				}
+				System.out.println("aaa" + Util.callPlayer);
+				while(Util.playerOne.getPlayerPoke().size() != 0 
+						&& Util.playerTwo.getPlayerPoke().size() != 0
+						&& Util.playerThree.getPlayerPoke().size() != 0){//判断条件就是都不为空说明有牌
+					if(Util.callPlayer == 0){
+						
+					}else if(Util.callPlayer == 1){
+						//东家拿出最小的牌
+						Poke p = Util.playerThree.getPlayerPoke().get(Util.playerThree.getPlayerPoke().size() - 1);
+						//放进出牌的集合中
+						Util.playerThree.getOutPoke().add(p);
+						Util.playerThree.getPlayerPoke().remove(Util.playerThree.getPlayerPoke().size() - 1);
+						Util.callPlayer = 2;
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}else if(Util.callPlayer == 2){
+						//西家出一张比东家大1的牌
+						Poke p;
+						if(Util.playerThree.getOutPoke().size() != 0){
+							for (int i = Util.playerTwo.getPlayerPoke().size() - 1; i >= 0 ; i--) {
+								if(Util.playerTwo.getPlayerPoke().get(i).getNumber() > 
+								Util.playerThree.getOutPoke().get(0).getNumber()){//如果西家有一张牌比东家的一张牌大就可以出牌
+									p = Util.playerTwo.getPlayerPoke().get(i);
+									Util.playerTwo.getOutPoke().add(p);//将找出的那张牌放进西家的出牌集合中
+									Util.playerTwo.getPlayerPoke().remove(i);//并移除掉西家手牌中要出的牌
+									break;//找到跳出循环
+								}
+							}
+						}
+						if(Util.playerTwo.getOutPoke().size() == 0){//西家出牌集合为空,说明要不起
+							Util.onPoke = false;
+						}
+						Util.callPlayer = 0;//跳转到自己出牌
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+//					try {
+//						Thread.sleep(1);
+//					} catch (InterruptedException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
 				}
 			}
 			try {

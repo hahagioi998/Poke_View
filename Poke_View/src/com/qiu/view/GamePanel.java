@@ -26,8 +26,8 @@ public class GamePanel extends JPanel {
 	private JButton noOut = new JButton("不  出");
 	private JButton hint = new JButton("提  示");
 	private JButton trusteeship = new JButton("托  管");
-	
-//	private GameMouse gm = new GameMouse(this);
+
+	// private GameMouse gm = new GameMouse(this);
 
 	public GamePanel() {
 
@@ -41,6 +41,10 @@ public class GamePanel extends JPanel {
 		twoMark.setActionCommand("twoMark");
 		threeMark.setActionCommand("threeMark");
 		noMark.setActionCommand("noMark");
+		outPoke.setActionCommand("outPoke");
+		noOut.setActionCommand("noOut");
+		hint.setActionCommand("hint");
+		trusteeship.setActionCommand("trusteeship");
 
 	}
 
@@ -59,9 +63,22 @@ public class GamePanel extends JPanel {
 		g.drawString(new PlayerOne().getName(), 162, 631);
 		g.drawString(new PlayerTwo().getName(), 135, 30);
 		g.drawString(new PlayerThree().getName(), 800, 30);
+		// 放那出牌那些按钮
+		outPoke.setBounds(310, 440, 70, 40);
+		noOut.setBounds(390, 440, 70, 40);
+		hint.setBounds(470, 440, 70, 40);
+		trusteeship.setBounds(550, 440, 70, 40);
+		this.add(outPoke);
+		this.add(noOut);
+		this.add(hint);
+		this.add(trusteeship);
+		outPoke.setVisible(false);
+		noOut.setVisible(false);
+		hint.setVisible(false);
+		trusteeship.setVisible(false);
 
 		if (Util.key == 1) {
-			if(Util.landowner == 4){
+			if (Util.landowner == 4) {
 				g.drawString("重新发牌...", 370, 320);
 			}
 			oneMark.setVisible(false);
@@ -160,13 +177,13 @@ public class GamePanel extends JPanel {
 			noMark.setVisible(false);
 			if (Util.callPlayer == 0) {// 玩家一(自己)叫地主
 				// 自己叫地主的时候,按钮得可见
-				if(Util.hidePoints == 1){
+				if (Util.hidePoints == 1) {
 					oneMark.setVisible(false);
 					twoMark.setVisible(true);
-				}else if(Util.hidePoints == 2){
+				} else if (Util.hidePoints == 2) {
 					oneMark.setVisible(false);
 					twoMark.setVisible(false);
-				}else{
+				} else {
 					oneMark.setVisible(true);
 					twoMark.setVisible(true);
 				}
@@ -174,7 +191,7 @@ public class GamePanel extends JPanel {
 				noMark.setVisible(true);
 				if (Util.drawMark == 1) {
 					g.drawString("1  分", 665, 480);
-					//点完按钮,按钮要不可见
+					// 点完按钮,按钮要不可见
 					oneMark.setVisible(false);
 					twoMark.setVisible(false);
 					threeMark.setVisible(false);
@@ -252,22 +269,30 @@ public class GamePanel extends JPanel {
 			}
 			// 底牌
 			if (Util.pokeList.size() == 3) {
-				//将底牌显示出来
+				// 将底牌显示出来
 				for (int i = 0; i < Util.pokeList.size(); i++) {// 54张牌开始就显示在桌面
 					g.drawImage(Util.pokeList.get(i).getImage(), 400 + (i * 80), 160, 400 + (i * 80) + Util.POKE_W,
 							160 + Util.POKE_H, 0, 0, 108, 148, null);
 				}
 			}
-			//判断出谁是地主,直接画上
-			if (Util.landowner == 1) {
+			// 判断出谁是地主,直接画上
+			if (Util.landowner == 1) {// 自己地主
 				g.drawString("地 主", 665, 480);
-			} else if (Util.landowner == 2) {
+			} else if (Util.landowner == 2) {// 西家地主
 				g.drawString("地 主", 135, 70);
-			} else if (Util.landowner == 3) {
+			} else if (Util.landowner == 3) {// 东家地主
 				g.drawString("地 主", 800, 70);
 			}
 
-		}else if(Util.key == 4){
+		} else if (Util.key == 4) {
+			// 底牌
+			if (Util.pokeList.size() == 3) {
+				// 将底牌显示出来
+				for (int i = 0; i < Util.pokeList.size(); i++) {// 54张牌开始就显示在桌面
+					g.drawImage(Util.pokeList.get(i).getImage(), 400 + (i * 80), 160, 400 + (i * 80) + Util.POKE_W,
+							160 + Util.POKE_H, 0, 0, 108, 148, null);
+				}
+			}
 			for (int k = 0; k < Util.playerOne.getPlayerPoke().size(); k++) {// 玩家一的牌开始就显示在桌面
 				Poke p = Util.playerOne.getPlayerPoke().get(k);
 				g.drawImage(Util.playerOne.getPlayerPoke().get(k).getImage(), p.getPokeX(), p.getPokeY(),
@@ -293,7 +318,7 @@ public class GamePanel extends JPanel {
 							0, 108, 148, null);
 				}
 			}
-			//判断出谁是地主,直接画上
+			// 判断出谁是地主,直接画上
 			if (Util.landowner == 1) {
 				g.drawString("地 主", 665, 480);
 			} else if (Util.landowner == 2) {
@@ -301,21 +326,73 @@ public class GamePanel extends JPanel {
 			} else if (Util.landowner == 3) {
 				g.drawString("地 主", 800, 70);
 			}
-			
-			//放那出牌那些按钮
-			outPoke.setBounds(310, 440, 70, 40);
-			noOut.setBounds(390, 440, 70, 40);
-			hint.setBounds(470, 440, 70, 40);
-			trusteeship.setBounds(550, 440, 70, 40);
-			this.add(outPoke);
-			this.add(noOut);
-			this.add(hint);
-			this.add(trusteeship);
+
+			// 放那出牌那些按钮
+			// outPoke.setBounds(310, 440, 70, 40);
+			// noOut.setBounds(390, 440, 70, 40);
+			// hint.setBounds(470, 440, 70, 40);
+			// trusteeship.setBounds(550, 440, 70, 40);
+			// this.add(outPoke);
+			// this.add(noOut);
+			// this.add(hint);
+			// this.add(trusteeship);
 			outPoke.setVisible(false);
 			noOut.setVisible(false);
 			hint.setVisible(false);
 			trusteeship.setVisible(false);
-			//轮到谁出牌
+			// 轮到谁出牌
+			if (Util.callPlayer == 0) {// 自己先出牌
+				outPoke.setVisible(true);
+				noOut.setVisible(true);
+				hint.setVisible(true);
+				trusteeship.setVisible(true);
+				if (Util.playerThree.getOutPoke().size() != 0) {
+					for (int i = 0; i < Util.playerThree.getOutPoke().size(); i++) {
+						g.drawImage(Util.playerThree.getOutPoke().get(i).getImage(), 800, 150 + (i * 20),
+								800 + Util.POKE_W, 150 + (i * 20) + Util.POKE_H, 0, 0, 108, 148, null);
+					}
+				}
+				if (Util.playerTwo.getOutPoke().size() != 0) {
+					for (int k = 0; k < Util.playerTwo.getOutPoke().size(); k++) {// 玩家二的牌开始就显示在桌面
+						g.drawImage(Util.playerTwo.getOutPoke().get(k).getImage(), 122, 150 + (k * 20),
+								122 + Util.POKE_W, 150 + (k * 20) + Util.POKE_H, 0, 0, 108, 148, null);
+					}
+				}
+			} else if (Util.callPlayer == 1) {// 东家先出牌
+				outPoke.setVisible(false);
+				noOut.setVisible(false);
+				hint.setVisible(false);
+				trusteeship.setVisible(false);
+				if (Util.playerThree.getOutPoke().size() != 0) {
+					for (int i = 0; i < Util.playerThree.getOutPoke().size(); i++) {
+						g.drawImage(Util.playerThree.getOutPoke().get(i).getImage(), 800, 150 + (i * 20),
+								800 + Util.POKE_W, 150 + (i * 20) + Util.POKE_H, 0, 0, 108, 148, null);
+					}
+				}
+				if (Util.playerTwo.getOutPoke().size() != 0) {
+					for (int k = 0; k < Util.playerTwo.getOutPoke().size(); k++) {// 玩家二的牌开始就显示在桌面
+						g.drawImage(Util.playerTwo.getOutPoke().get(k).getImage(), 122, 150 + (k * 20),
+								122 + Util.POKE_W, 150 + (k * 20) + Util.POKE_H, 0, 0, 108, 148, null);
+					}
+				}
+			} else if (Util.callPlayer == 2) {// 西家出牌
+				outPoke.setVisible(false);
+				noOut.setVisible(false);
+				hint.setVisible(false);
+				trusteeship.setVisible(false);
+				if (Util.playerTwo.getOutPoke().size() != 0) {
+					for (int k = 0; k < Util.playerTwo.getOutPoke().size(); k++) {// 玩家二的牌开始就显示在桌面
+						g.drawImage(Util.playerTwo.getOutPoke().get(k).getImage(), 122, 150 + (k * 20),
+								122 + Util.POKE_W, 150 + (k * 20) + Util.POKE_H, 0, 0, 108, 148, null);
+					}
+				}
+				if (Util.playerThree.getOutPoke().size() != 0) {
+					for (int i = 0; i < Util.playerThree.getOutPoke().size(); i++) {
+						g.drawImage(Util.playerThree.getOutPoke().get(i).getImage(), 800, 150 + (i * 20),
+								800 + Util.POKE_W, 150 + (i * 20) + Util.POKE_H, 0, 0, 108, 148, null);
+					}
+				}
+			}
 		}
 
 		try {

@@ -23,7 +23,6 @@ public class GameMouse extends MouseAdapter {
 		if(left == 1){
 			int mouseX = e.getX();//获取鼠标的横坐标
 			int mouseY = e.getY();//获取鼠标的纵坐标
-			System.out.println("aaaaa");
 			for (int i = Util.playerOne.getPlayerPoke().size() -1; i >= 0; i--) {
 				Poke p = Util.playerOne.getPlayerPoke().get(i);
 				Rectangle rec = new Rectangle(p.getPokeX(), p.getPokeY(), Util.POKE_W, Util.POKE_H);
@@ -32,7 +31,13 @@ public class GameMouse extends MouseAdapter {
 						p.setPokeY(485);
 					}else if(p.getPokeY() == 485){
 						p.setPokeY(500);
-					}	
+					}
+					try {
+						Thread.sleep(1);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					getGp().repaint();
 					break;
 				}

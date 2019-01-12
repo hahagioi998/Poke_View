@@ -49,8 +49,11 @@ public class GameAction implements ActionListener {
 				Util.callPlayer = 0;
 				Util.mark = 0;
 				Util.hidePoints = 0;
+				lf.removeMouseListener(lf.getGm());
+				
 				Util.upsetPoke(Util.pokeList);
 				Util.setKey(1);
+//				Util.reStart = true;
 			}
 		}else if(order.equals("selete")){
 			lf.getSd().setVisible(true);
@@ -83,7 +86,6 @@ public class GameAction implements ActionListener {
 					+ "\n后按逆时针顺序依次出牌，轮到用户跟牌时，用户可以选择“不出”或出比"
 					+ "\n上一个玩家大的牌。某一玩家出完牌时结束本局。";
 			JOptionPane.showMessageDialog(lf.getGf(), ruleText, "规则说明", JOptionPane.CLOSED_OPTION);
-//			lf.getRd().setVisible(true);
 		}else if(order.equals("about")){
 			String textAbout = "斗地主 1.0Bate\n(C)2018-1219  涅槃出品";
 			JOptionPane.showMessageDialog(lf.getGf(), textAbout, "关于", JOptionPane.CLOSED_OPTION);
@@ -107,6 +109,14 @@ public class GameAction implements ActionListener {
 		}else if(order.equals("noMark")){
 			Util.drawMark = 4;
 			Util.playerOne.setPoints(0);//玩家叫1分
+		}else if(order.equals("outPoke")){
+			System.out.println("出牌");
+		}else if(order.equals("noOut")){
+			System.out.println("不出");
+		}else if(order.equals("hint")){
+			System.out.println("提示");
+		}else if(order.equals("trusteeship")){
+			System.out.println("托管");
 		}
 	}
 	public LoginFrame getLf() {

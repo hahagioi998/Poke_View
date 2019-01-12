@@ -101,18 +101,19 @@ public class Util {
 		}
 	}
 	//给自己的牌设置一个固定的坐标
-	public static void setCoordinate(ArrayList<Poke> list){
+	public static void setCoordinate(ArrayList<Poke> list){//传进来的参数集合就是要赋值的,其实就是自己的手牌要设置坐标
 		for (int i = 0; i < list.size(); i++) {
-			list.get(i).setPokeX(250 + (i * 25));
-			list.get(i).setPokeY(500);
+			list.get(i).setPokeX(250 + (i * 25));//250就是第一张牌的横坐标,每右边一张,就是横坐标加25像素
+			list.get(i).setPokeY(500);//500就是自己手牌的纵坐标,都一样
 		}
 	}
 
-	public static int callPlayer = 0;//随机谁叫地主
+	public static int callPlayer = 0;//随机谁叫地主  0自己,1东家,2西家
 	public static int drawMark = 0;//在面板上画几分开关
 	public static int mark = 0;//定义一个标记,用来对电脑叫几分控制
-	public static int landowner = 0;//判断自己叫分的时候,叫分按钮可不可见
+	public static int landowner = 0;//判断自己叫分的时候,叫分按钮可不可见,判断谁是地主,1自己,2西家,3东家
 	public static int hidePoints = 0;//判断西家叫过的分数,自己叫的分数一定要比上一家大,该变量用来控制比上一家小的按钮不可见
+	public static boolean onPoke = true;//要不起的开关,默认要的起
 	//叫分的方法
 	public static void callPlayers(){
 		Random ran = new Random();
