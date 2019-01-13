@@ -113,7 +113,8 @@ public class Util {
 	public static int mark = 0;//定义一个标记,用来对电脑叫几分控制
 	public static int landowner = 0;//判断自己叫分的时候,叫分按钮可不可见,判断谁是地主,1自己,2西家,3东家
 	public static int hidePoints = 0;//判断西家叫过的分数,自己叫的分数一定要比上一家大,该变量用来控制比上一家小的按钮不可见
-	public static boolean onPoke = true;//要不起的开关,默认要的起
+	public static int isPoke = -1;//要不起的开关,默认要的起
+	public static int pitchOn = 0;//自己选中了几张牌
 	//叫分的方法
 	public static void callPlayers(){
 		Random ran = new Random();

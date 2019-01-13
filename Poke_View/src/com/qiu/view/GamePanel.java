@@ -341,11 +341,12 @@ public class GamePanel extends JPanel {
 			hint.setVisible(false);
 			trusteeship.setVisible(false);
 			// 轮到谁出牌
-			if (Util.callPlayer == 0) {// 自己先出牌
+			if (Util.callPlayer == 0) {// 自己出牌
 				outPoke.setVisible(true);
 				noOut.setVisible(true);
 				hint.setVisible(true);
 				trusteeship.setVisible(true);
+				//另外两家出牌区域依然可见
 				if (Util.playerThree.getOutPoke().size() != 0) {
 					for (int i = 0; i < Util.playerThree.getOutPoke().size(); i++) {
 						g.drawImage(Util.playerThree.getOutPoke().get(i).getImage(), 800, 150 + (i * 20),
@@ -356,6 +357,12 @@ public class GamePanel extends JPanel {
 					for (int k = 0; k < Util.playerTwo.getOutPoke().size(); k++) {// 玩家二的牌开始就显示在桌面
 						g.drawImage(Util.playerTwo.getOutPoke().get(k).getImage(), 122, 150 + (k * 20),
 								122 + Util.POKE_W, 150 + (k * 20) + Util.POKE_H, 0, 0, 108, 148, null);
+					}
+				}
+				if(Util.playerOne.getOutPoke().size() != 0){//表示玩家一出牌集合里有牌
+					for (int k = 0; k < Util.playerOne.getOutPoke().size(); k++) {// 玩家一的牌开始就显示在桌面
+						g.drawImage(Util.playerOne.getOutPoke().get(k).getImage(), 400 + (k * 25), 390,
+								400 + (k * 25) + Util.POKE_W,390 + Util.POKE_H, 0, 0, 108, 148, null);
 					}
 				}
 			} else if (Util.callPlayer == 1) {// 东家先出牌
@@ -375,6 +382,12 @@ public class GamePanel extends JPanel {
 								122 + Util.POKE_W, 150 + (k * 20) + Util.POKE_H, 0, 0, 108, 148, null);
 					}
 				}
+				if(Util.playerOne.getOutPoke().size() != 0){
+					for (int k = 0; k < Util.playerOne.getOutPoke().size(); k++) {// 玩家一的牌开始就显示在桌面
+						g.drawImage(Util.playerOne.getOutPoke().get(k).getImage(), 400 + (k * 25), 390,
+								400 + (k * 25) + Util.POKE_W,390 + Util.POKE_H, 0, 0, 108, 148, null);
+					}
+				}
 			} else if (Util.callPlayer == 2) {// 西家出牌
 				outPoke.setVisible(false);
 				noOut.setVisible(false);
@@ -390,6 +403,12 @@ public class GamePanel extends JPanel {
 					for (int i = 0; i < Util.playerThree.getOutPoke().size(); i++) {
 						g.drawImage(Util.playerThree.getOutPoke().get(i).getImage(), 800, 150 + (i * 20),
 								800 + Util.POKE_W, 150 + (i * 20) + Util.POKE_H, 0, 0, 108, 148, null);
+					}
+				}
+				if(Util.playerOne.getOutPoke().size() != 0){
+					for (int k = 0; k < Util.playerOne.getOutPoke().size(); k++) {// 玩家一的牌开始就显示在桌面
+						g.drawImage(Util.playerOne.getOutPoke().get(k).getImage(), 400 + (k * 25), 390,
+								400 + (k * 25) + Util.POKE_W,390 + Util.POKE_H, 0, 0, 108, 148, null);
 					}
 				}
 			}

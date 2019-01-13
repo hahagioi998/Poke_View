@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import com.qiu.model.Poke;
 import com.qiu.util.Util;
 import com.qiu.view.LoginFrame;
 
@@ -49,7 +50,7 @@ public class GameAction implements ActionListener {
 				Util.callPlayer = 0;
 				Util.mark = 0;
 				Util.hidePoints = 0;
-				lf.removeMouseListener(lf.getGm());
+//				lf.removeMouseListener(lf.getGm());
 				
 				Util.upsetPoke(Util.pokeList);
 				Util.setKey(1);
@@ -110,7 +111,30 @@ public class GameAction implements ActionListener {
 			Util.drawMark = 4;
 			Util.playerOne.setPoints(0);//玩家叫1分
 		}else if(order.equals("outPoke")){
-			System.out.println("出牌");
+//			System.out.println("有几张牌起来:" + Util.pitchOn);
+			if(Util.pitchOn == 1){//只有一张牌
+				if(Util.playerTwo.getOutPoke().size() != 0){
+					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {
+						if(Util.playerOne.getPlayerPoke().get(i).getPokeY() == 485){//找着那张起来的牌
+							if(Util.playerOne.getPlayerPoke().get(i).getNumber() 
+									> Util.playerTwo.getOutPoke().get(0).getNumber()){//比较大小
+								Util.isPoke = 1;//1就表示要的起
+//								System.out.println("hhhhhhhh");
+							}else{
+								Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
+								Util.isPoke = 0;//0就要不起
+							}
+							break;
+						}
+					}
+				}
+			}else{
+				Util.pitchOn = 0;//置0,待会儿重新使用
+				for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {//把牌全部归位
+					Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
+				}
+			}
+			Util.pitchOn = 0;//置0,待会儿重新使用
 		}else if(order.equals("noOut")){
 			System.out.println("不出");
 		}else if(order.equals("hint")){
