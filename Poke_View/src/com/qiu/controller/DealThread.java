@@ -1,6 +1,7 @@
 package com.qiu.controller;
 
 import com.qiu.model.Poke;
+import com.qiu.util.OutPoke;
 import com.qiu.util.Util;
 import com.qiu.view.LoginFrame;
 
@@ -26,10 +27,10 @@ public class DealThread extends Thread {
 					for (int j = 0; j < Util.player.length; j++) {
 						Util.player[j].getPlayerPoke().add(Util.pokeList.get(0));
 						Util.pokeList.remove(0);
-						Util.pokeSort(Util.playerOne);
+						Util.pokeSort(Util.playerOne.getPlayerPoke());
 						Util.setCoordinate(Util.playerOne.getPlayerPoke());
-						Util.pokeSort(Util.playerTwo);
-						Util.pokeSort(Util.playerThree);
+						Util.pokeSort(Util.playerTwo.getPlayerPoke());
+						Util.pokeSort(Util.playerThree.getPlayerPoke());
 						try {
 							Thread.sleep(50);
 						} catch (InterruptedException e) {
@@ -77,6 +78,7 @@ public class DealThread extends Thread {
 						}
 						Util.key = 3;// 结束叫地主
 						Util.landowner = 1;// 玩家自己是地主
+						OutPoke.score = Util.playerOne.getPoints();//直接3分
 					} else if (Util.drawMark == 4) {
 						// 休眠两秒
 						try {
@@ -106,6 +108,7 @@ public class DealThread extends Thread {
 						}
 						Util.key = 3;// 结束叫地主
 						Util.landowner = 3;// 玩家自己是地主
+						OutPoke.score = Util.playerThree.getPoints();
 					}
 					// 休眠两秒
 					try {
@@ -140,6 +143,7 @@ public class DealThread extends Thread {
 						}
 						Util.key = 3;// 结束叫地主
 						Util.landowner = 2;// 玩家自己是地主
+						OutPoke.score = Util.playerTwo.getPoints();//直接3分
 					}
 					// 休眠两秒
 					try {
@@ -166,15 +170,17 @@ public class DealThread extends Thread {
 							&& Util.playerOne.getPoints() > Util.playerThree.getPoints()) {
 						Util.landowner = 1;// 表示玩家一地主
 						Util.key = 3;
+						OutPoke.score = Util.playerOne.getPoints();
 					} else if (Util.playerTwo.getPoints() > Util.playerOne.getPoints()
 							&& Util.playerTwo.getPoints() > Util.playerThree.getPoints()) {
 						Util.landowner = 2;// 表示玩家二地主
 						Util.key = 3;
+						OutPoke.score = Util.playerTwo.getPoints();
 					} else if (Util.playerThree.getPoints() > Util.playerOne.getPoints()
 							&& Util.playerThree.getPoints() > Util.playerTwo.getPoints()) {
 						Util.landowner = 3;// 表示玩家三地主
 						Util.key = 3;
-
+						OutPoke.score = Util.playerThree.getPoints();
 					} else if (Util.playerOne.getPoints() == 0 && Util.playerTwo.getPoints() == 0
 							&& Util.playerThree.getPoints() == 0) {// 都不叫地主
 
@@ -214,7 +220,27 @@ public class DealThread extends Thread {
 					for (int i = 0; i < Util.pokeList.size(); i++) {
 						Util.playerOne.getPlayerPoke().add(Util.pokeList.get(i));
 					}
-					Util.pokeSort(Util.playerOne);// 排序
+					//底牌排个序,方便查看是不是顺子
+					Util.pokeSort(Util.pokeList);
+					OutPoke.baseMultiple(Util.pokeList);//底牌情况对翻倍的控制
+					Util.pokeSort(Util.playerOne.getPlayerPoke());// 排序
+					Util.setCoordinate(Util.playerOne.getPlayerPoke());
+					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {
+						for (int j = 0; j < Util.pokeList.size(); j++) {
+							Poke p1 = Util.playerOne.getPlayerPoke().get(i);
+							Poke p2 = Util.pokeList.get(j);
+							if(p1.getName().equals(p2.getName()) && p1.getNumber() == p2.getNumber()){
+								p1.setPokeY(485);
+							}
+						}
+					}
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 					Util.setCoordinate(Util.playerOne.getPlayerPoke());
 				} else if (Util.landowner == 2) {
 					// while(Util.pokeList.size() != 0){
@@ -224,7 +250,10 @@ public class DealThread extends Thread {
 					for (int i = 0; i < Util.pokeList.size(); i++) {
 						Util.playerTwo.getPlayerPoke().add(Util.pokeList.get(i));
 					}
-					Util.pokeSort(Util.playerTwo);
+					//底牌排个序,方便查看是不是顺子
+					Util.pokeSort(Util.pokeList);
+					OutPoke.baseMultiple(Util.pokeList);//底牌情况对翻倍的控制
+					Util.pokeSort(Util.playerTwo.getPlayerPoke());
 				} else if (Util.landowner == 3) {
 					// while(Util.pokeList.size() != 0){
 					// Util.playerThree.getPlayerPoke().add(Util.pokeList.get(0));
@@ -233,7 +262,10 @@ public class DealThread extends Thread {
 					for (int i = 0; i < Util.pokeList.size(); i++) {
 						Util.playerThree.getPlayerPoke().add(Util.pokeList.get(i));
 					}
-					Util.pokeSort(Util.playerThree);
+					//底牌排个序,方便查看是不是顺子
+					Util.pokeSort(Util.pokeList);
+					OutPoke.baseMultiple(Util.pokeList);//底牌情况对翻倍的控制
+					Util.pokeSort(Util.playerThree.getPlayerPoke());
 				}
 				Util.key = 4;
 			} else if (Util.key == 4) {
@@ -265,14 +297,13 @@ public class DealThread extends Thread {
 								if (Util.playerOne.getPlayerPoke().get(i).getPokeY() == 485) {
 									Poke p = Util.playerOne.getPlayerPoke().get(i);// 找出这张牌
 									Util.playerOne.getOutPoke().add(p);// 放进出牌集合
-									System.out.println("自家出牌集合长度" + Util.playerOne.getOutPoke().size());
 									Util.playerOne.getPlayerPoke().remove(i);// 移除原集合的牌
 									Util.isPoke = -1;
 									break;// 一定要跳出循环
 								}
 							}
 							// 不管有没有出牌都重新排序
-							Util.pokeSort(Util.playerOne);
+							Util.pokeSort(Util.playerOne.getPlayerPoke());
 							// 重新设置坐标
 							Util.setCoordinate(Util.playerOne.getPlayerPoke());
 							Util.callPlayer = 1;

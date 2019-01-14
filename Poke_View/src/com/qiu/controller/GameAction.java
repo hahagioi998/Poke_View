@@ -2,6 +2,7 @@ package com.qiu.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -141,14 +142,46 @@ public class GameAction implements ActionListener {
 			}
 			Util.pitchOn = 0;//置0,待会儿重新使用
 		}else if(order.equals("noOut")){
-//			if(Util.playerOne.getPlayerPoke().size() != 20){//说明不是地主,可以选择不出
 				Util.isPoke = 0;//要不起
-//			}else{//是地主,必须先出牌
-//				JOptionPane.showMessageDialog(lf.getGf(), "你是地主,必须先出牌!");
-////				lf.getGf().getGamePanel().getNoOut().setVisible(false);
-//			}
 		}else if(order.equals("hint")){
-			System.out.println("提示");
+			//如果东西家的出牌集合都为空,说明现在要自己出牌
+			if(Util.playerTwo.getOutPoke().size() == 0 
+					&& Util.playerThree.getOutPoke().size() == 0){
+				ArrayList<Poke> temp = Util.playerOne.getPlayerPoke();//简化代码
+				temp.get(temp.size() - 1).setPokeY(485);//将自己手牌最小的一位弹起
+				Util.pitchOn ++;
+			}else if(Util.playerTwo.getOutPoke().size() != 0){//说明西家出了牌
+				//遍历一下,将自己的手牌从最小的地方开始遍历
+				for (int i = Util.playerOne.getPlayerPoke().size() - 1; i >= 0; i--) {
+					Poke p = Util.playerOne.getPlayerPoke().get(i);
+					//这个牌会大于西家出牌集合中最小的一位就弹起来
+					if(p.getNumber() > Util.playerTwo.getOutPoke().get(0).getNumber()){
+						p.setPokeY(485);
+						Util.pitchOn ++;
+						break;
+					}
+				}
+				//如果没有找到就说明要不起
+				if(Util.pitchOn == 0){
+					Util.isPoke = 0;
+				}
+			}else if(Util.playerTwo.getOutPoke().size() == 0 
+					&& Util.playerThree.getOutPoke().size() != 0){//西家出牌集合为空,并且东家出牌集合不为空,说明西家要不起东家的牌
+				//遍历一下,将自己的手牌从最小的地方开始遍历
+				for (int i = Util.playerOne.getPlayerPoke().size() - 1; i >= 0; i--) {
+					Poke p = Util.playerOne.getPlayerPoke().get(i);
+					//这个牌会大于东家出牌集合中最小的一位就弹起来
+					if(p.getNumber() > Util.playerThree.getOutPoke().get(0).getNumber()){
+						p.setPokeY(485);
+						Util.pitchOn ++;
+						break;//找到牌就弹出
+					}
+				}
+				//如果没有找到就说明要不起
+				if(Util.pitchOn == 0){
+					Util.isPoke = 0;
+				}
+			}
 		}else if(order.equals("trusteeship")){
 			System.out.println("托管");
 		}

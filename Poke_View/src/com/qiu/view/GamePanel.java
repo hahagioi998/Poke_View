@@ -13,6 +13,7 @@ import com.qiu.model.PlayerOne;
 import com.qiu.model.PlayerThree;
 import com.qiu.model.PlayerTwo;
 import com.qiu.model.Poke;
+import com.qiu.util.OutPoke;
 import com.qiu.util.Util;
 
 public class GamePanel extends JPanel {
@@ -289,8 +290,8 @@ public class GamePanel extends JPanel {
 			if (Util.pokeList.size() == 3) {
 				// 将底牌显示出来
 				for (int i = 0; i < Util.pokeList.size(); i++) {// 54张牌开始就显示在桌面
-					g.drawImage(Util.pokeList.get(i).getImage(), 400 + (i * 80), 160, 400 + (i * 80) + Util.POKE_W,
-							160 + Util.POKE_H, 0, 0, 108, 148, null);
+					g.drawImage(Util.pokeList.get(i).getImage(), 400 + (i * 80), 130, 400 + (i * 80) + Util.POKE_W,
+							130 + Util.POKE_H, 0, 0, 108, 148, null);
 				}
 			}
 			for (int k = 0; k < Util.playerOne.getPlayerPoke().size(); k++) {// 玩家一的牌开始就显示在桌面
@@ -318,6 +319,7 @@ public class GamePanel extends JPanel {
 							0, 108, 148, null);
 				}
 			}
+			g.drawString(OutPoke.score + "  倍", 460, 260);
 			// 判断出谁是地主,直接画上
 			if (Util.landowner == 1) {
 				g.drawString("地 主", 665, 480);

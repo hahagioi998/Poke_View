@@ -69,11 +69,11 @@ public class Util {
 		for (int i = 0; i < shape.length; i++) {
 			for (int j = 0; j < number.length; j++) {
 				String path = "img/poke/" + shape[i] + number[j] + ".png";
-				pokeList.add(new Poke(new ImageIcon(path).getImage(), number[j]));
+				pokeList.add(new Poke(new ImageIcon(path).getImage(), number[j],shape[i]));
 			}
 		}
-		pokeList.add(new Poke(new ImageIcon("img/poke/王99.png").getImage(), 99));
-		pokeList.add(new Poke(new ImageIcon("img/poke/王100.png").getImage(), 100));
+		pokeList.add(new Poke(new ImageIcon("img/poke/王99.png").getImage(), 99, "小王"));
+		pokeList.add(new Poke(new ImageIcon("img/poke/王100.png").getImage(), 100, "大王"));
 	}
 
 	// 将集合中的牌打乱
@@ -88,14 +88,14 @@ public class Util {
 	public static Player[] player = { playerOne, playerThree, playerTwo };
 
 	// 给玩家的手牌排序
-	public static void pokeSort(Player p) {
+	public static void pokeSort(ArrayList<Poke> list) {
 		// 采用选择排序法
-		for (int i = 0; i < p.getPlayerPoke().size() - 1; i++) {
-			for (int j = i + 1; j < p.getPlayerPoke().size(); j++) {
-				if (p.getPlayerPoke().get(i).getNumber() < p.getPlayerPoke().get(j).getNumber()) {
-					Poke temp = p.getPlayerPoke().get(i);
-					p.getPlayerPoke().set(i, p.getPlayerPoke().get(j));
-					p.getPlayerPoke().set(j, temp);
+		for (int i = 0; i < list.size() - 1; i++) {
+			for (int j = i + 1; j < list.size(); j++) {
+				if (list.get(i).getNumber() < list.get(j).getNumber()) {
+					Poke temp = list.get(i);
+					list.set(i, list.get(j));
+					list.set(j, temp);
 				}
 			}
 		}
@@ -110,11 +110,12 @@ public class Util {
 
 	public static int callPlayer = 0;//随机谁叫地主  0自己,1东家,2西家
 	public static int drawMark = 0;//在面板上画几分开关
-	public static int mark = 0;//定义一个标记,用来对电脑叫几分控制
+	public static int mark = 0;//定义一个标记,用来对电脑叫几分控制 0--不叫  1--1分  2--2分  3--3分
 	public static int landowner = 0;//判断自己叫分的时候,叫分按钮可不可见,判断谁是地主,1自己,2西家,3东家
 	public static int hidePoints = 0;//判断西家叫过的分数,自己叫的分数一定要比上一家大,该变量用来控制比上一家小的按钮不可见
 	public static int isPoke = -1;//要不起的开关,默认要的起 0--自己要不起  1--自己要的起  2--东家要不起  3--西家要不起
 	public static int pitchOn = 0;//自己选中了几张牌
+//	public static int score = 0;//叫地主的分数,乘上底牌的倍数
 	//叫分的方法
 	public static void callPlayers(){
 		Random ran = new Random();
@@ -130,8 +131,8 @@ public class Util {
 				Util.drawMark = 5;//东家叫3分
 			}else if((playerThree.getPlayerPoke().get(0).getNumber() == 100 &&//有一个大王并且有2个2或者3个2
 					playerThree.getPlayerPoke().get(1).getNumber() == 22 && 
-					playerThree.getPlayerPoke().get(2).getNumber() == 22) ||
-					(playerTwo.getPlayerPoke().get(0).getNumber() == 22 && 
+					playerThree.getPlayerPoke().get(2).getNumber() == 22) 
+					|| (playerTwo.getPlayerPoke().get(0).getNumber() == 22 && 
 					playerTwo.getPlayerPoke().get(1).getNumber() == 22 && 
 					playerTwo.getPlayerPoke().get(2).getNumber() == 22)){
 				Util.playerThree.setPoints(2);//叫二分
@@ -152,8 +153,8 @@ public class Util {
 				Util.drawMark = 9;//西家叫3分
 			}else if((playerTwo.getPlayerPoke().get(0).getNumber() == 100 &&//有一个大王并且有2个2或者直接有三个2
 					playerTwo.getPlayerPoke().get(1).getNumber() == 22 && 
-					playerTwo.getPlayerPoke().get(2).getNumber() == 22) || 
-					(playerTwo.getPlayerPoke().get(0).getNumber() == 22 && 
+					playerTwo.getPlayerPoke().get(2).getNumber() == 22) 
+					|| (playerTwo.getPlayerPoke().get(0).getNumber() == 22 && 
 					playerTwo.getPlayerPoke().get(1).getNumber() == 22 && 
 					playerTwo.getPlayerPoke().get(2).getNumber() == 22)){
 				Util.playerTwo.setPoints(2);//叫二分
