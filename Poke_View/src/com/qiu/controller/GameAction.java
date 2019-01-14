@@ -38,6 +38,9 @@ public class GameAction implements ActionListener {
 				Util.playerOne.getPlayerPoke().clear();
 				Util.playerTwo.getPlayerPoke().clear();
 				Util.playerThree.getPlayerPoke().clear();
+				Util.playerOne.getOutPoke().clear();
+				Util.playerTwo.getOutPoke().clear();
+				Util.playerThree.getOutPoke().clear();
 				Util.landowner = 4;
 				//一切数据都要重置
 				Util.initPoke();//初始化数据
@@ -50,7 +53,7 @@ public class GameAction implements ActionListener {
 				Util.callPlayer = 0;
 				Util.mark = 0;
 				Util.hidePoints = 0;
-//				lf.removeMouseListener(lf.getGm());
+//				lf.getGf().getGamePanel().removeMouseListener(lf.getGm());
 				
 				Util.upsetPoke(Util.pokeList);
 				Util.setKey(1);
@@ -122,11 +125,13 @@ public class GameAction implements ActionListener {
 //								System.out.println("hhhhhhhh");
 							}else{
 								Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
-								Util.isPoke = 0;//0就要不起
+								Util.isPoke = -1;//表示选择不对,重新出牌
 							}
 							break;
 						}
 					}
+				}else{
+					Util.isPoke = 1;//1就表示要的起
 				}
 			}else{
 				Util.pitchOn = 0;//置0,待会儿重新使用
@@ -136,7 +141,12 @@ public class GameAction implements ActionListener {
 			}
 			Util.pitchOn = 0;//置0,待会儿重新使用
 		}else if(order.equals("noOut")){
-			System.out.println("不出");
+//			if(Util.playerOne.getPlayerPoke().size() != 20){//说明不是地主,可以选择不出
+				Util.isPoke = 0;//要不起
+//			}else{//是地主,必须先出牌
+//				JOptionPane.showMessageDialog(lf.getGf(), "你是地主,必须先出牌!");
+////				lf.getGf().getGamePanel().getNoOut().setVisible(false);
+//			}
 		}else if(order.equals("hint")){
 			System.out.println("提示");
 		}else if(order.equals("trusteeship")){

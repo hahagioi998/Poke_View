@@ -113,7 +113,7 @@ public class Util {
 	public static int mark = 0;//定义一个标记,用来对电脑叫几分控制
 	public static int landowner = 0;//判断自己叫分的时候,叫分按钮可不可见,判断谁是地主,1自己,2西家,3东家
 	public static int hidePoints = 0;//判断西家叫过的分数,自己叫的分数一定要比上一家大,该变量用来控制比上一家小的按钮不可见
-	public static int isPoke = -1;//要不起的开关,默认要的起
+	public static int isPoke = -1;//要不起的开关,默认要的起 0--自己要不起  1--自己要的起  2--东家要不起  3--西家要不起
 	public static int pitchOn = 0;//自己选中了几张牌
 	//叫分的方法
 	public static void callPlayers(){
@@ -130,13 +130,14 @@ public class Util {
 				Util.drawMark = 5;//东家叫3分
 			}else if((playerThree.getPlayerPoke().get(0).getNumber() == 100 &&//有一个大王并且有2个2或者3个2
 					playerThree.getPlayerPoke().get(1).getNumber() == 22 && 
-					playerThree.getPlayerPoke().get(2).getNumber() == 22)){
+					playerThree.getPlayerPoke().get(2).getNumber() == 22) ||
+					(playerTwo.getPlayerPoke().get(0).getNumber() == 22 && 
+					playerTwo.getPlayerPoke().get(1).getNumber() == 22 && 
+					playerTwo.getPlayerPoke().get(2).getNumber() == 22)){
 				Util.playerThree.setPoints(2);//叫二分
 				Util.drawMark = 6;//东家叫2分
-			}else if(playerThree.getPlayerPoke().get(0).getNumber() == 99 &&//有一个小王并且有3个2
-					playerThree.getPlayerPoke().get(1).getNumber() == 22 && 
-					playerThree.getPlayerPoke().get(2).getNumber() == 22 && 
-					playerThree.getPlayerPoke().get(3).getNumber() == 22){
+			}else if(playerThree.getPlayerPoke().get(0).getNumber() == 99 &&//有一个小王并且有2个2
+					playerThree.getPlayerPoke().get(1).getNumber() == 22 ){
 				Util.playerThree.setPoints(1);//叫一分
 				Util.drawMark = 7;//东家叫1分
 			}else{
@@ -157,10 +158,8 @@ public class Util {
 					playerTwo.getPlayerPoke().get(2).getNumber() == 22)){
 				Util.playerTwo.setPoints(2);//叫二分
 				Util.drawMark = 10;//西家叫2分
-			}else if(playerTwo.getPlayerPoke().get(0).getNumber() == 99 &&//有一个小王并且有3个2
-					playerTwo.getPlayerPoke().get(1).getNumber() == 22 && 
-					playerTwo.getPlayerPoke().get(2).getNumber() == 22 && 
-					playerTwo.getPlayerPoke().get(3).getNumber() == 22){
+			}else if(playerTwo.getPlayerPoke().get(0).getNumber() == 99 &&//有一个小王并且有2个2
+					playerTwo.getPlayerPoke().get(1).getNumber() == 22){
 				Util.playerTwo.setPoints(1);//叫一分
 				Util.drawMark = 11;//西家叫1分
 			}else{
