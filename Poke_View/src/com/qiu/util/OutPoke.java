@@ -11,6 +11,22 @@ public class OutPoke {
 	public static int score = 0;// 叫地主的分数,乘上底牌的倍数
 	public static boolean isTrusteeship = false;//托管的开关,false表示自己玩,true表示托管开启
 	
+	//记牌器
+	public static int reMainPoke_3;//3的记牌器
+	public static int reMainPoke_4;//4的记牌器
+	public static int reMainPoke_5;//5的记牌器
+	public static int reMainPoke_6;//6的记牌器
+	public static int reMainPoke_7;//7的记牌器
+	public static int reMainPoke_8;//8的记牌器
+	public static int reMainPoke_9;//9的记牌器
+	public static int reMainPoke_10;//10的记牌器
+	public static int reMainPoke_11;//11的记牌器
+	public static int reMainPoke_12;//12的记牌器
+	public static int reMainPoke_13;//13的记牌器
+	public static int reMainPoke_14;//14的记牌器
+	public static int reMainPoke_22;//22的记牌器
+	public static int reMainPoke_W;//王的记牌器
+	
 	// 底牌翻倍的方法
 	public static void baseMultiple(ArrayList<Poke> p) {
 		/*

@@ -274,7 +274,7 @@ public class DealThread extends Thread {
 					Util.pokeSort(Util.playerThree.getPlayerPoke());
 				}
 				Util.key = 4;
-			} else if (Util.key == 4) {
+			} else if (Util.key == 4) {//开始出牌
 				lf.getGf().getGamePanel().addMouseListener(lf.getGm());
 				if (Util.landowner == 1) {
 					Util.callPlayer = 0;
@@ -296,6 +296,9 @@ public class DealThread extends Thread {
 						}
 						if(OutPoke.isTrusteeship){//托管开启
 							OutPoke.autoOutPoke(Util.playerTwo,Util.playerThree,Util.playerOne);//上家,下家,本家
+							if(Util.isPoke == 2){//如果是2就表示要不起
+								Util.isPoke = 0;//改成自家的要不起
+							}
 							Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
 							Util.callPlayer = 1;
 						}else{//托管关闭
@@ -327,7 +330,7 @@ public class DealThread extends Thread {
 						
 					} else if (Util.callPlayer == 1) {
 						try {
-							Thread.sleep(2000);
+							Thread.sleep(1000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -344,13 +347,25 @@ public class DealThread extends Thread {
 						Util.callPlayer = 2;
 					} else if (Util.callPlayer == 2) {
 						try {
-							Thread.sleep(2000);
+							Thread.sleep(1000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						OutPoke.autoOutPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+						try {
+							Thread.sleep(1);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						Util.callPlayer = 0;
+						try {
+							Thread.sleep(1);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				}
 			}

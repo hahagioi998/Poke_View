@@ -340,17 +340,23 @@ public class GamePanel extends JPanel {
 			trusteeship.setVisible(true);//托管按钮一直可见
 			// 轮到谁出牌
 			if (Util.callPlayer == 0) {// 自己出牌
-				if(Util.isPoke == 2){
-					g.drawString("要不起!", 160, 320);
-				}
-				outPoke.setVisible(true);
-				if (Util.playerTwo.getOutPoke().size() == 0 
-						&& Util.playerThree.getOutPoke().size() == 0) {// 东家和西家的出牌都集合都为空,就让不出的按钮不可见
+				if(OutPoke.isTrusteeship){//托管开启后,出牌按钮那些不可见
+					outPoke.setVisible(false);
 					noOut.setVisible(false);
-				} else {
-					noOut.setVisible(true);
+					hint.setVisible(false);
+				}else{
+					if(Util.isPoke == 2){
+						g.drawString("要不起!", 160, 320);//给上一家画要不起
+					}
+					outPoke.setVisible(true);
+					if (Util.playerTwo.getOutPoke().size() == 0 
+							&& Util.playerThree.getOutPoke().size() == 0) {// 东家和西家的出牌都集合都为空,就让不出的按钮不可见
+						noOut.setVisible(false);
+					} else {
+						noOut.setVisible(true);
+					}
+					hint.setVisible(true);
 				}
-				hint.setVisible(true);
 				// 另外两家出牌区域依然可见
 				if (Util.playerThree.getOutPoke().size() != 0) {
 					for (int i = 0; i < Util.playerThree.getOutPoke().size(); i++) {
@@ -372,7 +378,7 @@ public class GamePanel extends JPanel {
 				}
 			} else if (Util.callPlayer == 1) {// 东家先出牌
 				if(Util.isPoke == 0){
-					g.drawString("要不起!", 400, 440);
+					g.drawString("要不起!", 400, 440);//给上一家画要不起
 				}
 				outPoke.setVisible(false);
 				noOut.setVisible(false);
@@ -397,7 +403,7 @@ public class GamePanel extends JPanel {
 				}
 			} else if (Util.callPlayer == 2) {// 西家出牌
 				if(Util.isPoke == 2){
-					g.drawString("要不起!", 750, 320);
+					g.drawString("要不起!", 750, 320);//给上一家画要不起
 				}
 				outPoke.setVisible(false);
 				noOut.setVisible(false);
