@@ -36,7 +36,6 @@ public class LoginFrame extends JFrame {
 		this.setResizable(false);//不可更改大小
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//关闭方式
 		this.add(loginPanel);//放进面板
-		
 		this.setLocationRelativeTo(null);//显示屏幕中间
 		
 		this.addWindowListener(lw);//添加窗口监听

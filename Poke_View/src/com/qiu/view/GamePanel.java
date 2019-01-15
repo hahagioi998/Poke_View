@@ -18,6 +18,7 @@ import com.qiu.util.Util;
 
 public class GamePanel extends JPanel {
 
+	private RemainPoke rp = new RemainPoke();//记牌器
 	private JButton showPoke = new JButton("暗牌");
 	private JButton oneMark = new JButton("1  分");
 	private JButton twoMark = new JButton("2  分");
@@ -27,8 +28,6 @@ public class GamePanel extends JPanel {
 	private JButton noOut = new JButton("不  出");
 	private JButton hint = new JButton("提  示");
 	private JButton trusteeship = new JButton("托  管");
-
-	// private GameMouse gm = new GameMouse(this);
 
 	public GamePanel() {
 
@@ -46,6 +45,8 @@ public class GamePanel extends JPanel {
 		noOut.setActionCommand("noOut");
 		hint.setActionCommand("hint");
 		trusteeship.setActionCommand("trusteeship");
+		
+		this.add(rp);//放记牌器画板
 
 	}
 
@@ -68,7 +69,7 @@ public class GamePanel extends JPanel {
 		outPoke.setBounds(310, 440, 70, 40);
 		noOut.setBounds(390, 440, 70, 40);
 		hint.setBounds(470, 440, 70, 40);
-		trusteeship.setBounds(550, 440, 70, 40);
+		trusteeship.setBounds(550, 440, 90, 40);
 		this.add(outPoke);
 		this.add(noOut);
 		this.add(hint);
@@ -286,6 +287,10 @@ public class GamePanel extends JPanel {
 			}
 
 		} else if (Util.key == 4) {
+			//托管提示
+			if(OutPoke.isTrusteeship){
+				g.drawString("托管", 760, 480);
+			}
 			// 底牌
 			if (Util.pokeList.size() == 3) {
 				// 将底牌显示出来
@@ -332,10 +337,10 @@ public class GamePanel extends JPanel {
 			outPoke.setVisible(false);
 			noOut.setVisible(false);
 			hint.setVisible(false);
-			trusteeship.setVisible(false);
+			trusteeship.setVisible(true);//托管按钮一直可见
 			// 轮到谁出牌
 			if (Util.callPlayer == 0) {// 自己出牌
-				if(Util.isPoke == 3){
+				if(Util.isPoke == 2){
 					g.drawString("要不起!", 130, 330);
 				}
 				outPoke.setVisible(true);
@@ -346,7 +351,6 @@ public class GamePanel extends JPanel {
 					noOut.setVisible(true);
 				}
 				hint.setVisible(true);
-				trusteeship.setVisible(true);
 				// 另外两家出牌区域依然可见
 				if (Util.playerThree.getOutPoke().size() != 0) {
 					for (int i = 0; i < Util.playerThree.getOutPoke().size(); i++) {
@@ -373,7 +377,6 @@ public class GamePanel extends JPanel {
 				outPoke.setVisible(false);
 				noOut.setVisible(false);
 				hint.setVisible(false);
-				trusteeship.setVisible(false);
 				if (Util.playerThree.getOutPoke().size() != 0) {
 					for (int i = 0; i < Util.playerThree.getOutPoke().size(); i++) {
 						g.drawImage(Util.playerThree.getOutPoke().get(i).getImage(), 800, 150 + (i * 20),
@@ -399,7 +402,6 @@ public class GamePanel extends JPanel {
 				outPoke.setVisible(false);
 				noOut.setVisible(false);
 				hint.setVisible(false);
-				trusteeship.setVisible(false);
 				if (Util.playerTwo.getOutPoke().size() != 0) {
 					for (int k = 0; k < Util.playerTwo.getOutPoke().size(); k++) {// 玩家二的牌开始就显示在桌面
 						g.drawImage(Util.playerTwo.getOutPoke().get(k).getImage(), 122, 150 + (k * 20),
@@ -500,6 +502,14 @@ public class GamePanel extends JPanel {
 
 	public void setTrusteeship(JButton trusteeship) {
 		this.trusteeship = trusteeship;
+	}
+
+	public RemainPoke getRp() {
+		return rp;
+	}
+
+	public void setRp(RemainPoke rp) {
+		this.rp = rp;
 	}
 
 }

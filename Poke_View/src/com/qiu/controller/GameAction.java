@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import com.qiu.model.Poke;
+import com.qiu.util.OutPoke;
 import com.qiu.util.Util;
 import com.qiu.view.LoginFrame;
 
@@ -117,13 +118,12 @@ public class GameAction implements ActionListener {
 		}else if(order.equals("outPoke")){
 //			System.out.println("有几张牌起来:" + Util.pitchOn);
 			if(Util.pitchOn == 1){//只有一张牌
-				if(Util.playerTwo.getOutPoke().size() != 0){
+				if(Util.playerTwo.getOutPoke().size() != 0){//西家出牌集合不为空,说明有出牌
 					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {
 						if(Util.playerOne.getPlayerPoke().get(i).getPokeY() == 485){//找着那张起来的牌
 							if(Util.playerOne.getPlayerPoke().get(i).getNumber() 
 									> Util.playerTwo.getOutPoke().get(0).getNumber()){//比较大小
 								Util.isPoke = 1;//1就表示要的起
-//								System.out.println("hhhhhhhh");
 							}else{
 								Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
 								Util.isPoke = -1;//表示选择不对,重新出牌
@@ -131,7 +131,22 @@ public class GameAction implements ActionListener {
 							break;
 						}
 					}
-				}else{
+				}else if(Util.playerThree.getOutPoke().size() != 0 
+						&& Util.playerTwo.getOutPoke().size() == 0){
+					//东家的出牌集合不为空,西家的出牌集合为空,说明西家要不起,这时就要判断自家和东家的牌
+					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {
+						if(Util.playerOne.getPlayerPoke().get(i).getPokeY() == 485){//找着那张起来的牌
+							if(Util.playerOne.getPlayerPoke().get(i).getNumber() 
+									> Util.playerThree.getOutPoke().get(0).getNumber()){//比较大小
+								Util.isPoke = 1;//1就表示要的起
+							}else{
+								Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
+								Util.isPoke = -1;//表示选择不对,重新出牌
+							}
+							break;
+						}
+					}
+				}else{//不满足上面两个情况,说明现在就该自己出
 					Util.isPoke = 1;//1就表示要的起
 				}
 			}else{
@@ -183,7 +198,14 @@ public class GameAction implements ActionListener {
 				}
 			}
 		}else if(order.equals("trusteeship")){
-			System.out.println("托管");
+			if(OutPoke.isTrusteeship == false){
+				lf.getGf().getGamePanel().getTrusteeship().setText("取消托管");
+				OutPoke.isTrusteeship = true;
+			}else if(OutPoke.isTrusteeship = true){
+				lf.getGf().getGamePanel().getTrusteeship().setText("托管");
+				OutPoke.isTrusteeship = false;
+			}
+			
 		}
 	}
 	public LoginFrame getLf() {

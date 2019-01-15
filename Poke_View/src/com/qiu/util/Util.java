@@ -43,6 +43,7 @@ public class Util {
 	public static final Image P_TWO = new ImageIcon("img/playerTwo.jpg").getImage();// 玩家头像
 	public static final Image P_THREE = new ImageIcon("img/playerThree.jpg").getImage();// 玩家头像
 	public static final Image POKE_BACK = new ImageIcon("img/poke/牌背.png").getImage();// 牌背的显示
+	public static final Image REMAIN = new ImageIcon("img/reMain.png").getImage();//记牌器背景图
 
 	// 每个玩家手中初始的牌数
 	public static final int PLAYERE_POKE = 17;
