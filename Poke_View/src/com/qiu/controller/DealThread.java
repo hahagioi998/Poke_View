@@ -286,11 +286,13 @@ public class DealThread extends Thread {
 				// System.out.println("aaa" + Util.callPlayer);
 				while (Util.playerOne.getPlayerPoke().size() != 0 && Util.playerTwo.getPlayerPoke().size() != 0
 						&& Util.playerThree.getPlayerPoke().size() != 0) {// 判断条件就是都不为空说明有牌
+					
 					if (Util.callPlayer == 0) {// 自己出牌
 						try {
 							Thread.sleep(1);
-						} catch (InterruptedException e1) {
-							e1.printStackTrace();
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
 						if(OutPoke.isTrusteeship){//托管开启
 							OutPoke.autoOutPoke(Util.playerTwo,Util.playerThree,Util.playerOne);//上家,下家,本家
@@ -327,11 +329,18 @@ public class DealThread extends Thread {
 						try {
 							Thread.sleep(2000);
 						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						// 在自家的出牌集合中有牌,即不为空的前提下判断东家出什么牌
 						// System.out.println("ssss"+Util.playerOne.getOutPoke().size());
 						OutPoke.autoOutPoke(Util.playerOne,Util.playerTwo,Util.playerThree);
+						try {
+							Thread.sleep(1);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						Util.callPlayer = 2;
 					} else if (Util.callPlayer == 2) {
 						try {
@@ -342,7 +351,6 @@ public class DealThread extends Thread {
 						}
 						OutPoke.autoOutPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
 						Util.callPlayer = 0;
-						System.out.println(Util.isPoke);
 					}
 				}
 			}

@@ -48,7 +48,6 @@ public class OutPoke {
 			if(self.getOutPoke().size() == 0){
 				Util.isPoke = 2;//表示本家要不起
 			}
-//			Util.callPlayer = 2;
 		} else if (up.getOutPoke().size() != 0) {//上一家的出牌集合不为空,说明有出牌
 			// 先清除本家的出牌集合中的牌
 			self.getOutPoke().clear();
@@ -62,9 +61,8 @@ public class OutPoke {
 				}
 			}
 			if(self.getOutPoke().size() == 0){//遍历后依然为空表示要不起
-				Util.isPoke = 2;//表示东家要不起
+				Util.isPoke = 2;//表示要不起
 			}
-//			Util.callPlayer = 2;
 		} else if (up.getOutPoke().size() == 0 && down.getOutPoke().size() == 0) {// 否则就是前两家的出牌集合都是空的话,就是自己地主出第一张牌
 			// 先清除本家的出牌集合中的牌
 			self.getOutPoke().clear();
@@ -73,7 +71,6 @@ public class OutPoke {
 			// 放进出牌的集合中
 			self.getOutPoke().add(p);
 			self.getPlayerPoke().remove(self.getPlayerPoke().size() - 1);
-//			Util.callPlayer = 2;
 		}
 	}
 

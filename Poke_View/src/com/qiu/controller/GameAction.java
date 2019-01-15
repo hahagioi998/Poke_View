@@ -116,7 +116,7 @@ public class GameAction implements ActionListener {
 			Util.drawMark = 4;
 			Util.playerOne.setPoints(0);//玩家叫1分
 		}else if(order.equals("outPoke")){
-//			System.out.println("有几张牌起来:" + Util.pitchOn);
+			System.out.println("有几张牌起来:" + Util.pitchOn);
 			if(Util.pitchOn == 1){//只有一张牌
 				if(Util.playerTwo.getOutPoke().size() != 0){//西家出牌集合不为空,说明有出牌
 					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {

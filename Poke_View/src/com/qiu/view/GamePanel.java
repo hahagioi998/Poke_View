@@ -341,7 +341,7 @@ public class GamePanel extends JPanel {
 			// 轮到谁出牌
 			if (Util.callPlayer == 0) {// 自己出牌
 				if(Util.isPoke == 2){
-					g.drawString("要不起!", 130, 330);
+					g.drawString("要不起!", 160, 320);
 				}
 				outPoke.setVisible(true);
 				if (Util.playerTwo.getOutPoke().size() == 0 
