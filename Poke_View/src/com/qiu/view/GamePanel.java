@@ -70,7 +70,7 @@ public class GamePanel extends JPanel {
 		outPoke.setBounds(310, 440, 70, 40);
 		noOut.setBounds(390, 440, 70, 40);
 		hint.setBounds(470, 440, 70, 40);
-		trusteeship.setBounds(550, 440, 90, 40);
+		trusteeship.setBounds(660, 600, 90, 40);
 		this.add(outPoke);
 		this.add(noOut);
 		this.add(hint);

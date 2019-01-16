@@ -217,6 +217,33 @@ public class GameAction implements ActionListener {
 						Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
 					}
 				}
+			}else if((Util.type == 0 && Util.pitchOn == 5)
+					|| (Util.type == 5 && Util.pitchOn == 5)){//三带一对
+				ArrayList<Poke> temp = new ArrayList<Poke>();//临时集合
+				for(int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++){//遍历一下找出升起来的牌
+					Poke p = Util.playerOne.getPlayerPoke().get(i);
+					if(p.getPokeY() == 485){
+						temp.add(p);
+					}
+				}
+				Util.pokeSort(temp);//给临时集合排个序
+				if((temp.get(0).getNumber() == temp.get(1).getNumber()) 
+						&& (temp.get(0).getNumber() == temp.get(2).getNumber())
+						&& (temp.get(0).getNumber() != temp.get(3).getNumber())
+						&& (temp.get(3).getNumber() == temp.get(4).getNumber())){//是一个三带二的牌
+					Util.type = 5;
+					Util.isPoke = 1;
+				}else if((temp.get(2).getNumber() == temp.get(3).getNumber()) 
+						&& (temp.get(2).getNumber() == temp.get(4).getNumber())
+						&& (temp.get(2).getNumber() != temp.get(0).getNumber())
+						&& (temp.get(0).getNumber() == temp.get(1).getNumber())){//是三代一的牌
+					Util.type = 5;
+					Util.isPoke = 1;
+				}else{
+					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {//把牌全部归位
+						Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
+					}
+				}
 			}else{
 				for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {//把牌全部归位
 					Util.playerOne.getPlayerPoke().get(i).setPokeY(500);

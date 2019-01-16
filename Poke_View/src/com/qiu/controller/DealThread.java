@@ -356,6 +356,17 @@ public class DealThread extends Thread {
 							}else{
 								OutPoke.handAction();
 							}
+						}else if(Util.type == 5){
+							if(OutPoke.isTrusteeship){
+								OutPoke.autoTripleAndTwoOutPoke(Util.playerTwo,Util.playerThree,Util.playerOne);//上家,下家,本家
+								if(Util.isPoke == 2){//如果是2就表示要不起
+									Util.isPoke = 0;//改成自家的要不起
+								}
+								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
+								Util.callPlayer = 1;
+							}else{
+								OutPoke.handAction();
+							}
 						}
 					} else if (Util.callPlayer == 1) {
 						try {
@@ -407,6 +418,15 @@ public class DealThread extends Thread {
 								e.printStackTrace();
 							}
 							Util.callPlayer = 2;
+						}else if(Util.type == 5){//三代二
+							OutPoke.autoTripleAndTwoOutPoke(Util.playerOne, Util.playerTwo, Util.playerThree);
+							try {
+								Thread.sleep(1);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Util.callPlayer = 2;
 						}
 					} else if (Util.callPlayer == 2) {
 						try {
@@ -451,6 +471,15 @@ public class DealThread extends Thread {
 							Util.callPlayer = 0;
 						}else if(Util.type == 4){//三代一
 							OutPoke.autoTripleAndOneOutPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							try {
+								Thread.sleep(1);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Util.callPlayer = 0;
+						}else if(Util.type == 5){//三代二
+							OutPoke.autoTripleAndTwoOutPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
 							try {
 								Thread.sleep(1);
 							} catch (InterruptedException e) {
