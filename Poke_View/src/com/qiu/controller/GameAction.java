@@ -117,13 +117,19 @@ public class GameAction implements ActionListener {
 			Util.playerOne.setPoints(0);//玩家叫1分
 		}else if(order.equals("outPoke")){
 			System.out.println("有几张牌起来:" + Util.pitchOn);
-			if(Util.pitchOn == 1){//只有一张牌
+			if(Util.playerTwo.getOutPoke().size() == 0 
+					&& Util.playerThree.getOutPoke().size() == 0){//电脑两玩家的出牌集合为空,说明自己出牌,可以重新定义牌型
+				Util.type = 0;
+			}
+			if((Util.type == 0 && Util.pitchOn == 1) 
+					|| (Util.type == 1 && Util.pitchOn == 1)){//如果是地主,type就是为0.可以进来,不是地主的时候得根据前面一个人出牌的类型来出自己的牌
 				if(Util.playerTwo.getOutPoke().size() != 0){//西家出牌集合不为空,说明有出牌
 					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {
 						if(Util.playerOne.getPlayerPoke().get(i).getPokeY() == 485){//找着那张起来的牌
 							if(Util.playerOne.getPlayerPoke().get(i).getNumber() 
 									> Util.playerTwo.getOutPoke().get(0).getNumber()){//比较大小
 								Util.isPoke = 1;//1就表示要的起
+								Util.type = 1;//单牌类型
 							}else{
 								Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
 								Util.isPoke = -1;//表示选择不对,重新出牌
@@ -147,15 +153,54 @@ public class GameAction implements ActionListener {
 						}
 					}
 				}else{//不满足上面两个情况,说明现在就该自己出
+					Util.type = 1;//走1步骤
 					Util.isPoke = 1;//1就表示要的起
 				}
+			}else if((Util.type == 0 && Util.pitchOn == 2) 
+					|| (Util.type == 2 && Util.pitchOn == 2)){////如果是地主,type就是为0.可以进来,不是地主的时候得根据前面一个人出牌的类型来出自己的牌
+				ArrayList<Poke> temp = new ArrayList<Poke>();//临时一个集合,用来存放起来的两张牌
+				for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {
+					Poke p = Util.playerOne.getPlayerPoke().get(i);//临时扑克
+					if(p.getPokeY() == 485){//起来的两张牌的面值是不是一样
+						temp.add(p);
+					}
+				}
+				if(temp.get(0).getNumber() == temp.get(1).getNumber()){//临时扑克牌的面值一样时就是对子
+					Util.type = 2;//表明自己出了对子
+					Util.isPoke = 1;//有牌出
+				}else{//否则表示出牌有误 ,起来的牌归位
+					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {//把牌全部归位
+						Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
+					}
+//					Util.pitchOn = 0;//置0,待会儿重新使用
+				}
+			}else if((Util.type == 0 && Util.pitchOn == 3) 
+					||(Util.type == 3 && Util.pitchOn == 3)){////如果是地主,type就是为0.可以进来,不是地主的时候得根据前面一个人出牌的类型来出自己的牌
+				ArrayList<Poke> temp = new ArrayList<Poke>();//临时一个集合,用来存放起来的两张牌
+				for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {
+					Poke p = Util.playerOne.getPlayerPoke().get(i);//临时扑克
+					if(p.getPokeY() == 485){//起来的两张牌的面值是不是一样
+						temp.add(p);
+					}
+				}
+				if((temp.get(0).getNumber() == temp.get(1).getNumber()) 
+						&& (temp.get(0).getNumber() == temp.get(2).getNumber())){//第一张和第二张相同.并且和第三张相同
+					Util.type = 3;//表明自己出了三张一样的
+					Util.isPoke = 1;//有牌出
+				}else{//否则表示出牌有误 ,起来的牌归位
+					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {//把牌全部归位
+						Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
+					}
+				}
 			}else{
-				Util.pitchOn = 0;//置0,待会儿重新使用
 				for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {//把牌全部归位
 					Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
 				}
 			}
+//			System.out.println("AAAAAAAAAA"+Util.isPoke);
+//			System.out.println("bbbbbbbb" + Util.type);
 			Util.pitchOn = 0;//置0,待会儿重新使用
+			
 		}else if(order.equals("noOut")){
 				Util.isPoke = 0;//要不起
 		}else if(order.equals("hint")){

@@ -60,7 +60,7 @@ public class LoginFrame extends JFrame {
 		this.getGf().getGamePanel().getNoOut().addActionListener(ga);
 		this.getGf().getGamePanel().getHint().addActionListener(ga);
 		this.getGf().getGamePanel().getTrusteeship().addActionListener(ga);
-//		this.getGf().getGamePanel().addMouseListener(gm);
+		this.getGf().getGamePanel().addMouseListener(gm);
 		
 	}
 	

@@ -47,7 +47,7 @@ public class OutPoke {
 	}
 	
 	//电脑智能出牌    参数传进  上家  下家  本家
-	public static void autoOutPoke(Player up, Player down, Player self){
+	public static void autoSoloOutPoke(Player up, Player down, Player self){
 		Util.isPoke = -1;// 关闭要不起的按钮
 		// 如果上家的出牌集合为空,下家的出牌集合不为空,就说明上家选择不出牌
 		if (up.getOutPoke().size() == 0 && down.getOutPoke().size() != 0) {
@@ -89,5 +89,100 @@ public class OutPoke {
 			self.getPlayerPoke().remove(self.getPlayerPoke().size() - 1);
 		}
 	}
+	
+	//专门出对子的方法
+	public static void autoDoubleOutPoke(Player up, Player down, Player self){
+		Util.isPoke = -1;//关闭要不起的按钮
+		self.getOutPoke().clear();
+		if(up.getOutPoke().size() != 0){//上家的出牌集合不为空,说明上家就是出了对子
+			//判断条件i > 0 是因为防止下标越界,因为有可能是最后一张牌是个对子,不存在-1的下标
+			for (int i = self.getPlayerPoke().size() - 1; i > 0; i--) {
+				Poke p1 = self.getPlayerPoke().get(i);//最右边开始
+				Poke p2 = self.getPlayerPoke().get(i - 1);//相邻的两张
+				if(p1.getNumber() == p2.getNumber()){//两张的面值一样,说明是对子
+					if(p1.getNumber() > up.getOutPoke().get(0).getNumber()){
+						self.getOutPoke().add(p1);//添加到出牌集合中
+						self.getOutPoke().add(p2);//添加到出牌集合中
+						self.getPlayerPoke().remove(i);//从手牌集合中移除
+						self.getPlayerPoke().remove(i - 1);//从手牌集合中移除
+						break;
+					}
+				}
+			}
+			if(self.getOutPoke().size() == 0){//本家出牌集合为空,就说明要不起
+				Util.isPoke = 2;
+			}
+			
+		}else if(up.getOutPoke().size() == 0 
+				&& down.getOutPoke().size() != 0){//上家的出牌集合为空,并且下家的出牌集合不为空,说明上家要不起下家
+			//判断条件i > 0 是因为防止下标越界,因为有可能是最后一张牌是个对子,不存在-1的下标
+			for (int i = self.getPlayerPoke().size() - 1; i > 0; i--) {
+				Poke p1 = self.getPlayerPoke().get(i);//最右边开始
+				Poke p2 = self.getPlayerPoke().get(i - 1);//相邻的两张
+				if(p1.getNumber() == p2.getNumber()){//两张的面值一样,说明是对子
+					if(p1.getNumber() > down.getOutPoke().get(0).getNumber()){
+						self.getOutPoke().add(p1);//添加到出牌集合中
+						self.getOutPoke().add(p2);//添加到出牌集合中
+						self.getPlayerPoke().remove(i);//从手牌集合中移除
+						self.getPlayerPoke().remove(i - 1);//从手牌集合中移除
+						break;
+					}
+				}
+			}
+			if(self.getOutPoke().size() == 0){//本家出牌集合为空,就说明要不起
+				Util.isPoke = 2;
+			}
+		}
+	}
 
+	//专门出三张一样的方法
+		public static void autoTripleOutPoke(Player up, Player down, Player self){
+			Util.isPoke = -1;//关闭要不起的按钮
+			self.getOutPoke().clear();
+			if(up.getOutPoke().size() != 0){//上家的出牌集合不为空,说明上家就是出了三张
+				//判断条件i > 1 是因为防止下标越界,因为有可能是最后3张牌是个一样的,不存在-1的下标
+				for (int i = self.getPlayerPoke().size() - 1; i > 1; i--) {
+					Poke p1 = self.getPlayerPoke().get(i);//最右边开始
+					Poke p2 = self.getPlayerPoke().get(i - 1);//相邻的第二张
+					Poke p3 = self.getPlayerPoke().get(i - 2); //相邻的第三张
+					if(p1.getNumber() == p2.getNumber() && p1.getNumber() == p3.getNumber()){//三张的面值一样
+						if(p1.getNumber() > up.getOutPoke().get(0).getNumber()){
+							self.getOutPoke().add(p1);//添加到出牌集合中
+							self.getOutPoke().add(p2);//添加到出牌集合中
+							self.getOutPoke().add(p3);//添加到出牌集合中
+							self.getPlayerPoke().remove(i);//从手牌集合中移除
+							self.getPlayerPoke().remove(i - 1);//从手牌集合中移除
+							self.getPlayerPoke().remove(i - 2);//从手牌集合中移除
+							break;
+						}
+					}
+				}
+				if(self.getOutPoke().size() == 0){//本家出牌集合为空,就说明要不起
+					Util.isPoke = 2;
+				}
+				
+			}else if(up.getOutPoke().size() == 0 
+					&& down.getOutPoke().size() != 0){//上家的出牌集合为空,并且下家的出牌集合不为空,说明上家要不起下家
+				//判断条件i > 1 是因为防止下标越界,因为有可能是最后3张牌是个一样的,不存在-1的下标
+				for (int i = self.getPlayerPoke().size() - 1; i > 1; i--) {
+					Poke p1 = self.getPlayerPoke().get(i);//最右边开始
+					Poke p2 = self.getPlayerPoke().get(i - 1);//相邻的两张
+					Poke p3 = self.getPlayerPoke().get(i - 2);//相邻的两张
+					if(p1.getNumber() == p2.getNumber() && p1.getNumber() == p3.getNumber()){//两张的面值一样,说明是对子
+						if(p1.getNumber() > down.getOutPoke().get(0).getNumber()){
+							self.getOutPoke().add(p1);//添加到出牌集合中
+							self.getOutPoke().add(p2);//添加到出牌集合中
+							self.getOutPoke().add(p3);//添加到出牌集合中
+							self.getPlayerPoke().remove(i);//从手牌集合中移除
+							self.getPlayerPoke().remove(i - 1);//从手牌集合中移除
+							self.getPlayerPoke().remove(i - 2);//从手牌集合中移除
+							break;
+						}
+					}
+				}
+				if(self.getOutPoke().size() == 0){//本家出牌集合为空,就说明要不起
+					Util.isPoke = 2;
+				}
+			}
+		}
 }

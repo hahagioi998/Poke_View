@@ -47,6 +47,8 @@ public class GamePanel extends JPanel {
 		trusteeship.setActionCommand("trusteeship");
 		
 		this.add(rp);//放记牌器画板
+		
+//		this.addMouseListener(l);
 
 	}
 
@@ -344,6 +346,9 @@ public class GamePanel extends JPanel {
 					outPoke.setVisible(false);
 					noOut.setVisible(false);
 					hint.setVisible(false);
+					if(Util.isPoke == 2){
+						g.drawString("要不起!", 160, 320);//给上一家画要不起
+					}
 				}else{
 					if(Util.isPoke == 2){
 						g.drawString("要不起!", 160, 320);//给上一家画要不起

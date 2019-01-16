@@ -275,7 +275,8 @@ public class DealThread extends Thread {
 				}
 				Util.key = 4;
 			} else if (Util.key == 4) {//开始出牌
-				lf.getGf().getGamePanel().addMouseListener(lf.getGm());
+				Util.pitchOn = 0;//防止还没到发牌的时候,就点击了牌的起来,会出现异常
+//				lf.getGf().getGamePanel().addMouseListener(lf.getGm());
 				if (Util.landowner == 1) {
 					Util.callPlayer = 0;
 				} else if (Util.landowner == 2) {
@@ -283,7 +284,6 @@ public class DealThread extends Thread {
 				} else if (Util.landowner == 3) {
 					Util.callPlayer = 1;
 				}
-				// System.out.println("aaa" + Util.callPlayer);
 				while (Util.playerOne.getPlayerPoke().size() != 0 && Util.playerTwo.getPlayerPoke().size() != 0
 						&& Util.playerThree.getPlayerPoke().size() != 0) {// 判断条件就是都不为空说明有牌
 					
@@ -294,40 +294,103 @@ public class DealThread extends Thread {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						if(OutPoke.isTrusteeship){//托管开启
-							OutPoke.autoOutPoke(Util.playerTwo,Util.playerThree,Util.playerOne);//上家,下家,本家
-							if(Util.isPoke == 2){//如果是2就表示要不起
-								Util.isPoke = 0;//改成自家的要不起
-							}
-							Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
-							Util.callPlayer = 1;
-						}else{//托管关闭
-							if (Util.isPoke == 1) {
-
-								// 清空自家出牌集合
-								Util.playerOne.getOutPoke().clear();
-								// System.out.println("mmmmmmmmmm");
-								// System.out.println("isPoke"+ Util.isPoke);
-								for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {// 遍历一次把选中的牌放进出牌集合
-									if (Util.playerOne.getPlayerPoke().get(i).getPokeY() == 485) {
-										Poke p = Util.playerOne.getPlayerPoke().get(i);// 找出这张牌
-										Util.playerOne.getOutPoke().add(p);// 放进出牌集合
-										Util.playerOne.getPlayerPoke().remove(i);// 移除原集合的牌
-										Util.isPoke = -1;
-										break;// 一定要跳出循环
-									}
+						if(Util.type == 1 || Util.type == 0){//单牌类型
+							if(OutPoke.isTrusteeship){//托管开启
+								OutPoke.autoSoloOutPoke(Util.playerTwo,Util.playerThree,Util.playerOne);//上家,下家,本家
+								Util.type = 1;
+								if(Util.isPoke == 2){//如果是2就表示要不起
+									Util.isPoke = 0;//改成自家的要不起
 								}
-								// 不管有没有出牌都重新排序
-								Util.pokeSort(Util.playerOne.getPlayerPoke());
-								// 重新设置坐标
-								Util.setCoordinate(Util.playerOne.getPlayerPoke());
+								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
 								Util.callPlayer = 1;
-							} else if (Util.isPoke == 0) {// 要不起
-								Util.playerOne.getOutPoke().clear();
-								Util.callPlayer = 1;// 就直接跳转下一个人
+							}else{//托管关闭
+								if (Util.isPoke == 1) {
+
+									// 清空自家出牌集合
+									Util.playerOne.getOutPoke().clear();
+									for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {// 遍历一次把选中的牌放进出牌集合
+										if (Util.playerOne.getPlayerPoke().get(i).getPokeY() == 485) {
+											Poke p = Util.playerOne.getPlayerPoke().get(i);// 找出这张牌
+											Util.playerOne.getOutPoke().add(p);// 放进出牌集合
+											Util.playerOne.getPlayerPoke().remove(i);// 移除原集合的牌
+											Util.isPoke = -1;
+											break;// 一定要跳出循环
+										}
+									}
+									// 不管有没有出牌都重新排序
+									Util.pokeSort(Util.playerOne.getPlayerPoke());
+									// 重新设置坐标
+									Util.setCoordinate(Util.playerOne.getPlayerPoke());
+									Util.callPlayer = 1;
+								} else if (Util.isPoke == 0) {// 要不起
+									Util.playerOne.getOutPoke().clear();
+									Util.callPlayer = 1;// 就直接跳转下一个人
+								}
 							}
+						}else if(Util.type == 2){//对子类型
+							if(OutPoke.isTrusteeship){
+								OutPoke.autoDoubleOutPoke(Util.playerTwo,Util.playerThree,Util.playerOne);//上家,下家,本家
+								if(Util.isPoke == 2){//如果是2就表示要不起
+									Util.isPoke = 0;//改成自家的要不起
+								}
+								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
+								Util.callPlayer = 1;
+							}else{
+								if(Util.isPoke == 1){
+									//先清空自己的出牌集合
+									Util.playerOne.getOutPoke().clear();
+									//遍历将起来的牌放进出牌集合中
+									for(int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++){
+										Poke p = Util.playerOne.getPlayerPoke().get(i);
+										if(p.getPokeY() == 485){
+											Util.playerOne.getOutPoke().add(p);//将起来的牌放进
+											Util.playerOne.getPlayerPoke().remove(i);//从手牌中移除该牌
+											i = -1;//手牌集合中的长度有变化,需要重新开始
+										}
+									}
+									// 不管有没有出牌都重新排序
+									Util.pokeSort(Util.playerOne.getPlayerPoke());
+									// 重新设置坐标
+									Util.setCoordinate(Util.playerOne.getPlayerPoke());
+									Util.callPlayer = 1;
+								}else if(Util.isPoke == 0){
+									Util.playerOne.getOutPoke().clear();
+									Util.callPlayer = 1;// 就直接跳转下一个人
+								}
+							}
+						}else if(Util.type == 3){
+							if(OutPoke.isTrusteeship){
+								OutPoke.autoTripleOutPoke(Util.playerTwo,Util.playerThree,Util.playerOne);//上家,下家,本家
+								if(Util.isPoke == 2){//如果是2就表示要不起
+									Util.isPoke = 0;//改成自家的要不起
+								}
+								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
+								Util.callPlayer = 1;
+							}else{
+								if(Util.isPoke == 1){
+									//先清空自己的出牌集合
+									Util.playerOne.getOutPoke().clear();
+									//遍历将起来的牌放进出牌集合中
+									for(int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++){
+										Poke p = Util.playerOne.getPlayerPoke().get(i);
+										if(p.getPokeY() == 485){
+											Util.playerOne.getOutPoke().add(p);//将起来的牌放进
+											Util.playerOne.getPlayerPoke().remove(i);//从手牌中移除该牌
+											i = -1;//手牌集合中的长度有变化,需要重新开始
+										}
+									}
+									// 不管有没有出牌都重新排序
+									Util.pokeSort(Util.playerOne.getPlayerPoke());
+									// 重新设置坐标
+									Util.setCoordinate(Util.playerOne.getPlayerPoke());
+									Util.callPlayer = 1;
+								}else if(Util.isPoke == 0){
+									Util.playerOne.getOutPoke().clear();
+									Util.callPlayer = 1;// 就直接跳转下一个人
+								}
+							}
+							
 						}
-						
 					} else if (Util.callPlayer == 1) {
 						try {
 							Thread.sleep(1000);
@@ -335,16 +398,41 @@ public class DealThread extends Thread {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						// 在自家的出牌集合中有牌,即不为空的前提下判断东家出什么牌
-						// System.out.println("ssss"+Util.playerOne.getOutPoke().size());
-						OutPoke.autoOutPoke(Util.playerOne,Util.playerTwo,Util.playerThree);
-						try {
-							Thread.sleep(1);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+						if(Util.playerOne.getOutPoke().size() == 0 
+								&& Util.playerTwo.getOutPoke().size() == 0){//当上一家和下一家的出牌集合为空时,说明是本家出牌
+							Util.type = 1;//默认出单张
 						}
-						Util.callPlayer = 2;
+						if(Util.type == 1){//单牌类型
+							// 在自家的出牌集合中有牌,即不为空的前提下判断东家出什么牌
+							OutPoke.autoSoloOutPoke(Util.playerOne,Util.playerTwo,Util.playerThree);
+							try {
+								Thread.sleep(1);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Util.callPlayer = 2;
+						}else if(Util.type == 2){//对子类型
+							//调用对子类型的方法
+							OutPoke.autoDoubleOutPoke(Util.playerOne, Util.playerTwo, Util.playerThree);
+							try {
+								Thread.sleep(1);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Util.callPlayer = 2;
+						}else if(Util.type == 3){
+							//调用三张类型的方法
+							OutPoke.autoTripleOutPoke(Util.playerOne, Util.playerTwo, Util.playerThree);
+							try {
+								Thread.sleep(1);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Util.callPlayer = 2;
+						}
 					} else if (Util.callPlayer == 2) {
 						try {
 							Thread.sleep(1000);
@@ -352,16 +440,43 @@ public class DealThread extends Thread {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						OutPoke.autoOutPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
-						try {
-							Thread.sleep(1);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+						if(Util.playerThree.getOutPoke().size() == 0 
+								&& Util.playerOne.getOutPoke().size() == 0){//当上一家和下一家的出牌集合为空时,说明是本家出牌
+							Util.type = 1;//默认出单张
 						}
-						Util.callPlayer = 0;
+						if(Util.type == 1){//单牌类型
+							OutPoke.autoSoloOutPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							try {
+								Thread.sleep(1);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Util.callPlayer = 0;
+							
+						}else if(Util.type == 2){//对子类型
+							//调用对子类型的方法
+							OutPoke.autoDoubleOutPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							try {
+								Thread.sleep(1);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Util.callPlayer = 0;
+						}else if(Util.type == 3){
+							//调用三张类型的方法
+							OutPoke.autoTripleOutPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							try {
+								Thread.sleep(1);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							Util.callPlayer = 0;
+						}
 						try {
-							Thread.sleep(1);
+							Thread.sleep(1000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
