@@ -29,12 +29,10 @@ public class RemainPoke extends JPanel {
 		if (Util.key == 3 || Util.key == 4) {
 			for (int i = 0; i < count.length; i++) {
 				int c = reMainPoke(count[i]);
-				g.drawString(c + "", 12 + (i * 29), 40);
+				g.drawString(c + "", 12 + (i * 29), 42);
 			}
-//			int c_Dw = reMainPoke(100);
-//			int c_Xw = reMainPoke(99);
 			int c_W = reMainPoke(100) + reMainPoke(99);
-			g.drawString(c_W + "", 389, 40);
+			g.drawString(c_W + "", 389, 42);
 		}
 
 		this.repaint();

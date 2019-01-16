@@ -116,7 +116,7 @@ public class GameAction implements ActionListener {
 			Util.drawMark = 4;
 			Util.playerOne.setPoints(0);//玩家叫1分
 		}else if(order.equals("outPoke")){
-			System.out.println("有几张牌起来:" + Util.pitchOn);
+//			System.out.println("有几张牌起来:" + Util.pitchOn);
 			if(Util.playerTwo.getOutPoke().size() == 0 
 					&& Util.playerThree.getOutPoke().size() == 0){//电脑两玩家的出牌集合为空,说明自己出牌,可以重新定义牌型
 				Util.type = 0;
@@ -188,6 +188,31 @@ public class GameAction implements ActionListener {
 					Util.type = 3;//表明自己出了三张一样的
 					Util.isPoke = 1;//有牌出
 				}else{//否则表示出牌有误 ,起来的牌归位
+					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {//把牌全部归位
+						Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
+					}
+				}
+			}else if((Util.type == 0 && Util.pitchOn == 4)
+					|| (Util.type == 4 && Util.pitchOn == 4)){//三带一的牌型
+				ArrayList<Poke> temp = new ArrayList<Poke>();//临时集合
+				for(int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++){//遍历一下找出升起来的牌
+					Poke p = Util.playerOne.getPlayerPoke().get(i);
+					if(p.getPokeY() == 485){
+						temp.add(p);
+					}
+				}
+				Util.pokeSort(temp);//给临时集合排个序
+				if((temp.get(0).getNumber() == temp.get(1).getNumber()) 
+						&& (temp.get(0).getNumber() == temp.get(2).getNumber())
+						&& (temp.get(0).getNumber() != temp.get(3).getNumber())){//是一个三带一的牌
+					Util.type = 4;
+					Util.isPoke = 1;
+				}else if((temp.get(1).getNumber() == temp.get(2).getNumber()) 
+						&& (temp.get(1).getNumber() == temp.get(3).getNumber())
+						&& (temp.get(1).getNumber() != temp.get(0).getNumber())){//是三代一的牌
+					Util.type = 4;
+					Util.isPoke = 1;
+				}else{
 					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {//把牌全部归位
 						Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
 					}

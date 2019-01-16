@@ -7,6 +7,7 @@ import com.qiu.controller.GameMouse;
 import com.qiu.controller.GameWindow;
 import com.qiu.controller.LoginAction;
 import com.qiu.controller.LoginWindow;
+import com.qiu.controller.SelectAction;
 import com.qiu.model.Player;
 import com.qiu.model.PlayerOne;
 import com.qiu.model.PlayerThree;
@@ -22,6 +23,7 @@ public class LoginFrame extends JFrame {
 	GameWindow gw = new GameWindow(this);
 	GameAction ga = new GameAction(this);
 	GameMouse gm = new GameMouse(this.getGf().getGamePanel());
+	SelectAction sa = new SelectAction(this);
 	
 	Player playerOne = new PlayerOne();
 	Player playerTwo = new PlayerTwo();
@@ -61,6 +63,8 @@ public class LoginFrame extends JFrame {
 		this.getGf().getGamePanel().getHint().addActionListener(ga);
 		this.getGf().getGamePanel().getTrusteeship().addActionListener(ga);
 		this.getGf().getGamePanel().addMouseListener(gm);
+		this.getSd().getSure().addActionListener(sa);
+		this.getSd().getCancel().addActionListener(sa);
 		
 	}
 	
