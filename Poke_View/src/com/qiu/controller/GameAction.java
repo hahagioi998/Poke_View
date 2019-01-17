@@ -12,7 +12,7 @@ import com.qiu.util.Util;
 import com.qiu.view.LoginFrame;
 
 public class GameAction implements ActionListener {
-	
+
 	private LoginFrame lf;
 
 	public GameAction(LoginFrame lf) {// 构造方法传参
@@ -24,19 +24,20 @@ public class GameAction implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		String order = e.getActionCommand();//获取相应的指令
-		if(order.equals("deal")){
+		String order = e.getActionCommand();// 获取相应的指令
+		if (order.equals("deal")) {
 			Util.upsetPoke(Util.pokeList);
 			Util.setKey(1);
 			lf.getGf().getStartItem().setText("重发(D)");
 			lf.getGf().getStartItem().setActionCommand("reDeal");
-			
-//			Util.show();
-		}else if(order.equals("reDeal")){//重新发牌
+
+			// Util.show();
+		} else if (order.equals("reDeal")) {// 重新发牌
 			// 窗口监听,提示一下
-			int key = JOptionPane.showConfirmDialog(lf.getGf(), "游戏正在进行,是否确定重新发牌?", "温馨提示", JOptionPane.OK_CANCEL_OPTION);
+			int key = JOptionPane.showConfirmDialog(lf.getGf(), "游戏正在进行,是否确定重新发牌?", "温馨提示",
+					JOptionPane.OK_CANCEL_OPTION);
 			if (key == JOptionPane.OK_OPTION) {
-				Util.pokeList.clear();//移除集合的所有元素
+				Util.pokeList.clear();// 移除集合的所有元素
 				Util.playerOne.getPlayerPoke().clear();
 				Util.playerTwo.getPlayerPoke().clear();
 				Util.playerThree.getPlayerPoke().clear();
@@ -44,9 +45,9 @@ public class GameAction implements ActionListener {
 				Util.playerTwo.getOutPoke().clear();
 				Util.playerThree.getOutPoke().clear();
 				Util.landowner = 4;
-				//一切数据都要重置
-				Util.initPoke();//初始化数据
-				Util.player_Poke = 0;//发牌轮数重置为0
+				// 一切数据都要重置
+				Util.initPoke();// 初始化数据
+				Util.player_Poke = 0;// 发牌轮数重置为0
 				Util.playerOne.setPoints(4);
 				Util.playerTwo.setPoints(4);
 				Util.playerThree.setPoints(4);
@@ -55,256 +56,286 @@ public class GameAction implements ActionListener {
 				Util.callPlayer = 0;
 				Util.mark = 0;
 				Util.hidePoints = 0;
-//				lf.getGf().getGamePanel().removeMouseListener(lf.getGm());
-				
+				// lf.getGf().getGamePanel().removeMouseListener(lf.getGm());
+
 				Util.upsetPoke(Util.pokeList);
 				Util.setKey(1);
-//				Util.reStart = true;
+				// Util.reStart = true;
 			}
-		}else if(order.equals("selete")){
+		} else if (order.equals("selete")) {
 			lf.getSd().setVisible(true);
-		}else if(order.equals("score")){
+		} else if (order.equals("score")) {
 			System.out.println("ccc");
-		}else if(order.equals("exit")){
+		} else if (order.equals("exit")) {
 			// 窗口监听,提示一下
 			int key = JOptionPane.showConfirmDialog(lf.getGf(), "真的要退出游戏吗?", "温馨提示", JOptionPane.OK_CANCEL_OPTION);
 			if (key == JOptionPane.OK_OPTION) {
 				lf.getGf().setVisible(false);
 				lf.setVisible(true);
 			}
-		}else if(order.equals("rule")){
-			String ruleText = "发牌:\n"
-					+ "一副牌 54 张，一人 17 张，留 3 张做底牌，在确定地主之前玩家不"
-					+ "\n能看底牌，地主确定后，底牌亮出，底牌分给地主。"
-					+ "\n第一个叫牌的玩家"
-					+ "\n翻一张地主牌，地主牌被谁拿到谁是地主。棋牌平台\n"
-					+ "上为第一轮叫牌的玩家由系统选定。\n"
-					+ "叫牌"
-					+ "\n叫牌按出牌的顺序轮流进行，每人只能叫一次。叫牌时可以叫“1分”，"
-					+ "\n“2分”，“3分”，“不叫”。后叫牌者只能叫比前面玩家高的分或者不叫。"
-					+ "\n叫牌结束后所叫分值最大的玩家为地主；如果有玩家叫“3分”则立即结"
-					+ "\n束叫牌，该玩家为地主；如果都不叫，则重新发牌，重新叫牌。"
-					+ "\n加倍"
-					+ "\n叫牌结束后，玩家可选择“加倍”和“不加倍”。加倍后玩家输赢结算得分"
-					+ "\n翻倍，不加倍得分无倍率变化。"
-					+ "\n出牌"
-					+ "\n将三张底牌交给地主，并亮出底牌让所有人都能看到。地主首先出牌，然"
-					+ "\n后按逆时针顺序依次出牌，轮到用户跟牌时，用户可以选择“不出”或出比"
+		} else if (order.equals("rule")) {
+			String ruleText = "发牌:\n" + "一副牌 54 张，一人 17 张，留 3 张做底牌，在确定地主之前玩家不" + "\n能看底牌，地主确定后，底牌亮出，底牌分给地主。"
+					+ "\n第一个叫牌的玩家" + "\n翻一张地主牌，地主牌被谁拿到谁是地主。棋牌平台\n" + "上为第一轮叫牌的玩家由系统选定。\n" + "叫牌"
+					+ "\n叫牌按出牌的顺序轮流进行，每人只能叫一次。叫牌时可以叫“1分”，" + "\n“2分”，“3分”，“不叫”。后叫牌者只能叫比前面玩家高的分或者不叫。"
+					+ "\n叫牌结束后所叫分值最大的玩家为地主；如果有玩家叫“3分”则立即结" + "\n束叫牌，该玩家为地主；如果都不叫，则重新发牌，重新叫牌。" + "\n加倍"
+					+ "\n叫牌结束后，玩家可选择“加倍”和“不加倍”。加倍后玩家输赢结算得分" + "\n翻倍，不加倍得分无倍率变化。" + "\n出牌"
+					+ "\n将三张底牌交给地主，并亮出底牌让所有人都能看到。地主首先出牌，然" + "\n后按逆时针顺序依次出牌，轮到用户跟牌时，用户可以选择“不出”或出比"
 					+ "\n上一个玩家大的牌。某一玩家出完牌时结束本局。";
 			JOptionPane.showMessageDialog(lf.getGf(), ruleText, "规则说明", JOptionPane.CLOSED_OPTION);
-		}else if(order.equals("about")){
+		} else if (order.equals("about")) {
 			String textAbout = "斗地主 1.0Bate\n(C)2018-1219  涅槃出品";
 			JOptionPane.showMessageDialog(lf.getGf(), textAbout, "关于", JOptionPane.CLOSED_OPTION);
-		}else if(order.equals("showPoke")){			
-			if(Util.flag){
-				Util.flag = false;//暗牌开关
+		} else if (order.equals("showPoke")) {
+			if (Util.flag) {
+				Util.flag = false;// 暗牌开关
 				lf.getGf().getGamePanel().getShowPoke().setText("明牌");
-			}else{
-				Util.flag = true;//明牌开关
+			} else {
+				Util.flag = true;// 明牌开关
 				lf.getGf().getGamePanel().getShowPoke().setText("暗牌");
 			}
-		}else if(order.equals("oneMark")){
+		} else if (order.equals("oneMark")) {
 			Util.drawMark = 1;
-			Util.playerOne.setPoints(1);//玩家叫1分
-		}else if(order.equals("twoMark")){
+			Util.playerOne.setPoints(1);// 玩家叫1分
+		} else if (order.equals("twoMark")) {
 			Util.drawMark = 2;
-			Util.playerOne.setPoints(2);//玩家叫1分
-		}else if(order.equals("threeMark")){
+			Util.playerOne.setPoints(2);// 玩家叫1分
+		} else if (order.equals("threeMark")) {
 			Util.drawMark = 3;
-			Util.playerOne.setPoints(3);//玩家叫1分
-		}else if(order.equals("noMark")){
+			Util.playerOne.setPoints(3);// 玩家叫1分
+		} else if (order.equals("noMark")) {
 			Util.drawMark = 4;
-			Util.playerOne.setPoints(0);//玩家叫1分
-		}else if(order.equals("outPoke")){
-//			System.out.println("有几张牌起来:" + Util.pitchOn);
-			if(Util.playerTwo.getOutPoke().size() == 0 
-					&& Util.playerThree.getOutPoke().size() == 0){//电脑两玩家的出牌集合为空,说明自己出牌,可以重新定义牌型
+			Util.playerOne.setPoints(0);// 玩家叫1分
+		} else if (order.equals("outPoke")) {
+			// System.out.println("有几张牌起来:" + Util.pitchOn);
+			if (Util.playerTwo.getOutPoke().size() == 0 && Util.playerThree.getOutPoke().size() == 0) {// 电脑两玩家的出牌集合为空,说明自己出牌,可以重新定义牌型
 				Util.type = 0;
 			}
-			if((Util.type == 0 && Util.pitchOn == 1) 
-					|| (Util.type == 1 && Util.pitchOn == 1)){//如果是地主,type就是为0.可以进来,不是地主的时候得根据前面一个人出牌的类型来出自己的牌
-				if(Util.playerTwo.getOutPoke().size() != 0){//西家出牌集合不为空,说明有出牌
+			if ((Util.type == 0 && Util.pitchOn == 1) || (Util.type == 1 && Util.pitchOn == 1)) {// 如果是地主,type就是为0.可以进来,不是地主的时候得根据前面一个人出牌的类型来出自己的牌
+				if (Util.playerTwo.getOutPoke().size() != 0) {// 西家出牌集合不为空,说明有出牌
 					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {
-						if(Util.playerOne.getPlayerPoke().get(i).getPokeY() == 485){//找着那张起来的牌
-							if(Util.playerOne.getPlayerPoke().get(i).getNumber() 
-									> Util.playerTwo.getOutPoke().get(0).getNumber()){//比较大小
-								Util.isPoke = 1;//1就表示要的起
-								Util.type = 1;//单牌类型
-							}else{
+						if (Util.playerOne.getPlayerPoke().get(i).getPokeY() == 485) {// 找着那张起来的牌
+							if (Util.playerOne.getPlayerPoke().get(i).getNumber() > Util.playerTwo.getOutPoke().get(0)
+									.getNumber()) {// 比较大小
+								Util.isPoke = 1;// 1就表示要的起
+								Util.type = 1;// 单牌类型
+							} else {
 								Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
-								Util.isPoke = -1;//表示选择不对,重新出牌
+								Util.isPoke = -1;// 表示选择不对,重新出牌
 							}
 							break;
 						}
 					}
-				}else if(Util.playerThree.getOutPoke().size() != 0 
-						&& Util.playerTwo.getOutPoke().size() == 0){
-					//东家的出牌集合不为空,西家的出牌集合为空,说明西家要不起,这时就要判断自家和东家的牌
+				} else if (Util.playerThree.getOutPoke().size() != 0 && Util.playerTwo.getOutPoke().size() == 0) {
+					// 东家的出牌集合不为空,西家的出牌集合为空,说明西家要不起,这时就要判断自家和东家的牌
 					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {
-						if(Util.playerOne.getPlayerPoke().get(i).getPokeY() == 485){//找着那张起来的牌
-							if(Util.playerOne.getPlayerPoke().get(i).getNumber() 
-									> Util.playerThree.getOutPoke().get(0).getNumber()){//比较大小
-								Util.isPoke = 1;//1就表示要的起
-							}else{
+						if (Util.playerOne.getPlayerPoke().get(i).getPokeY() == 485) {// 找着那张起来的牌
+							if (Util.playerOne.getPlayerPoke().get(i).getNumber() > Util.playerThree.getOutPoke().get(0)
+									.getNumber()) {// 比较大小
+								Util.isPoke = 1;// 1就表示要的起
+							} else {
 								Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
-								Util.isPoke = -1;//表示选择不对,重新出牌
+								Util.isPoke = -1;// 表示选择不对,重新出牌
 							}
 							break;
 						}
 					}
-				}else{//不满足上面两个情况,说明现在就该自己出
-					Util.type = 1;//走1步骤
-					Util.isPoke = 1;//1就表示要的起
+				} else {// 不满足上面两个情况,说明现在就该自己出
+					Util.type = 1;// 走1步骤
+					Util.isPoke = 1;// 1就表示要的起
 				}
-			}else if((Util.type == 0 && Util.pitchOn == 2) 
-					|| (Util.type == 2 && Util.pitchOn == 2)){////如果是地主,type就是为0.可以进来,不是地主的时候得根据前面一个人出牌的类型来出自己的牌
-				ArrayList<Poke> temp = new ArrayList<Poke>();//临时一个集合,用来存放起来的两张牌
+			} else if ((Util.type == 0 && Util.pitchOn == 2) || (Util.type == 2 && Util.pitchOn == 2)) {// 如果是地主,type就是为0.可以进来,不是地主的时候得根据前面一个人出牌的类型来出自己的牌
+				ArrayList<Poke> temp = new ArrayList<Poke>();// 临时一个集合,用来存放起来的两张牌
 				for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {
-					Poke p = Util.playerOne.getPlayerPoke().get(i);//临时扑克
-					if(p.getPokeY() == 485){//起来的两张牌的面值是不是一样
+					Poke p = Util.playerOne.getPlayerPoke().get(i);// 临时扑克
+					if (p.getPokeY() == 485) {// 起来的两张牌的面值是不是一样
 						temp.add(p);
 					}
 				}
-				if(temp.get(0).getNumber() == temp.get(1).getNumber()){//临时扑克牌的面值一样时就是对子
-					Util.type = 2;//表明自己出了对子
-					Util.isPoke = 1;//有牌出
-				}else{//否则表示出牌有误 ,起来的牌归位
-					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {//把牌全部归位
+				if (temp.get(0).getNumber() == temp.get(1).getNumber()) {// 临时扑克牌的面值一样时就是对子
+					Util.type = 2;// 表明自己出了对子
+					Util.isPoke = 1;// 有牌出
+				} else {// 否则表示出牌有误 ,起来的牌归位
+					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {// 把牌全部归位
 						Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
 					}
-//					Util.pitchOn = 0;//置0,待会儿重新使用
+					// Util.pitchOn = 0;//置0,待会儿重新使用
 				}
-			}else if((Util.type == 0 && Util.pitchOn == 3) 
-					||(Util.type == 3 && Util.pitchOn == 3)){////如果是地主,type就是为0.可以进来,不是地主的时候得根据前面一个人出牌的类型来出自己的牌
-				ArrayList<Poke> temp = new ArrayList<Poke>();//临时一个集合,用来存放起来的两张牌
+			} else if ((Util.type == 0 && Util.pitchOn == 3) || (Util.type == 3 && Util.pitchOn == 3)) {//// 如果是地主,type就是为0.可以进来,不是地主的时候得根据前面一个人出牌的类型来出自己的牌
+				ArrayList<Poke> temp = new ArrayList<Poke>();// 临时一个集合,用来存放起来的两张牌
 				for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {
-					Poke p = Util.playerOne.getPlayerPoke().get(i);//临时扑克
-					if(p.getPokeY() == 485){//起来的两张牌的面值是不是一样
+					Poke p = Util.playerOne.getPlayerPoke().get(i);// 临时扑克
+					if (p.getPokeY() == 485) {// 起来的两张牌的面值是不是一样
 						temp.add(p);
 					}
 				}
-				if((temp.get(0).getNumber() == temp.get(1).getNumber()) 
-						&& (temp.get(0).getNumber() == temp.get(2).getNumber())){//第一张和第二张相同.并且和第三张相同
-					Util.type = 3;//表明自己出了三张一样的
-					Util.isPoke = 1;//有牌出
-				}else{//否则表示出牌有误 ,起来的牌归位
-					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {//把牌全部归位
+				if ((temp.get(0).getNumber() == temp.get(1).getNumber())
+						&& (temp.get(0).getNumber() == temp.get(2).getNumber())) {// 第一张和第二张相同.并且和第三张相同
+					Util.type = 3;// 表明自己出了三张一样的
+					Util.isPoke = 1;// 有牌出
+				} else {// 否则表示出牌有误 ,起来的牌归位
+					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {// 把牌全部归位
 						Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
 					}
 				}
-			}else if((Util.type == 0 && Util.pitchOn == 4)
-					|| (Util.type == 4 && Util.pitchOn == 4)){//三带一的牌型
-				ArrayList<Poke> temp = new ArrayList<Poke>();//临时集合
-				for(int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++){//遍历一下找出升起来的牌
+			} else if ((Util.type == 0 && Util.pitchOn == 4) || (Util.type == 4 && Util.pitchOn == 4)) {// 三带一的牌型
+				ArrayList<Poke> temp = new ArrayList<Poke>();// 临时集合
+				for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {// 遍历一下找出升起来的牌
 					Poke p = Util.playerOne.getPlayerPoke().get(i);
-					if(p.getPokeY() == 485){
+					if (p.getPokeY() == 485) {
 						temp.add(p);
 					}
 				}
-				Util.pokeSort(temp);//给临时集合排个序
-				if((temp.get(0).getNumber() == temp.get(1).getNumber()) 
+				Util.pokeSort(temp);// 给临时集合排个序
+				if ((temp.get(0).getNumber() == temp.get(1).getNumber())
 						&& (temp.get(0).getNumber() == temp.get(2).getNumber())
-						&& (temp.get(0).getNumber() != temp.get(3).getNumber())){//是一个三带一的牌
+						&& (temp.get(0).getNumber() != temp.get(3).getNumber())) {// 是一个三带一的牌
 					Util.type = 4;
 					Util.isPoke = 1;
-				}else if((temp.get(1).getNumber() == temp.get(2).getNumber()) 
+				} else if ((temp.get(1).getNumber() == temp.get(2).getNumber())
 						&& (temp.get(1).getNumber() == temp.get(3).getNumber())
-						&& (temp.get(1).getNumber() != temp.get(0).getNumber())){//是三代一的牌
+						&& (temp.get(1).getNumber() != temp.get(0).getNumber())) {// 是三代一的牌
 					Util.type = 4;
 					Util.isPoke = 1;
-				}else{
-					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {//把牌全部归位
+				} else {
+					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {// 把牌全部归位
 						Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
 					}
 				}
-			}else if((Util.type == 0 && Util.pitchOn == 5)
-					|| (Util.type == 5 && Util.pitchOn == 5)){//三带一对
-				ArrayList<Poke> temp = new ArrayList<Poke>();//临时集合
-				for(int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++){//遍历一下找出升起来的牌
+			} else if ((Util.type == 0 && Util.pitchOn == 5) || (Util.type == 5 && Util.pitchOn == 5)) {// 三带一对
+				ArrayList<Poke> temp = new ArrayList<Poke>();// 临时集合
+				for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {// 遍历一下找出升起来的牌
 					Poke p = Util.playerOne.getPlayerPoke().get(i);
-					if(p.getPokeY() == 485){
+					if (p.getPokeY() == 485) {
 						temp.add(p);
 					}
 				}
-				Util.pokeSort(temp);//给临时集合排个序
-				if((temp.get(0).getNumber() == temp.get(1).getNumber()) 
+				Util.pokeSort(temp);// 给临时集合排个序
+				if ((temp.get(0).getNumber() == temp.get(1).getNumber())
 						&& (temp.get(0).getNumber() == temp.get(2).getNumber())
 						&& (temp.get(0).getNumber() != temp.get(3).getNumber())
-						&& (temp.get(3).getNumber() == temp.get(4).getNumber())){//是一个三带二的牌
+						&& (temp.get(3).getNumber() == temp.get(4).getNumber())) {// 是一个三带二的牌
 					Util.type = 5;
 					Util.isPoke = 1;
-				}else if((temp.get(2).getNumber() == temp.get(3).getNumber()) 
+				} else if ((temp.get(2).getNumber() == temp.get(3).getNumber())
 						&& (temp.get(2).getNumber() == temp.get(4).getNumber())
 						&& (temp.get(2).getNumber() != temp.get(0).getNumber())
-						&& (temp.get(0).getNumber() == temp.get(1).getNumber())){//是三代一的牌
+						&& (temp.get(0).getNumber() == temp.get(1).getNumber())) {// 是三代一的牌
 					Util.type = 5;
 					Util.isPoke = 1;
-				}else{
-					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {//把牌全部归位
+				} else if ((temp.get(0).getNumber() - temp.get(1).getNumber() == 1)
+						&& (temp.get(0).getNumber() - temp.get(2).getNumber() == 2)
+						&& (temp.get(0).getNumber() - temp.get(3).getNumber() == 3)
+						&& (temp.get(0).getNumber() - temp.get(4).getNumber() == 4)) {// 顺子5张的时候
+					Util.type = 6;
+					Util.isPoke = 1;
+
+				} else {
+					for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {// 把牌全部归位
 						Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
 					}
 				}
-			}else{
-				for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {//把牌全部归位
+			} else if ((Util.type == 0 && Util.pitchOn > 5) 
+					|| (Util.type == 6 && Util.pitchOn >= 5)) {//起来的牌数大于5
+				ArrayList<Poke> temp = new ArrayList<Poke>();// 临时集合
+				for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {// 遍历一下找出升起来的牌
+					Poke p = Util.playerOne.getPlayerPoke().get(i);
+					if (p.getPokeY() == 485) {
+						temp.add(p);
+					}
+				}
+				Util.pokeSort(temp);// 排个序确保没错
+				int t = 1;//用于判断是不是顺子的返回值   1--顺子  2--双顺
+				//顺子的判断
+				for (int i = temp.size() - 1; i > 0; i--) {
+					if (temp.get(i - 1).getNumber() - temp.get(i).getNumber() != 1) {// 不满足条件,坐标归零
+						t = 0;
+//						Util.setCoordinate(Util.playerOne.getPlayerPoke());
+					}
+				}
+				//双顺的判断
+				if(temp.size() % 2 == 0){
+					for (int i = temp.size() - 1; i > 2; i -= 2) {
+						//两张相同,接后的两张相同且比前两张大1
+						if(temp.get(i).getNumber() == temp.get(i - 1).getNumber()
+								&& temp.get(i - 2).getNumber() - temp.get(i).getNumber() == 1
+								&& temp.get(i - 2).getNumber() == temp.get(i - 3).getNumber()){
+							t = 2;
+						}else{
+							t = 0;
+							break;
+						}
+					}
+				}
+				if(t == 1){
+					Util.type = 6;
+					Util.isPoke = 1;
+				}else if(t == 2){
+					Util.type = 7;
+					Util.isPoke = 1;
+				}else if(t == 0){
+					Util.setCoordinate(Util.playerOne.getPlayerPoke());
+				}
+
+			} else {
+				for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {// 把牌全部归位
 					Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
 				}
 			}
-//			System.out.println("AAAAAAAAAA"+Util.isPoke);
-//			System.out.println("bbbbbbbb" + Util.type);
-			Util.pitchOn = 0;//置0,待会儿重新使用
-			
-		}else if(order.equals("noOut")){
-				Util.isPoke = 0;//要不起
-		}else if(order.equals("hint")){
-			//如果东西家的出牌集合都为空,说明现在要自己出牌
-			if(Util.playerTwo.getOutPoke().size() == 0 
-					&& Util.playerThree.getOutPoke().size() == 0){
-				ArrayList<Poke> temp = Util.playerOne.getPlayerPoke();//简化代码
-				temp.get(temp.size() - 1).setPokeY(485);//将自己手牌最小的一位弹起
-				Util.pitchOn ++;
-			}else if(Util.playerTwo.getOutPoke().size() != 0){//说明西家出了牌
-				//遍历一下,将自己的手牌从最小的地方开始遍历
+			// System.out.println("AAAAAAAAAA"+Util.isPoke);
+			// System.out.println("bbbbbbbb" + Util.type);
+			Util.pitchOn = 0;// 置0,待会儿重新使用
+
+		} else if (order.equals("noOut")) {
+			Util.isPoke = 0;// 要不起
+		} else if (order.equals("hint")) {
+			// 如果东西家的出牌集合都为空,说明现在要自己出牌
+			if (Util.playerTwo.getOutPoke().size() == 0 && Util.playerThree.getOutPoke().size() == 0) {
+				ArrayList<Poke> temp = Util.playerOne.getPlayerPoke();// 简化代码
+				temp.get(temp.size() - 1).setPokeY(485);// 将自己手牌最小的一位弹起
+				Util.pitchOn++;
+			} else if (Util.playerTwo.getOutPoke().size() != 0) {// 说明西家出了牌
+				// 遍历一下,将自己的手牌从最小的地方开始遍历
 				for (int i = Util.playerOne.getPlayerPoke().size() - 1; i >= 0; i--) {
 					Poke p = Util.playerOne.getPlayerPoke().get(i);
-					//这个牌会大于西家出牌集合中最小的一位就弹起来
-					if(p.getNumber() > Util.playerTwo.getOutPoke().get(0).getNumber()){
+					// 这个牌会大于西家出牌集合中最小的一位就弹起来
+					if (p.getNumber() > Util.playerTwo.getOutPoke().get(0).getNumber()) {
 						p.setPokeY(485);
-						Util.pitchOn ++;
+						Util.pitchOn++;
 						break;
 					}
 				}
-				//如果没有找到就说明要不起
-				if(Util.pitchOn == 0){
+				// 如果没有找到就说明要不起
+				if (Util.pitchOn == 0) {
 					Util.isPoke = 0;
 				}
-			}else if(Util.playerTwo.getOutPoke().size() == 0 
-					&& Util.playerThree.getOutPoke().size() != 0){//西家出牌集合为空,并且东家出牌集合不为空,说明西家要不起东家的牌
-				//遍历一下,将自己的手牌从最小的地方开始遍历
+			} else if (Util.playerTwo.getOutPoke().size() == 0 && Util.playerThree.getOutPoke().size() != 0) {// 西家出牌集合为空,并且东家出牌集合不为空,说明西家要不起东家的牌
+				// 遍历一下,将自己的手牌从最小的地方开始遍历
 				for (int i = Util.playerOne.getPlayerPoke().size() - 1; i >= 0; i--) {
 					Poke p = Util.playerOne.getPlayerPoke().get(i);
-					//这个牌会大于东家出牌集合中最小的一位就弹起来
-					if(p.getNumber() > Util.playerThree.getOutPoke().get(0).getNumber()){
+					// 这个牌会大于东家出牌集合中最小的一位就弹起来
+					if (p.getNumber() > Util.playerThree.getOutPoke().get(0).getNumber()) {
 						p.setPokeY(485);
-						Util.pitchOn ++;
-						break;//找到牌就弹出
+						Util.pitchOn++;
+						break;// 找到牌就弹出
 					}
 				}
-				//如果没有找到就说明要不起
-				if(Util.pitchOn == 0){
+				// 如果没有找到就说明要不起
+				if (Util.pitchOn == 0) {
 					Util.isPoke = 0;
 				}
 			}
-		}else if(order.equals("trusteeship")){
-			if(OutPoke.isTrusteeship == false){
+		} else if (order.equals("trusteeship")) {
+			if (OutPoke.isTrusteeship == false) {
 				lf.getGf().getGamePanel().getTrusteeship().setText("取消托管");
 				OutPoke.isTrusteeship = true;
-			}else if(OutPoke.isTrusteeship = true){
+			} else if (OutPoke.isTrusteeship = true) {
 				lf.getGf().getGamePanel().getTrusteeship().setText("托管");
 				OutPoke.isTrusteeship = false;
 			}
-			
+
 		}
 	}
+
 	public LoginFrame getLf() {
 		return lf;
 	}
@@ -313,5 +344,4 @@ public class GameAction implements ActionListener {
 		this.lf = lf;
 	}
 
-	
 }
