@@ -44,6 +44,8 @@ public class GameAction implements ActionListener {
 				Util.playerOne.getOutPoke().clear();
 				Util.playerTwo.getOutPoke().clear();
 				Util.playerThree.getOutPoke().clear();
+				OutPoke.temp.clear();
+				OutPoke.index.clear();
 				Util.landowner = 4;
 				// 一切数据都要重置
 				Util.initPoke();// 初始化数据
@@ -56,8 +58,11 @@ public class GameAction implements ActionListener {
 				Util.callPlayer = 0;
 				Util.mark = 0;
 				Util.hidePoints = 0;
-				// lf.getGf().getGamePanel().removeMouseListener(lf.getGm());
-
+				Util.isPoke = -1;
+				Util.pitchOn = 0;
+				Util.type = 0;
+				OutPoke.score = 0;
+				OutPoke.isTrusteeship = false;
 				Util.upsetPoke(Util.pokeList);
 				Util.setKey(1);
 				// Util.reStart = true;
@@ -234,8 +239,7 @@ public class GameAction implements ActionListener {
 						Util.playerOne.getPlayerPoke().get(i).setPokeY(500);
 					}
 				}
-			} else if ((Util.type == 0 && Util.pitchOn > 5) 
-					|| (Util.type == 6 && Util.pitchOn >= 5)) {//起来的牌数大于5
+			} else if ((Util.type == 0 && Util.pitchOn > 5) || (Util.type == 6 && Util.pitchOn >= 5)) {// 起来的牌数大于5
 				ArrayList<Poke> temp = new ArrayList<Poke>();// 临时集合
 				for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {// 遍历一下找出升起来的牌
 					Poke p = Util.playerOne.getPlayerPoke().get(i);
@@ -244,35 +248,37 @@ public class GameAction implements ActionListener {
 					}
 				}
 				Util.pokeSort(temp);// 排个序确保没错
-				int t = 1;//用于判断是不是顺子的返回值   1--顺子  2--双顺
-				//顺子的判断
+				boolean k = true;// 用于判断是不是顺子的返回值 1--顺子 2--双顺
+				boolean b = false;// 判断是不是双顺
+				// 顺子的判断
 				for (int i = temp.size() - 1; i > 0; i--) {
 					if (temp.get(i - 1).getNumber() - temp.get(i).getNumber() != 1) {// 不满足条件,坐标归零
-						t = 0;
-//						Util.setCoordinate(Util.playerOne.getPlayerPoke());
+						k = false;
 					}
 				}
-				//双顺的判断
-				if(temp.size() % 2 == 0){
+				// 双顺的判断
+				if (temp.size() % 2 == 0) {
 					for (int i = temp.size() - 1; i > 2; i -= 2) {
-						//两张相同,接后的两张相同且比前两张大1
-						if(temp.get(i).getNumber() == temp.get(i - 1).getNumber()
+						// 两张相同,接后的两张相同且比前两张大1
+						if (temp.get(i).getNumber() == temp.get(i - 1).getNumber()
 								&& temp.get(i - 2).getNumber() - temp.get(i).getNumber() == 1
-								&& temp.get(i - 2).getNumber() == temp.get(i - 3).getNumber()){
-							t = 2;
-						}else{
-							t = 0;
+								&& temp.get(i - 2).getNumber() == temp.get(i - 3).getNumber()) {
+							b = true;
+						} else {
+							b = false;
 							break;
 						}
 					}
 				}
-				if(t == 1){
+				if (k) {
 					Util.type = 6;
 					Util.isPoke = 1;
-				}else if(t == 2){
+				}
+				if (b) {
 					Util.type = 7;
 					Util.isPoke = 1;
-				}else if(t == 0){
+				}
+				if (k == false && b == false) {
 					Util.setCoordinate(Util.playerOne.getPlayerPoke());
 				}
 

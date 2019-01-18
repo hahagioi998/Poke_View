@@ -39,12 +39,12 @@ public class OutPoke {
 			// 先清空自己的出牌集合
 			Util.playerOne.getOutPoke().clear();
 			// 遍历将起来的牌放进出牌集合中
-			for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {
+			for (int i = Util.playerOne.getPlayerPoke().size() - 1; i >= 0; i--) {
 				Poke p = Util.playerOne.getPlayerPoke().get(i);
 				if (p.getPokeY() == 485) {
 					Util.playerOne.getOutPoke().add(p);// 将起来的牌放进
 					Util.playerOne.getPlayerPoke().remove(i);// 从手牌中移除该牌
-					i = -1;// 手牌集合中的长度有变化,需要重新开始
+					// i = -1;// 手牌集合中的长度有变化,需要重新开始
 				}
 			}
 			// 不管有没有出牌都重新排序
@@ -480,6 +480,162 @@ public class OutPoke {
 							}
 							// 说明中间断开了
 							if (p.getNumber() - OutPoke.temp.get(OutPoke.temp.size() - 1).getNumber() > 1) {
+								OutPoke.temp.clear();
+								OutPoke.index.clear();
+								i = j;
+								break;
+							}
+						}
+						if (OutPoke.temp.size() == count) {
+							break;
+						}
+					}
+
+				}
+				// 当temp中的值有count一样就说明有牌要的起
+				if (OutPoke.temp.size() == count) {
+					for (int j = OutPoke.temp.size() - 1; j >= 0; j--) {
+						Poke p = OutPoke.temp.get(j);
+						self.getOutPoke().add(p);
+					}
+					for (int j = 0; j < OutPoke.index.size(); j++) {
+						int x = OutPoke.index.get(j);
+						self.getPlayerPoke().remove(x);
+					}
+					Util.pokeSort(self.getOutPoke());
+					Util.pokeSort(self.getPlayerPoke());
+					OutPoke.temp.clear();
+					OutPoke.index.clear();
+				} else {
+					Util.isPoke = 2;// 要不起
+				}
+			} else {
+				Util.isPoke = 2;
+			}
+		}
+	}
+
+	// 双顺出牌方法
+	public static void continueDoublePoke(Player prior, Player next, Player self) {
+		Util.isPoke = -1;// 关闭要不起的按钮
+		self.getOutPoke().clear();
+
+		if (prior.getOutPoke().size() != 0) {
+			int count = prior.getOutPoke().size();
+			Util.pokeSort(prior.getOutPoke());// 给上一家出牌集合排序,安全一点
+			int location = -1;
+			int i = self.getPlayerPoke().size() - 1;
+			if (self.getPlayerPoke().size() >= count) {// 说明手里的牌够再进来
+				while (location != 0) {
+					if (OutPoke.temp.size() == 0) {
+						for (; i >= 0; i--) {
+							Poke p = self.getPlayerPoke().get(i);
+							if (p.getNumber() > prior.getOutPoke().get(prior.getOutPoke().size() - 1).getNumber()) {
+								OutPoke.temp.add(p);
+								OutPoke.index.add(i);
+								break;
+							}
+						}
+						if (OutPoke.temp.size() == 0) {// 说明最小的一张都比不过
+							Util.isPoke = 2;// 要不起
+							break;
+						}
+					} else {
+						for (int j = i; j >= 0; j--) {
+							location = j;
+							Poke p = self.getPlayerPoke().get(j);
+							if (p.getNumber() == OutPoke.temp.get(OutPoke.temp.size() - 1).getNumber()) {
+								if (OutPoke.temp.size() == 1 || OutPoke.temp.get(OutPoke.temp.size() - 1).getNumber()
+										- OutPoke.temp.get(OutPoke.temp.size() - 2).getNumber() == 1) {
+									OutPoke.temp.add(p);
+									OutPoke.index.add(j);
+									if (OutPoke.temp.size() == count) {
+										break;
+									}
+								}
+							} else if (p.getNumber() - OutPoke.temp.get(OutPoke.temp.size() - 1).getNumber() == 1
+									&& OutPoke.temp.get(OutPoke.temp.size() - 1).getNumber() == OutPoke.temp
+											.get(OutPoke.temp.size() - 2).getNumber()) {
+								OutPoke.temp.add(p);
+								OutPoke.index.add(j);
+								if (OutPoke.temp.size() == count) {
+									break;
+								}
+							} else if (p.getNumber() - OutPoke.temp.get(OutPoke.temp.size() - 1).getNumber() > 1) {
+								OutPoke.temp.clear();
+								OutPoke.index.clear();
+								i = j;
+								break;
+							}
+						}
+						if (OutPoke.temp.size() == count) {
+							break;
+						}
+					}
+
+				}
+				// 当temp中的值有count一样就说明有牌要的起
+				if (OutPoke.temp.size() == count) {
+					for (int j = OutPoke.temp.size() - 1; j >= 0; j--) {
+						Poke p = OutPoke.temp.get(j);
+						self.getOutPoke().add(p);
+					}
+					for (int j = 0; j < OutPoke.index.size(); j++) {
+						int x = OutPoke.index.get(j);
+						self.getPlayerPoke().remove(x);
+					}
+					Util.pokeSort(self.getOutPoke());
+					Util.pokeSort(self.getPlayerPoke());
+					OutPoke.temp.clear();
+					OutPoke.index.clear();
+				} else {
+					Util.isPoke = 2;// 要不起
+				}
+			} else {
+				Util.isPoke = 2;
+			}
+		} else if (prior.getOutPoke().size() == 0 && next.getOutPoke().size() != 0) {
+			int count = next.getOutPoke().size();
+			Util.pokeSort(next.getOutPoke());// 给上一家出牌集合排序,安全一点
+			int location = -1;
+			int i = self.getPlayerPoke().size() - 1;
+			if (self.getPlayerPoke().size() >= count) {// 说明手里的牌够再进来
+				while (location != 0) {
+					if (OutPoke.temp.size() == 0) {
+						for (; i >= 0; i--) {
+							Poke p = self.getPlayerPoke().get(i);
+							if (p.getNumber() > next.getOutPoke().get(next.getOutPoke().size() - 1).getNumber()) {
+								OutPoke.temp.add(p);
+								OutPoke.index.add(i);
+								break;
+							}
+						}
+						if (OutPoke.temp.size() == 0) {// 说明最小的一张都比不过
+							Util.isPoke = 2;// 要不起
+							break;
+						}
+					} else {
+						for (int j = i; j >= 0; j--) {
+							location = j;
+							Poke p = self.getPlayerPoke().get(j);
+							if (p.getNumber() == OutPoke.temp.get(OutPoke.temp.size() - 1).getNumber()) {
+								if (OutPoke.temp.size() == 1 || OutPoke.temp.get(OutPoke.temp.size() - 1).getNumber()
+										- OutPoke.temp.get(OutPoke.temp.size() - 2).getNumber() == 1) {
+									OutPoke.temp.add(p);
+									OutPoke.index.add(j);
+									if (OutPoke.temp.size() == count) {
+										break;
+									}
+								}
+							} else if (p.getNumber() - OutPoke.temp.get(OutPoke.temp.size() - 1).getNumber() == 1
+									&& OutPoke.temp.get(OutPoke.temp.size() - 1).getNumber() == OutPoke.temp
+											.get(OutPoke.temp.size() - 2).getNumber()) {
+								OutPoke.temp.add(p);
+								OutPoke.index.add(j);
+								if (OutPoke.temp.size() == count) {
+									break;
+								}
+							} else if (p.getNumber() - OutPoke.temp.get(OutPoke.temp.size() - 1).getNumber() > 1) {
 								OutPoke.temp.clear();
 								OutPoke.index.clear();
 								i = j;

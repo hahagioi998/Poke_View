@@ -63,9 +63,9 @@ public class GamePanel extends JPanel {
 		g.drawImage(Util.P_THREE, 870, 5, 950, 85, 0, 0, 80, 80, null);
 		g.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
 		g.setColor(Color.RED);
-		g.drawString(new PlayerOne().getName(), 162, 631);
-		g.drawString(new PlayerTwo().getName(), 135, 30);
-		g.drawString(new PlayerThree().getName(), 800, 30);
+		g.drawString(Util.playerOne.getName(), 162, 631);
+		g.drawString(Util.playerTwo.getName(), 135, 30);
+		g.drawString(Util.playerThree.getName(), 800, 30);
 		// 放那出牌那些按钮
 		outPoke.setBounds(310, 440, 70, 40);
 		noOut.setBounds(390, 440, 70, 40);

@@ -186,25 +186,16 @@ public class Util {
 		return false;
 		
 	} 
-//	//я╟уркЁвс
-//	public static boolean lookForStraight(ArrayList list){
-//		for (int i = 0; i < list.size(); i++) {
-//			if(list.get(i) - list.){
-//				
+//	public static void show() {
+//
+//		for (int i = 0; i < pokeList.size(); i++) {
+//			System.out.print(pokeList.get(i).getNumber() + " ");
+//			if ((i + 1) % 13 == 0) {
+//				System.out.println();
 //			}
 //		}
-//		return false;	
+//
 //	}
-	public static void show() {
-
-		for (int i = 0; i < pokeList.size(); i++) {
-			System.out.print(pokeList.get(i).getNumber() + " ");
-			if ((i + 1) % 13 == 0) {
-				System.out.println();
-			}
-		}
-
-	}
 
 	public static int getKey() {
 		return key;
