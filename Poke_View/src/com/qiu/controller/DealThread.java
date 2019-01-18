@@ -297,6 +297,12 @@ public class DealThread extends Thread {
 								if(Util.isPoke == 2){//如果是2就表示要不起
 									Util.isPoke = 0;//改成自家的要不起
 								}
+								if(Util.isPoke == 0){
+									OutPoke.boomPoke(Util.playerTwo,Util.playerThree,Util.playerOne);
+								}
+								if(Util.isPoke == 0){
+									OutPoke.doubleBoom(Util.playerOne);
+								}
 								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
 								Util.callPlayer = 1;
 							}else{//托管关闭
@@ -329,6 +335,12 @@ public class DealThread extends Thread {
 								if(Util.isPoke == 2){//如果是2就表示要不起
 									Util.isPoke = 0;//改成自家的要不起
 								}
+								if(Util.isPoke == 0){
+									OutPoke.boomPoke(Util.playerTwo,Util.playerThree,Util.playerOne);
+								}
+								if(Util.isPoke == 0){
+									OutPoke.doubleBoom(Util.playerOne);
+								}
 								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
 								Util.callPlayer = 1;
 							}else{
@@ -339,6 +351,12 @@ public class DealThread extends Thread {
 								OutPoke.autoTripleOutPoke(Util.playerTwo,Util.playerThree,Util.playerOne);//上家,下家,本家
 								if(Util.isPoke == 2){//如果是2就表示要不起
 									Util.isPoke = 0;//改成自家的要不起
+								}
+								if(Util.isPoke == 0){
+									OutPoke.boomPoke(Util.playerTwo,Util.playerThree,Util.playerOne);
+								}
+								if(Util.isPoke == 0){
+									OutPoke.doubleBoom(Util.playerOne);
 								}
 								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
 								Util.callPlayer = 1;
@@ -351,6 +369,13 @@ public class DealThread extends Thread {
 								if(Util.isPoke == 2){//如果是2就表示要不起
 									Util.isPoke = 0;//改成自家的要不起
 								}
+								if(Util.isPoke == 0){
+									OutPoke.boomPoke(Util.playerTwo,Util.playerThree,Util.playerOne);
+								}
+								if(Util.isPoke == 0){
+									OutPoke.doubleBoom(Util.playerOne);
+								}
+								Util.pokeSort(Util.playerOne.getOutPoke());
 								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
 								Util.callPlayer = 1;
 							}else{
@@ -362,6 +387,13 @@ public class DealThread extends Thread {
 								if(Util.isPoke == 2){//如果是2就表示要不起
 									Util.isPoke = 0;//改成自家的要不起
 								}
+								if(Util.isPoke == 0){
+									OutPoke.boomPoke(Util.playerTwo,Util.playerThree,Util.playerOne);
+								}
+								if(Util.isPoke == 0){
+									OutPoke.doubleBoom(Util.playerOne);
+								}
+								Util.pokeSort(Util.playerOne.getOutPoke());
 								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
 								Util.callPlayer = 1;
 							}else{
@@ -373,6 +405,13 @@ public class DealThread extends Thread {
 								if(Util.isPoke == 2){//如果是2就表示要不起
 									Util.isPoke = 0;//改成自家的要不起
 								}
+								if(Util.isPoke == 0){
+									OutPoke.boomPoke(Util.playerTwo,Util.playerThree,Util.playerOne);
+								}
+								if(Util.isPoke == 0){
+									OutPoke.doubleBoom(Util.playerOne);
+								}
+								Util.pokeSort(Util.playerOne.getOutPoke());
 								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
 								Util.callPlayer = 1;
 							}else{
@@ -384,6 +423,28 @@ public class DealThread extends Thread {
 								if(Util.isPoke == 2){//如果是2就表示要不起
 									Util.isPoke = 0;//改成自家的要不起
 								}
+								if(Util.isPoke == 0){
+									OutPoke.boomPoke(Util.playerTwo,Util.playerThree,Util.playerOne);
+								}
+								if(Util.isPoke == 0){
+									OutPoke.doubleBoom(Util.playerOne);
+								}
+								Util.pokeSort(Util.playerOne.getOutPoke());
+								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
+								Util.callPlayer = 1;
+							}else{
+								OutPoke.handAction();
+							}
+						}else if(Util.type == 8){
+							if(OutPoke.isTrusteeship){
+								OutPoke.boomPoke(Util.playerTwo,Util.playerThree,Util.playerOne);//上家,下家,本家
+								if(Util.isPoke == 2){
+									OutPoke.doubleBoom(Util.playerOne);
+								}
+								if(Util.isPoke == 2){//如果是2就表示要不起
+									Util.isPoke = 0;//改成自家的要不起
+								}
+								Util.pokeSort(Util.playerOne.getOutPoke());
 								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
 								Util.callPlayer = 1;
 							}else{
@@ -404,6 +465,12 @@ public class DealThread extends Thread {
 						if(Util.type == 1){//单牌类型
 							// 在自家的出牌集合中有牌,即不为空的前提下判断东家出什么牌
 							OutPoke.autoSoloOutPoke(Util.playerOne,Util.playerTwo,Util.playerThree);
+							if(Util.isPoke == 2){
+								OutPoke.boomPoke(Util.playerOne,Util.playerTwo,Util.playerThree);
+							}
+							if(Util.isPoke == 2){
+								OutPoke.doubleBoom(Util.playerThree);
+							}
 							try {
 								Thread.sleep(1);
 							} catch (InterruptedException e) {
@@ -414,6 +481,12 @@ public class DealThread extends Thread {
 						}else if(Util.type == 2){//对子类型
 							//调用对子类型的方法
 							OutPoke.autoDoubleOutPoke(Util.playerOne, Util.playerTwo, Util.playerThree);
+							if(Util.isPoke == 2){
+								OutPoke.boomPoke(Util.playerOne,Util.playerTwo,Util.playerThree);
+							}
+							if(Util.isPoke == 2){
+								OutPoke.doubleBoom(Util.playerThree);
+							}
 							try {
 								Thread.sleep(1);
 							} catch (InterruptedException e) {
@@ -424,6 +497,12 @@ public class DealThread extends Thread {
 						}else if(Util.type == 3){
 							//调用三张类型的方法
 							OutPoke.autoTripleOutPoke(Util.playerOne, Util.playerTwo, Util.playerThree);
+							if(Util.isPoke == 2){
+								OutPoke.boomPoke(Util.playerOne,Util.playerTwo,Util.playerThree);
+							}
+							if(Util.isPoke == 2){
+								OutPoke.doubleBoom(Util.playerThree);
+							}
 							try {
 								Thread.sleep(1);
 							} catch (InterruptedException e) {
@@ -433,6 +512,12 @@ public class DealThread extends Thread {
 							Util.callPlayer = 2;
 						}else if(Util.type == 4){//三代一
 							OutPoke.autoTripleAndOneOutPoke(Util.playerOne, Util.playerTwo, Util.playerThree);
+							if(Util.isPoke == 2){
+								OutPoke.boomPoke(Util.playerOne,Util.playerTwo,Util.playerThree);
+							}
+							if(Util.isPoke == 2){
+								OutPoke.doubleBoom(Util.playerThree);
+							}
 							try {
 								Thread.sleep(1);
 							} catch (InterruptedException e) {
@@ -442,6 +527,12 @@ public class DealThread extends Thread {
 							Util.callPlayer = 2;
 						}else if(Util.type == 5){//三代二
 							OutPoke.autoTripleAndTwoOutPoke(Util.playerOne, Util.playerTwo, Util.playerThree);
+							if(Util.isPoke == 2){
+								OutPoke.boomPoke(Util.playerOne,Util.playerTwo,Util.playerThree);
+							}
+							if(Util.isPoke == 2){
+								OutPoke.doubleBoom(Util.playerThree);
+							}
 							try {
 								Thread.sleep(1);
 							} catch (InterruptedException e) {
@@ -459,6 +550,12 @@ public class DealThread extends Thread {
 								e.printStackTrace();
 							}
 							OutPoke.continuePoke(Util.playerOne, Util.playerTwo, Util.playerThree);
+							if(Util.isPoke == 2){
+								OutPoke.boomPoke(Util.playerOne,Util.playerTwo,Util.playerThree);
+							}
+							if(Util.isPoke == 2){
+								OutPoke.doubleBoom(Util.playerThree);
+							}
 							try {
 								Thread.sleep(1);
 							} catch (InterruptedException e) {
@@ -476,11 +573,23 @@ public class DealThread extends Thread {
 								e.printStackTrace();
 							}
 							OutPoke.continueDoublePoke(Util.playerOne, Util.playerTwo, Util.playerThree);
+							if(Util.isPoke == 2){
+								OutPoke.boomPoke(Util.playerOne,Util.playerTwo,Util.playerThree);
+							}
+							if(Util.isPoke == 2){
+								OutPoke.doubleBoom(Util.playerThree);
+							}
 							try {
 								Thread.sleep(1);
 							} catch (InterruptedException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
+							}
+							Util.callPlayer = 2;
+						}else if(Util.type == 8){
+							OutPoke.boomPoke(Util.playerOne,Util.playerTwo,Util.playerThree);
+							if(Util.isPoke == 2){
+								OutPoke.doubleBoom(Util.playerThree);
 							}
 							Util.callPlayer = 2;
 						}
@@ -497,6 +606,12 @@ public class DealThread extends Thread {
 						}
 						if(Util.type == 1){//单牌类型
 							OutPoke.autoSoloOutPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							if(Util.isPoke == 2){
+								OutPoke.boomPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							}
+							if(Util.isPoke == 2){
+								OutPoke.doubleBoom(Util.playerTwo);
+							}
 							try {
 								Thread.sleep(1);
 							} catch (InterruptedException e) {
@@ -508,6 +623,12 @@ public class DealThread extends Thread {
 						}else if(Util.type == 2){//对子类型
 							//调用对子类型的方法
 							OutPoke.autoDoubleOutPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							if(Util.isPoke == 2){
+								OutPoke.boomPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							}
+							if(Util.isPoke == 2){
+								OutPoke.doubleBoom(Util.playerTwo);
+							}
 							try {
 								Thread.sleep(1);
 							} catch (InterruptedException e) {
@@ -518,6 +639,12 @@ public class DealThread extends Thread {
 						}else if(Util.type == 3){
 							//调用三张类型的方法
 							OutPoke.autoTripleOutPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							if(Util.isPoke == 2){
+								OutPoke.boomPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							}
+							if(Util.isPoke == 2){
+								OutPoke.doubleBoom(Util.playerTwo);
+							}
 							try {
 								Thread.sleep(1);
 							} catch (InterruptedException e) {
@@ -527,6 +654,12 @@ public class DealThread extends Thread {
 							Util.callPlayer = 0;
 						}else if(Util.type == 4){//三代一
 							OutPoke.autoTripleAndOneOutPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							if(Util.isPoke == 2){
+								OutPoke.boomPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							}
+							if(Util.isPoke == 2){
+								OutPoke.doubleBoom(Util.playerTwo);
+							}
 							try {
 								Thread.sleep(1);
 							} catch (InterruptedException e) {
@@ -536,6 +669,12 @@ public class DealThread extends Thread {
 							Util.callPlayer = 0;
 						}else if(Util.type == 5){//三代二
 							OutPoke.autoTripleAndTwoOutPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							if(Util.isPoke == 2){
+								OutPoke.boomPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							}
+							if(Util.isPoke == 2){
+								OutPoke.doubleBoom(Util.playerTwo);
+							}
 							try {
 								Thread.sleep(1);
 							} catch (InterruptedException e) {
@@ -553,6 +692,12 @@ public class DealThread extends Thread {
 								e.printStackTrace();
 							}
 							OutPoke.continuePoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							if(Util.isPoke == 2){
+								OutPoke.boomPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							}
+							if(Util.isPoke == 2){
+								OutPoke.doubleBoom(Util.playerTwo);
+							}
 							try {
 								Thread.sleep(1);
 							} catch (InterruptedException e) {
@@ -570,11 +715,23 @@ public class DealThread extends Thread {
 								e.printStackTrace();
 							}
 							OutPoke.continueDoublePoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							if(Util.isPoke == 2){
+								OutPoke.boomPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							}
+							if(Util.isPoke == 2){
+								OutPoke.doubleBoom(Util.playerTwo);
+							}
 							try {
 								Thread.sleep(1);
 							} catch (InterruptedException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
+							}
+							Util.callPlayer = 0;
+						}else if(Util.type == 8){//出炸弹的时候
+							OutPoke.boomPoke(Util.playerThree, Util.playerOne, Util.playerTwo);
+							if(Util.isPoke == 2){
+								OutPoke.doubleBoom(Util.playerTwo);
 							}
 							Util.callPlayer = 0;
 						}
