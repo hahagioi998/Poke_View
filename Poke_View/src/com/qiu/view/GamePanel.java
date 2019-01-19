@@ -30,6 +30,7 @@ public class GamePanel extends JPanel {
 	private JButton noOut = new JButton("不  出");
 	private JButton hint = new JButton("提  示");
 	private JButton trusteeship = new JButton("托  管");
+	private ResultDialog rd = new ResultDialog();
 
 	public GamePanel() {
 
@@ -292,6 +293,19 @@ public class GamePanel extends JPanel {
 					}
 				}
 			}
+		}else if(Util.key == 5){
+			String s = "游戏结束,正在清理战场...";
+			g.drawString(s, 370, 320);
+//			System.out.println(Util.key);
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(Util.key == 7){
+			rd.setVisible(true);
+			Util.key = 0;
 		}
 
 		try {
@@ -437,6 +451,14 @@ public class GamePanel extends JPanel {
 
 	public void setRp(RemainPoke rp) {
 		this.rp = rp;
+	}
+
+	public ResultDialog getRd() {
+		return rd;
+	}
+
+	public void setRd(ResultDialog rd) {
+		this.rd = rd;
 	}
 
 }

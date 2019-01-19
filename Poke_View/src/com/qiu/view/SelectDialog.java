@@ -41,6 +41,7 @@ public class SelectDialog extends JDialog {
 		// super(lf,"选项");
 		this.setTitle("选项");
 		this.setSize(300, 300);
+		this.setResizable(false);
 
 		this.setLayout(new GridLayout(2, 2, 10, 10));// 将对话框设计为两行两列的网格,两面板距离10像素
 		// 给每个面板添加边框和标题,使用BorderFactory工厂类生成带标题的边框对象

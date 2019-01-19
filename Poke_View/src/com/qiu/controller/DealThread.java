@@ -294,14 +294,14 @@ public class DealThread extends Thread {
 								}
 								OutPoke.autoSoloOutPoke(Util.playerTwo,Util.playerThree,Util.playerOne);//上家,下家,本家
 								Util.type = 1;
-								if(Util.isPoke == 2){//如果是2就表示要不起
-									Util.isPoke = 0;//改成自家的要不起
-								}
-								if(Util.isPoke == 0){
+								if(Util.isPoke == 2){
 									OutPoke.boomPoke(Util.playerTwo,Util.playerThree,Util.playerOne);
 								}
-								if(Util.isPoke == 0){
+								if(Util.isPoke == 2){
 									OutPoke.doubleBoom(Util.playerOne);
+								}
+								if(Util.isPoke == 2){//如果是2就表示要不起
+									Util.isPoke = 0;//改成自家的要不起
 								}
 								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
 								Util.callPlayer = 1;
@@ -332,14 +332,14 @@ public class DealThread extends Thread {
 						}else if(Util.type == 2){//对子类型
 							if(OutPoke.isTrusteeship){
 								OutPoke.autoDoubleOutPoke(Util.playerTwo,Util.playerThree,Util.playerOne);//上家,下家,本家
-								if(Util.isPoke == 2){//如果是2就表示要不起
-									Util.isPoke = 0;//改成自家的要不起
-								}
-								if(Util.isPoke == 0){
+								if(Util.isPoke == 2){
 									OutPoke.boomPoke(Util.playerTwo,Util.playerThree,Util.playerOne);
 								}
-								if(Util.isPoke == 0){
+								if(Util.isPoke == 2){
 									OutPoke.doubleBoom(Util.playerOne);
+								}
+								if(Util.isPoke == 2){//如果是2就表示要不起
+									Util.isPoke = 0;//改成自家的要不起
 								}
 								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
 								Util.callPlayer = 1;
@@ -349,14 +349,14 @@ public class DealThread extends Thread {
 						}else if(Util.type == 3){
 							if(OutPoke.isTrusteeship){
 								OutPoke.autoTripleOutPoke(Util.playerTwo,Util.playerThree,Util.playerOne);//上家,下家,本家
-								if(Util.isPoke == 2){//如果是2就表示要不起
-									Util.isPoke = 0;//改成自家的要不起
-								}
-								if(Util.isPoke == 0){
+								if(Util.isPoke == 2){
 									OutPoke.boomPoke(Util.playerTwo,Util.playerThree,Util.playerOne);
 								}
-								if(Util.isPoke == 0){
+								if(Util.isPoke == 2){
 									OutPoke.doubleBoom(Util.playerOne);
+								}
+								if(Util.isPoke == 2){//如果是2就表示要不起
+									Util.isPoke = 0;//改成自家的要不起
 								}
 								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
 								Util.callPlayer = 1;
@@ -366,14 +366,14 @@ public class DealThread extends Thread {
 						}else if(Util.type == 4){
 							if(OutPoke.isTrusteeship){
 								OutPoke.autoTripleAndOneOutPoke(Util.playerTwo,Util.playerThree,Util.playerOne);//上家,下家,本家
-								if(Util.isPoke == 2){//如果是2就表示要不起
-									Util.isPoke = 0;//改成自家的要不起
-								}
-								if(Util.isPoke == 0){
+								if(Util.isPoke == 2){
 									OutPoke.boomPoke(Util.playerTwo,Util.playerThree,Util.playerOne);
 								}
-								if(Util.isPoke == 0){
+								if(Util.isPoke == 2){
 									OutPoke.doubleBoom(Util.playerOne);
+								}
+								if(Util.isPoke == 2){//如果是2就表示要不起
+									Util.isPoke = 0;//改成自家的要不起
 								}
 								Util.pokeSort(Util.playerOne.getOutPoke());
 								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
@@ -384,14 +384,14 @@ public class DealThread extends Thread {
 						}else if(Util.type == 5){
 							if(OutPoke.isTrusteeship){
 								OutPoke.autoTripleAndTwoOutPoke(Util.playerTwo,Util.playerThree,Util.playerOne);//上家,下家,本家
-								if(Util.isPoke == 2){//如果是2就表示要不起
-									Util.isPoke = 0;//改成自家的要不起
-								}
-								if(Util.isPoke == 0){
+								if(Util.isPoke == 2){
 									OutPoke.boomPoke(Util.playerTwo,Util.playerThree,Util.playerOne);
 								}
-								if(Util.isPoke == 0){
+								if(Util.isPoke == 2){
 									OutPoke.doubleBoom(Util.playerOne);
+								}
+								if(Util.isPoke == 2){//如果是2就表示要不起
+									Util.isPoke = 0;//改成自家的要不起
 								}
 								Util.pokeSort(Util.playerOne.getOutPoke());
 								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
@@ -402,14 +402,14 @@ public class DealThread extends Thread {
 						}else if(Util.type == 6){
 							if(OutPoke.isTrusteeship){
 								OutPoke.continuePoke(Util.playerTwo,Util.playerThree,Util.playerOne);//上家,下家,本家
-								if(Util.isPoke == 2){//如果是2就表示要不起
-									Util.isPoke = 0;//改成自家的要不起
-								}
-								if(Util.isPoke == 0){
+								if(Util.isPoke == 2){
 									OutPoke.boomPoke(Util.playerTwo,Util.playerThree,Util.playerOne);
 								}
-								if(Util.isPoke == 0){
+								if(Util.isPoke == 2){
 									OutPoke.doubleBoom(Util.playerOne);
+								}
+								if(Util.isPoke == 2){//如果是2就表示要不起
+									Util.isPoke = 0;//改成自家的要不起
 								}
 								Util.pokeSort(Util.playerOne.getOutPoke());
 								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
@@ -420,14 +420,14 @@ public class DealThread extends Thread {
 						}else if(Util.type == 7){
 							if(OutPoke.isTrusteeship){
 								OutPoke.continueDoublePoke(Util.playerTwo,Util.playerThree,Util.playerOne);//上家,下家,本家
-								if(Util.isPoke == 2){//如果是2就表示要不起
-									Util.isPoke = 0;//改成自家的要不起
-								}
-								if(Util.isPoke == 0){
+								if(Util.isPoke == 2){
 									OutPoke.boomPoke(Util.playerTwo,Util.playerThree,Util.playerOne);
 								}
-								if(Util.isPoke == 0){
+								if(Util.isPoke == 2){
 									OutPoke.doubleBoom(Util.playerOne);
+								}
+								if(Util.isPoke == 2){//如果是2就表示要不起
+									Util.isPoke = 0;//改成自家的要不起
 								}
 								Util.pokeSort(Util.playerOne.getOutPoke());
 								Util.setCoordinate(Util.playerOne.getPlayerPoke());//左边重新设置好
@@ -743,6 +743,47 @@ public class DealThread extends Thread {
 						}
 					}
 				}
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if((Util.playerOne.getPlayerPoke().size() == 0 && Util.playerTwo.getPlayerPoke().size() != 0 
+						&& Util.playerThree.getPlayerPoke().size() != 0) || 
+						(Util.playerOne.getPlayerPoke().size() != 0 && Util.playerTwo.getPlayerPoke().size() == 0 
+						&& Util.playerThree.getPlayerPoke().size() != 0) ||
+						(Util.playerOne.getPlayerPoke().size() != 0 && Util.playerTwo.getPlayerPoke().size() != 0 
+						&& Util.playerThree.getPlayerPoke().size() == 0)){
+					Util.key = 5;
+				}
+			}else if(Util.key == 5){
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Util.key = 6;
+			}else if(Util.key == 6){
+				//如果是地主的手牌集合为空就判断地主赢,否则就是农民赢
+				if(Util.landowner == 1 && Util.playerOne.getPlayerPoke().size() == 0){
+					Util.playerOne.setScore(Util.playerOne.getScore() +  OutPoke.score * 2);
+					Util.playerTwo.setScore(Util.playerTwo.getScore() - OutPoke.score);
+					Util.playerThree.setScore(Util.playerThree.getScore() - OutPoke.score);
+					Util.key = 7;//跳转到结算面板
+				}else if(Util.landowner == 2 && Util.playerTwo.getPlayerPoke().size() == 0){
+					Util.playerTwo.setScore(Util.playerTwo.getScore() +  OutPoke.score * 2);
+					Util.playerOne.setScore(Util.playerOne.getScore() - OutPoke.score);
+					Util.playerThree.setScore(Util.playerThree.getScore() - OutPoke.score);
+					Util.key = 7;//跳转到结算面板
+				}else if(Util.landowner == 3 && Util.playerThree.getPlayerPoke().size() == 0){
+					Util.playerThree.setScore(Util.playerThree.getScore() +  OutPoke.score * 2);
+					Util.playerTwo.setScore(Util.playerTwo.getScore() - OutPoke.score);
+					Util.playerOne.setScore(Util.playerOne.getScore() - OutPoke.score);
+					Util.key = 7;//跳转到结算面板
+				}
+				
 			}
 			try {
 				Thread.sleep(1);

@@ -8,7 +8,8 @@ public abstract class Player {
 	private ArrayList<Poke> playerPoke = new ArrayList<Poke>();//手牌的集合
 	private int points = 4;//初始分数
 	private ArrayList<Poke> outPoke = new ArrayList<Poke>();//出牌的集合
-
+	private int score = 1000;//每个人初始化有1000分
+	
 	public String getName() {
 		return name;
 	}
@@ -41,4 +42,12 @@ public abstract class Player {
 		this.outPoke = outPoke;
 	}
 	
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
 }

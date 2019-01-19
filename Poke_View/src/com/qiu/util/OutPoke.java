@@ -102,10 +102,14 @@ public class OutPoke {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Poke p = self.getPlayerPoke().get(self.getPlayerPoke().size() - 1);
-			// 放进出牌的集合中
-			self.getOutPoke().add(p);
-			self.getPlayerPoke().remove(self.getPlayerPoke().size() - 1);
+			if(self.getPlayerPoke().size() != 0){
+				Poke p = self.getPlayerPoke().get(self.getPlayerPoke().size() - 1);
+				// 放进出牌的集合中
+				self.getOutPoke().add(p);
+				self.getPlayerPoke().remove(self.getPlayerPoke().size() - 1);
+			}
+			
+			
 		}
 	}
 
@@ -840,6 +844,7 @@ public class OutPoke {
 			self.getPlayerPoke().remove(0);
 			self.getPlayerPoke().remove(0);
 			OutPoke.score *= 4;
+			Util.type = 8;
 		}else{
 			Util.isPoke = 2;
 		}
