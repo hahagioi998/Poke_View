@@ -57,9 +57,8 @@ public class Util {
 	public static int key = 0;
 	public static boolean flag = true;// 控制明牌和暗牌的按钮
 
-	// 设置一个步骤
-	// public static
-
+	//游戏时间的快慢
+	public static int time = 2000;//正常为2秒
 	// 创建poke牌
 	public static ArrayList<Poke> pokeList = new ArrayList<Poke>();// 放顺序poke牌的集合
 	// 创建poke的初始方法

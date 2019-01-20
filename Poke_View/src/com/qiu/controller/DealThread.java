@@ -7,7 +7,6 @@ import com.qiu.view.LoginFrame;
 
 public class DealThread extends Thread {
 
-	// private GameMouse gm = new GameMouse(lf.getGf().getGamePanel());
 	LoginFrame lf;
 
 	public DealThread(LoginFrame lf) {
@@ -48,7 +47,7 @@ public class DealThread extends Thread {
 					if (Util.drawMark == 1) {
 						// 休眠两秒
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(Util.time);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -61,7 +60,7 @@ public class DealThread extends Thread {
 					} else if (Util.drawMark == 2) {
 						// 休眠两秒
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(Util.time);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -72,7 +71,7 @@ public class DealThread extends Thread {
 						}
 					} else if (Util.drawMark == 3) {// 自己直接叫3分需休眠一下
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(Util.time);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -82,7 +81,7 @@ public class DealThread extends Thread {
 					} else if (Util.drawMark == 4) {
 						// 休眠两秒
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(Util.time);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -102,7 +101,7 @@ public class DealThread extends Thread {
 					}
 					if (Util.drawMark == 5) {// 自己直接叫3分需休眠一下
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(Util.time);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -112,7 +111,7 @@ public class DealThread extends Thread {
 					}
 					// 休眠两秒
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(Util.time);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -137,7 +136,7 @@ public class DealThread extends Thread {
 					}
 					if (Util.drawMark == 9) {// 自己直接叫3分需休眠一下
 						try {
-							Thread.sleep(2000);
+							Thread.sleep(Util.time);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -147,7 +146,7 @@ public class DealThread extends Thread {
 					}
 					// 休眠两秒
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(Util.time);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -164,7 +163,7 @@ public class DealThread extends Thread {
 
 				}
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(Util.time);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -237,7 +236,7 @@ public class DealThread extends Thread {
 						}
 					}
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(Util.time);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -453,7 +452,7 @@ public class DealThread extends Thread {
 						}
 					} else if (Util.callPlayer == 1) {
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(Util.time);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -595,7 +594,7 @@ public class DealThread extends Thread {
 						}
 					} else if (Util.callPlayer == 2) {
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(Util.time);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -736,7 +735,7 @@ public class DealThread extends Thread {
 							Util.callPlayer = 0;
 						}
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(Util.time);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -744,7 +743,7 @@ public class DealThread extends Thread {
 					}
 				}
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(Util.time);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

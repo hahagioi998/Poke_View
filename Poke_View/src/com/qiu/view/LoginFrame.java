@@ -12,6 +12,7 @@ import com.qiu.model.Player;
 import com.qiu.model.PlayerOne;
 import com.qiu.model.PlayerThree;
 import com.qiu.model.PlayerTwo;
+import com.qiu.util.MusicServer;
 import com.qiu.util.Util;
 
 public class LoginFrame extends JFrame {
@@ -29,6 +30,7 @@ public class LoginFrame extends JFrame {
 	Player playerThree = new PlayerThree();
 	SelectDialog sd = new SelectDialog(this);
 	ScoreDialog scd = new ScoreDialog(this);
+	MusicServer ms = new MusicServer();
 
 	//登录界面的构建
 	public LoginFrame(){
@@ -42,6 +44,7 @@ public class LoginFrame extends JFrame {
 		
 		this.addWindowListener(lw);//添加窗口监听
 		this.getGf().addWindowListener(gw);//游戏界面添加窗口监听
+		this.getMs().loop();
 		//登录按钮添加动作监听
 		this.getLoginPanel().getStart().addActionListener(la);
 		this.getLoginPanel().getIntroduce().addActionListener(la);
@@ -65,6 +68,7 @@ public class LoginFrame extends JFrame {
 		this.getGf().getGamePanel().addMouseListener(gm);
 		this.getSd().getSure().addActionListener(sa);
 		this.getSd().getCancel().addActionListener(sa);
+		this.getSd().getMusic().addActionListener(sa);
 		this.getGf().getGamePanel().getRd().getRp().getExit().addActionListener(ga);
 		this.getGf().getGamePanel().getRd().getRp().getRestart().addActionListener(ga);
 		this.getScd().getSp().getSure().addActionListener(ga);
@@ -157,6 +161,16 @@ public class LoginFrame extends JFrame {
 
 	public void setScd(ScoreDialog scd) {
 		this.scd = scd;
+	}
+
+
+	public MusicServer getMs() {
+		return ms;
+	}
+
+
+	public void setMs(MusicServer ms) {
+		this.ms = ms;
 	}
 
 }

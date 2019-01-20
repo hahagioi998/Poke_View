@@ -52,11 +52,16 @@ public class SelectDialog extends JDialog {
 		buttonGroup.add(slow);
 		buttonGroup.add(normal);
 		buttonGroup.add(fast);
+		speed.setLayout(null);
+		slow.setBounds(30, 30, 100, 25);
+		normal.setBounds(30, 60, 100, 25);
+		fast.setBounds(30, 90, 100, 25);
+		normal.setSelected(true);
 		speed.add(slow);
 		speed.add(normal);
 		speed.add(fast);
-		// speed.add(buttonGroup);
 		// 添加复选框
+		music.setSelected(true);
 		sound.add(music);
 		// 面板3上设置东西
 		playerName.setLayout(null);
@@ -92,6 +97,7 @@ public class SelectDialog extends JDialog {
 		
 		this.getSure().setActionCommand("sure");
 		this.getCancel().setActionCommand("cancel");
+		this.getMusic().setActionCommand("music");
 	}
 
 	public LoginFrame getLf() {
