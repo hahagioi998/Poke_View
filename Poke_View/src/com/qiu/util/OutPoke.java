@@ -1,5 +1,6 @@
 package com.qiu.util;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 
 import com.qiu.model.Player;
@@ -13,6 +14,8 @@ public class OutPoke {
 
 	public static int score = 0;// 叫地主的分数,乘上底牌的倍数
 	public static boolean isTrusteeship = false;// 托管的开关,false表示自己玩,true表示托管开启
+	public static int boomCount = 0;//普通炸弹的个数
+	public static int doubleBoomCount = 0;//王炸个数
 
 	// 底牌翻倍的方法
 	public static void baseMultiple(ArrayList<Poke> p) {
@@ -232,7 +235,7 @@ public class OutPoke {
 			// 本家出牌集合为空,就说明要不起,还有一种情况就是刚好剩下三张一样的
 			if (self.getOutPoke().size() == 0 || self.getPlayerPoke().size() == 0) {
 				// 大不起我的放回去
-				for (int i = 0; i < self.getOutPoke().size(); i++) {
+				for (int i = self.getOutPoke().size() - 1; i >= 0; i--) {
 					self.getPlayerPoke().add(self.getOutPoke().get(i));
 					self.getOutPoke().remove(i);
 				}
@@ -243,12 +246,10 @@ public class OutPoke {
 				if (p.getNumber() != self.getOutPoke().get(0).getNumber()) {// 判断带进去的一张,它和前面三张不一样才是三代一,否则就是炸弹
 					self.getOutPoke().add(p);
 					self.getPlayerPoke().remove(self.getPlayerPoke().size() - 1);
-				} 
-//				else {
-//					self.getOutPoke().add(p);
-//					self.getPlayerPoke().remove(self.getPlayerPoke().size() - 1);
-//					OutPoke.score *= 4;// 炸弹翻四倍
-//				}
+				}else{
+					Util.pokeSort(self.getPlayerPoke());
+					Util.isPoke = 2;
+				}
 
 			}
 
@@ -711,6 +712,7 @@ public class OutPoke {
 						Util.type = 8;
 						Util.isPoke = -1;// 关闭要不起的按钮
 						OutPoke.score *= 4;
+						OutPoke.boomCount ++;
 						break;
 					}else if(prior.getOutPoke().size() == 4
 							&& prior.getOutPoke().get(0).getNumber() == prior.getOutPoke().get(1).getNumber()
@@ -728,6 +730,7 @@ public class OutPoke {
 							Util.type = 8;
 							Util.isPoke = -1;// 关闭要不起的按钮
 							OutPoke.score *= 4;
+							OutPoke.boomCount ++;
 							break;
 						}else{
 //							Util.isPoke = 2;//要不起
@@ -751,6 +754,7 @@ public class OutPoke {
 						Util.type = 8;
 						Util.isPoke = -1;// 关闭要不起的按钮
 						OutPoke.score *= 4;
+						OutPoke.boomCount ++;
 						break;
 					}
 					
@@ -783,6 +787,7 @@ public class OutPoke {
 						Util.type = 8;
 						Util.isPoke = -1;// 关闭要不起的按钮
 						OutPoke.score *= 4;
+						OutPoke.boomCount ++;
 						break;
 					}else if(next.getOutPoke().size() == 4
 							&& next.getOutPoke().get(0).getNumber() == next.getOutPoke().get(1).getNumber()
@@ -800,6 +805,7 @@ public class OutPoke {
 							Util.type = 8;
 							Util.isPoke = -1;// 关闭要不起的按钮
 							OutPoke.score *= 4;
+							OutPoke.boomCount ++;
 							break;
 						}else{
 							Util.isPoke = 2;//要不起
@@ -823,6 +829,7 @@ public class OutPoke {
 						Util.type = 8;
 						Util.isPoke = -1;// 关闭要不起的按钮
 						OutPoke.score *= 4;
+						OutPoke.boomCount ++;
 						break;
 					}
 					
@@ -844,6 +851,7 @@ public class OutPoke {
 			self.getPlayerPoke().remove(0);
 			self.getPlayerPoke().remove(0);
 			OutPoke.score *= 4;
+			OutPoke.doubleBoomCount ++;
 			Util.type = 8;
 		}else{
 			Util.isPoke = 2;

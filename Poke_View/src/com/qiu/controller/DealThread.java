@@ -769,18 +769,27 @@ public class DealThread extends Thread {
 				//如果是地主的手牌集合为空就判断地主赢,否则就是农民赢
 				if(Util.landowner == 1 && Util.playerOne.getPlayerPoke().size() == 0){
 					Util.playerOne.setScore(Util.playerOne.getScore() +  OutPoke.score * 2);
+					Util.playerOne.setWin("胜");
 					Util.playerTwo.setScore(Util.playerTwo.getScore() - OutPoke.score);
+					Util.playerTwo.setWin("败");
 					Util.playerThree.setScore(Util.playerThree.getScore() - OutPoke.score);
+					Util.playerThree.setWin("败");
 					Util.key = 7;//跳转到结算面板
 				}else if(Util.landowner == 2 && Util.playerTwo.getPlayerPoke().size() == 0){
 					Util.playerTwo.setScore(Util.playerTwo.getScore() +  OutPoke.score * 2);
+					Util.playerTwo.setWin("胜");
 					Util.playerOne.setScore(Util.playerOne.getScore() - OutPoke.score);
+					Util.playerOne.setWin("败");
 					Util.playerThree.setScore(Util.playerThree.getScore() - OutPoke.score);
+					Util.playerThree.setWin("败");
 					Util.key = 7;//跳转到结算面板
 				}else if(Util.landowner == 3 && Util.playerThree.getPlayerPoke().size() == 0){
 					Util.playerThree.setScore(Util.playerThree.getScore() +  OutPoke.score * 2);
+					Util.playerThree.setWin("胜");
 					Util.playerTwo.setScore(Util.playerTwo.getScore() - OutPoke.score);
+					Util.playerTwo.setWin("败");
 					Util.playerOne.setScore(Util.playerOne.getScore() - OutPoke.score);
+					Util.playerOne.setWin("败");
 					Util.key = 7;//跳转到结算面板
 				}
 				

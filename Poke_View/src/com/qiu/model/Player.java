@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public abstract class Player {
 
 	private String name;
+	private String win;
 	private ArrayList<Poke> playerPoke = new ArrayList<Poke>();//手牌的集合
 	private int points = 4;//初始分数
 	private ArrayList<Poke> outPoke = new ArrayList<Poke>();//出牌的集合
@@ -48,6 +49,14 @@ public abstract class Player {
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	public String getWin() {
+		return win;
+	}
+
+	public void setWin(String win) {
+		this.win = win;
 	}
 
 }

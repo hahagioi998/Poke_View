@@ -22,20 +22,20 @@ public class SelectAction implements ActionListener {
 		String order = e.getActionCommand();
 		if(order.equals("sure")){
 			String oneName = lf.getSd().getJtf_PlayerOne().getText();
-			if(oneName.length() == 0 || oneName.length() > 6){
-				JOptionPane.showMessageDialog(lf, "请将玩家一的名字长度控制在1-12个字符之间!");
+			if(oneName.length() == 0 || oneName.length() > 3){
+				JOptionPane.showMessageDialog(lf, "请将玩家一的名字长度控制在1-3个字符之间!");
 			}else{
 				Util.playerOne.setName(oneName);
 			}
 			String twoName = lf.getSd().getJtf_PlayerTwo().getText();
-			if(twoName.length() == 0 || twoName.length() > 6){
-				JOptionPane.showMessageDialog(lf, "请将玩家二的名字长度控制在1-12个字符之间!");
+			if(twoName.length() == 0 || twoName.length() > 3){
+				JOptionPane.showMessageDialog(lf, "请将玩家二的名字长度控制在1-3个字符之间!");
 			}else{
 				Util.playerTwo.setName(twoName);
 			}
 			String threeName = lf.getSd().getJtf_PlayerThree().getText();
-			if(threeName.length() == 0 || threeName.length() > 6){
-				JOptionPane.showMessageDialog(lf, "请将玩家三的名字长度控制在1-12个字符之间!");
+			if(threeName.length() == 0 || threeName.length() > 3){
+				JOptionPane.showMessageDialog(lf, "请将玩家三的名字长度控制在1-3个字符之间!");
 			}else{
 				Util.playerThree.setName(threeName);
 			}

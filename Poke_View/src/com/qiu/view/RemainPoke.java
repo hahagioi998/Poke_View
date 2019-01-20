@@ -41,24 +41,31 @@ public class RemainPoke extends JPanel {
 	// 王的记牌方法
 	public int reMainPoke(int num) {
 		int count = 0;
-		for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {
-			Poke p = Util.playerOne.getPlayerPoke().get(i);
-			if (num == p.getNumber()) {
-				count++;
+		if(Util.playerOne.getPlayerPoke().size() != 0){
+			for (int i = 0; i < Util.playerOne.getPlayerPoke().size(); i++) {
+				Poke p = Util.playerOne.getPlayerPoke().get(i);
+				if (num == p.getNumber()) {
+					count++;
+				}
 			}
 		}
-		for (int i = 0; i < Util.playerTwo.getPlayerPoke().size(); i++) {
-			Poke p = Util.playerTwo.getPlayerPoke().get(i);
-			if (num == p.getNumber()) {
-				count++;
+		if(Util.playerTwo.getPlayerPoke().size() != 0){
+			for (int i = 0; i < Util.playerTwo.getPlayerPoke().size(); i++) {
+				Poke p = Util.playerTwo.getPlayerPoke().get(i);
+				if (num == p.getNumber()) {
+					count++;
+				}
 			}
 		}
-		for (int i = 0; i < Util.playerThree.getPlayerPoke().size(); i++) {
-			Poke p = Util.playerThree.getPlayerPoke().get(i);
-			if (num == p.getNumber()) {
-				count++;
+		if(Util.playerThree.getPlayerPoke().size() != 0){
+			for (int i = 0; i < Util.playerThree.getPlayerPoke().size(); i++) {
+				Poke p = Util.playerThree.getPlayerPoke().get(i);
+				if (num == p.getNumber()) {
+					count++;
+				}
 			}
 		}
+		
 		return count;
 	}
 }

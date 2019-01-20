@@ -7,7 +7,6 @@ import com.qiu.controller.GameMouse;
 import com.qiu.controller.GameWindow;
 import com.qiu.controller.LoginAction;
 import com.qiu.controller.LoginWindow;
-import com.qiu.controller.ResultAction;
 import com.qiu.controller.SelectAction;
 import com.qiu.model.Player;
 import com.qiu.model.PlayerOne;
@@ -25,12 +24,11 @@ public class LoginFrame extends JFrame {
 	GameAction ga = new GameAction(this);
 	GameMouse gm = new GameMouse(this.getGf().getGamePanel());
 	SelectAction sa = new SelectAction(this);
-//	ResultDialog rd = new ResultDialog();
-//	ResultAction ra = new ResultAction(rd);
 	Player playerOne = new PlayerOne();
 	Player playerTwo = new PlayerTwo();
 	Player playerThree = new PlayerThree();
 	SelectDialog sd = new SelectDialog(this);
+	ScoreDialog scd = new ScoreDialog(this);
 
 	//登录界面的构建
 	public LoginFrame(){
@@ -62,14 +60,15 @@ public class LoginFrame extends JFrame {
 		this.getGf().getGamePanel().getNoMark().addActionListener(ga);
 		this.getGf().getGamePanel().getOutPoke().addActionListener(ga);
 		this.getGf().getGamePanel().getNoOut().addActionListener(ga);
-		this.getGf().getGamePanel().getHint().addActionListener(ga);
+		this.getGf().getGamePanel().getBack().addActionListener(ga);
 		this.getGf().getGamePanel().getTrusteeship().addActionListener(ga);
 		this.getGf().getGamePanel().addMouseListener(gm);
 		this.getSd().getSure().addActionListener(sa);
 		this.getSd().getCancel().addActionListener(sa);
-//		this.getRd().getRp().getExit().addActionListener(ra);
-//		this.getRd().getRp().getRestart().addActionListener(ra);
-		
+		this.getGf().getGamePanel().getRd().getRp().getExit().addActionListener(ga);
+		this.getGf().getGamePanel().getRd().getRp().getRestart().addActionListener(ga);
+		this.getScd().getSp().getSure().addActionListener(ga);
+		this.getScd().getSp().getReset().addActionListener(ga);
 	}
 	
 	
@@ -151,13 +150,13 @@ public class LoginFrame extends JFrame {
 	}
 
 
-//	public ResultDialog getRd() {
-//		return rd;
-//	}
-//
-//
-//	public void setRd(ResultDialog rd) {
-//		this.rd = rd;
-//	}
+	public ScoreDialog getScd() {
+		return scd;
+	}
+
+
+	public void setScd(ScoreDialog scd) {
+		this.scd = scd;
+	}
 
 }

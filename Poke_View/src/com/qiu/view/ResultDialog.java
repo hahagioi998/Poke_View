@@ -4,12 +4,9 @@ import java.awt.Graphics;
 
 import javax.swing.JDialog;
 
-import com.qiu.controller.ResultAction;
-
 public class ResultDialog extends JDialog {
 	private LoginFrame lf;
 	private ResultPanel rp = new ResultPanel();
-	private ResultAction ra = new ResultAction(this);
 	public ResultDialog(){
 		this.setLf(lf);
 		this.setSize(630, 270);
@@ -18,8 +15,6 @@ public class ResultDialog extends JDialog {
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		
-		this.getRp().getExit().addActionListener(ra);
-//		this.getRp().getRestart().addActionListener(ra);
 	}
 	
 	public LoginFrame getLf() {
@@ -37,13 +32,6 @@ public class ResultDialog extends JDialog {
 		this.rp = rp;
 	}
 
-	public ResultAction getRa() {
-		return ra;
-	}
-
-	public void setRa(ResultAction ra) {
-		this.ra = ra;
-	}
 
 	
 }

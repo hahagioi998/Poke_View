@@ -28,7 +28,7 @@ public class GamePanel extends JPanel {
 	private JButton noMark = new JButton("不  叫");
 	private JButton outPoke = new JButton("出  牌");
 	private JButton noOut = new JButton("不  出");
-	private JButton hint = new JButton("提  示");
+	private JButton back = new JButton("恢  复");
 	private JButton trusteeship = new JButton("托  管");
 	private ResultDialog rd = new ResultDialog();
 
@@ -46,7 +46,7 @@ public class GamePanel extends JPanel {
 		noMark.setActionCommand("noMark");
 		outPoke.setActionCommand("outPoke");
 		noOut.setActionCommand("noOut");
-		hint.setActionCommand("hint");
+		back.setActionCommand("back");
 		trusteeship.setActionCommand("trusteeship");
 
 		this.add(rp);// 放记牌器画板
@@ -70,15 +70,15 @@ public class GamePanel extends JPanel {
 		// 放那出牌那些按钮
 		outPoke.setBounds(310, 440, 70, 40);
 		noOut.setBounds(390, 440, 70, 40);
-		hint.setBounds(470, 440, 70, 40);
+		back.setBounds(470, 440, 70, 40);
 		trusteeship.setBounds(660, 600, 90, 40);
 		this.add(outPoke);
 		this.add(noOut);
-		this.add(hint);
+		this.add(back);
 		this.add(trusteeship);
 		outPoke.setVisible(false);
 		noOut.setVisible(false);
-		hint.setVisible(false);
+		back.setVisible(false);
 		trusteeship.setVisible(false);
 
 		if (Util.key == 1) {
@@ -225,7 +225,7 @@ public class GamePanel extends JPanel {
 					} else {
 						noOut.setVisible(true);
 					}
-					hint.setVisible(true);
+					back.setVisible(true);
 				}
 				// 另外两家出牌区域依然可见
 				if (Util.playerThree.getOutPoke().size() != 0) {
@@ -370,7 +370,7 @@ public class GamePanel extends JPanel {
 	public void showOutPokeButton() {
 		outPoke.setVisible(false);
 		noOut.setVisible(false);
-		hint.setVisible(false);
+		back.setVisible(false);
 	}
 
 	public JButton getShowPoke() {
@@ -429,14 +429,6 @@ public class GamePanel extends JPanel {
 		this.noOut = noOut;
 	}
 
-	public JButton getHint() {
-		return hint;
-	}
-
-	public void setHint(JButton hint) {
-		this.hint = hint;
-	}
-
 	public JButton getTrusteeship() {
 		return trusteeship;
 	}
@@ -459,6 +451,14 @@ public class GamePanel extends JPanel {
 
 	public void setRd(ResultDialog rd) {
 		this.rd = rd;
+	}
+
+	public JButton getBack() {
+		return back;
+	}
+
+	public void setBack(JButton back) {
+		this.back = back;
 	}
 
 }

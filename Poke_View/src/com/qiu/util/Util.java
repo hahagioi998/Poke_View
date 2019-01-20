@@ -45,6 +45,7 @@ public class Util {
 	public static final Image POKE_BACK = new ImageIcon("img/poke/牌背.png").getImage();// 牌背的显示
 	public static final Image REMAIN = new ImageIcon("img/reMain.png").getImage();//记牌器背景图
 	public static final Image RESULT = new ImageIcon("img/result.jpg").getImage();//结算面板的背景图
+	public static final Image SCORE = new ImageIcon("img/score.jpg").getImage();//得分面板背景图
 
 	// 每个玩家手中初始的牌数
 	public static final int PLAYERE_POKE = 17;
