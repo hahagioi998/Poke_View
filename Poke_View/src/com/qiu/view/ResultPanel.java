@@ -40,28 +40,67 @@ public class ResultPanel extends JPanel {
 		g.drawString(Util.playerTwo.getName(), 290, 125);
 		g.drawString(Util.playerThree.getName(), 290, 165);
 		if (Util.landowner == 1) {
-			g.drawString(Util.playerOne.getWin(), 430, 85);
-			g.drawString(Util.playerOne.getScore() + "(+" + OutPoke.score * 2 + ")", 545, 85);
-			g.drawString(Util.playerTwo.getWin(), 430, 125);
-			g.drawString(Util.playerTwo.getScore() + "(-" + OutPoke.score + ")", 545, 125);
-			g.drawString(Util.playerThree.getWin(), 430, 165);
-			g.drawString(Util.playerThree.getScore() + "(-" + OutPoke.score + ")", 545, 165);
+			if(Util.playerOne.getPlayerPoke().size() == 0){
+				g.drawString(Util.playerOne.getWin(), 430, 85);
+				g.drawString(Util.playerOne.getScore() + "(+" + OutPoke.score * 2 + ")", 545, 85);
+				g.drawString(Util.playerTwo.getWin(), 430, 125);
+				g.drawString(Util.playerTwo.getScore() + "(-" + OutPoke.score + ")", 545, 125);
+				g.drawString(Util.playerThree.getWin(), 430, 165);
+				g.drawString(Util.playerThree.getScore() + "(-" + OutPoke.score + ")", 545, 165);
+			}else if((Util.playerOne.getPlayerPoke().size() != 0 && Util.playerTwo.getPlayerPoke().size() == 0 )
+					|| (Util.playerOne.getPlayerPoke().size() != 0 &&Util.playerThree.getPlayerPoke().size() == 0)){
+				g.drawString(Util.playerOne.getWin(), 430, 85);
+				g.drawString(Util.playerOne.getScore() + "(-" + OutPoke.score * 2 + ")", 545, 85);
+				g.drawString(Util.playerTwo.getWin(), 430, 125);
+				g.drawString(Util.playerTwo.getScore() + "(+" + OutPoke.score + ")", 545, 125);
+				g.drawString(Util.playerThree.getWin(), 430, 165);
+				g.drawString(Util.playerThree.getScore() + "(+" + OutPoke.score + ")", 545, 165);
+			}
+			
 		} else if (Util.landowner == 2) {
-			g.drawString(Util.playerOne.getWin(), 430, 85);
-			g.drawString(Util.playerOne.getScore() + "(-" + OutPoke.score + ")", 545, 85);
-			g.drawString(Util.playerTwo.getWin(), 430, 125);
-			g.drawString(Util.playerTwo.getScore() + "(+" + OutPoke.score * 2 + ")", 545, 125);
-			g.drawString(Util.playerThree.getWin(), 430, 165);
-			g.drawString(Util.playerThree.getScore() + "(-" + OutPoke.score + ")", 545, 165);
+			if(Util.playerTwo.getPlayerPoke().size() == 0){
+				g.drawString(Util.playerOne.getWin(), 430, 85);
+				g.drawString(Util.playerOne.getScore() + "(-" + OutPoke.score + ")", 545, 85);
+				g.drawString(Util.playerTwo.getWin(), 430, 125);
+				g.drawString(Util.playerTwo.getScore() + "(+" + OutPoke.score * 2 + ")", 545, 125);
+				g.drawString(Util.playerThree.getWin(), 430, 165);
+				g.drawString(Util.playerThree.getScore() + "(-" + OutPoke.score + ")", 545, 165);
+			}else if(Util.playerOne.getPlayerPoke().size() == 0
+					|| Util.playerThree.getPlayerPoke().size() == 0){
+				g.drawString(Util.playerOne.getWin(), 430, 85);
+				g.drawString(Util.playerOne.getScore() + "(+" + OutPoke.score + ")", 545, 85);
+				g.drawString(Util.playerTwo.getWin(), 430, 125);
+				g.drawString(Util.playerTwo.getScore() + "(-" + OutPoke.score * 2 + ")", 545, 125);
+				g.drawString(Util.playerThree.getWin(), 430, 165);
+				g.drawString(Util.playerThree.getScore() + "(+" + OutPoke.score + ")", 545, 165);
+			}
+			
 		} else if (Util.landowner == 3) {
-			g.drawString(Util.playerOne.getWin(), 430, 85);
-			g.drawString(Util.playerOne.getScore() + "(-" + OutPoke.score + ")", 545, 85);
-			g.drawString(Util.playerTwo.getWin(), 430, 125);
-			g.drawString(Util.playerTwo.getScore() + "(-" + OutPoke.score + ")", 545, 125);
-			g.drawString(Util.playerThree.getWin(), 430, 165);
-			g.drawString(Util.playerThree.getScore() + "(+ " + OutPoke.score * 2 + ")", 545, 165);
+			if(Util.playerThree.getPlayerPoke().size() == 0){
+				g.drawString(Util.playerOne.getWin(), 430, 85);
+				g.drawString(Util.playerOne.getScore() + "(-" + OutPoke.score + ")", 545, 85);
+				g.drawString(Util.playerTwo.getWin(), 430, 125);
+				g.drawString(Util.playerTwo.getScore() + "(-" + OutPoke.score + ")", 545, 125);
+				g.drawString(Util.playerThree.getWin(), 430, 165);
+				g.drawString(Util.playerThree.getScore() + "(+ " + OutPoke.score * 2 + ")", 545, 165);
+			}else if(Util.playerOne.getPlayerPoke().size() == 0
+					|| Util.playerTwo.getPlayerPoke().size() == 0){
+				g.drawString(Util.playerOne.getWin(), 430, 85);
+				g.drawString(Util.playerOne.getScore() + "(+" + OutPoke.score + ")", 545, 85);
+				g.drawString(Util.playerTwo.getWin(), 430, 125);
+				g.drawString(Util.playerTwo.getScore() + "(+" + OutPoke.score + ")", 545, 125);
+				g.drawString(Util.playerThree.getWin(), 430, 165);
+				g.drawString(Util.playerThree.getScore() + "(- " + OutPoke.score * 2 + ")", 545, 165);
+			}
+			
 		}
 
+		try {
+			Thread.sleep(1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.repaint();
 	}
 

@@ -118,6 +118,7 @@ public class Util {
 	public static int isPoke = -1;//要不起的开关,默认要的起 0--自己要不起  1--自己要的起  2--东家要不起  3--西家要不起
 	public static int pitchOn = 0;//自己选中了几张牌
 	public static int type = 0;//出牌的类型  1--是单张  2--是对子   3--是三张  4--三代一  5--三代二   6--顺子  7--双顺  8--炸弹 
+	public static boolean remain = true;//记牌器的开关,默认为打开
 	//叫分的方法
 	public static void callPlayers(){
 		Random ran = new Random();

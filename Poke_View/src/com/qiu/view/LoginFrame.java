@@ -56,21 +56,28 @@ public class LoginFrame extends JFrame {
 		this.getGf().getExitItem().addActionListener(ga);
 		this.getGf().getRuleItem().addActionListener(ga);
 		this.getGf().getAboutItem().addActionListener(ga);
+		//游戏面板叫分监听
 		this.getGf().getGamePanel().getShowPoke().addActionListener(ga);
 		this.getGf().getGamePanel().getOneMark().addActionListener(ga);
 		this.getGf().getGamePanel().getTwoMark().addActionListener(ga);
 		this.getGf().getGamePanel().getThreeMark().addActionListener(ga);
 		this.getGf().getGamePanel().getNoMark().addActionListener(ga);
+		//游戏面板出牌按钮监听
 		this.getGf().getGamePanel().getOutPoke().addActionListener(ga);
 		this.getGf().getGamePanel().getNoOut().addActionListener(ga);
 		this.getGf().getGamePanel().getBack().addActionListener(ga);
 		this.getGf().getGamePanel().getTrusteeship().addActionListener(ga);
+		//鼠标监听
 		this.getGf().getGamePanel().addMouseListener(gm);
+		//选项按钮监听
 		this.getSd().getSure().addActionListener(sa);
 		this.getSd().getCancel().addActionListener(sa);
 		this.getSd().getMusic().addActionListener(sa);
+		this.getSd().getRemain().addActionListener(sa);
+		//结算面板退出和重开监听
 		this.getGf().getGamePanel().getRd().getRp().getExit().addActionListener(ga);
 		this.getGf().getGamePanel().getRd().getRp().getRestart().addActionListener(ga);
+		//得分面板监听
 		this.getScd().getSp().getSure().addActionListener(ga);
 		this.getScd().getSp().getReset().addActionListener(ga);
 	}

@@ -19,13 +19,14 @@ public class SelectDialog extends JDialog {
 	private JRadioButton normal = new JRadioButton("正常(N)");
 	private JRadioButton fast = new JRadioButton("快(F)");
 	private JCheckBox music = new JCheckBox("音效");
+	private JCheckBox remain = new JCheckBox("记牌器");
 	private JLabel jl_PlayerOne = new JLabel("自己");
 	private JLabel jl_PlayerTwo = new JLabel("东家");
 	private JLabel jl_PlayerThree = new JLabel("西家");
 	private ButtonGroup buttonGroup = new ButtonGroup();
 	// 创建4个面板,分别放进网格中
 	private JPanel speed = new JPanel();
-	private JPanel sound = new JPanel();
+	private JPanel other = new JPanel();
 	private JPanel playerName = new JPanel();
 	private JPanel buttonPanel = new JPanel();
 	
@@ -46,7 +47,7 @@ public class SelectDialog extends JDialog {
 		this.setLayout(new GridLayout(2, 2, 10, 10));// 将对话框设计为两行两列的网格,两面板距离10像素
 		// 给每个面板添加边框和标题,使用BorderFactory工厂类生成带标题的边框对象
 		speed.setBorder(BorderFactory.createTitledBorder("动画速度"));
-		sound.setBorder(BorderFactory.createTitledBorder("音效"));
+		other.setBorder(BorderFactory.createTitledBorder("其他"));
 		playerName.setBorder(BorderFactory.createTitledBorder("玩家姓名"));
 		// 添加单选框
 		buttonGroup.add(slow);
@@ -60,9 +61,14 @@ public class SelectDialog extends JDialog {
 		speed.add(slow);
 		speed.add(normal);
 		speed.add(fast);
-		// 添加复选框
+		//其他面板添加复选框和设置绝对坐标
+		other.setLayout(null);
+		remain.setSelected(true);
+		remain.setBounds(30, 30, 100, 25);
 		music.setSelected(true);
-		sound.add(music);
+		music.setBounds(30, 60, 100, 25);
+		other.add(music);
+		other.add(remain);
 		// 面板3上设置东西
 		playerName.setLayout(null);
 		jl_PlayerOne.setBounds(8, 20, 30, 25);
@@ -89,7 +95,7 @@ public class SelectDialog extends JDialog {
 		buttonPanel.add(cancel);
 		// 面板添加到窗体
 		this.add(speed);
-		this.add(sound);
+		this.add(other);
 		this.add(playerName);
 		this.add(buttonPanel);
 
@@ -98,6 +104,7 @@ public class SelectDialog extends JDialog {
 		this.getSure().setActionCommand("sure");
 		this.getCancel().setActionCommand("cancel");
 		this.getMusic().setActionCommand("music");
+		this.getRemain().setActionCommand("remain");
 	}
 
 	public LoginFrame getLf() {
@@ -178,6 +185,14 @@ public class SelectDialog extends JDialog {
 
 	public void setCancel(JButton cancel) {
 		this.cancel = cancel;
+	}
+
+	public JCheckBox getRemain() {
+		return remain;
+	}
+
+	public void setRemain(JCheckBox remain) {
+		this.remain = remain;
 	}
 
 }

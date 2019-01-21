@@ -57,6 +57,7 @@ public class GameAction implements ActionListener {
 				Util.drawMark = 0;
 				Util.flag = true;
 				lf.getGf().getGamePanel().getShowPoke().setText("暗牌");
+				lf.getGf().getGamePanel().getShowPoke().setVisible(true);
 				Util.callPlayer = 0;
 				Util.mark = 0;
 				Util.hidePoints = 0;
@@ -64,6 +65,8 @@ public class GameAction implements ActionListener {
 				Util.pitchOn = 0;
 				Util.type = 0;
 				OutPoke.score = 0;
+				OutPoke.boomCount = 0;
+				OutPoke.doubleBoomCount = 0;
 				lf.getGf().getGamePanel().getTrusteeship().setText("托管");
 				OutPoke.isTrusteeship = false;
 				Util.upsetPoke(Util.pokeList);
@@ -326,9 +329,12 @@ public class GameAction implements ActionListener {
 			Util.pitchOn = 0;// 置0,待会儿重新使用
 		} else if (order.equals("noOut")) {
 			Util.isPoke = 0;// 要不起
+			Util.setCoordinate(Util.playerOne.getPlayerPoke());
+			Util.pitchOn = 0;
 		} else if (order.equals("back")) {
 			//出去的牌按回复原来的位置
 			Util.setCoordinate(Util.playerOne.getPlayerPoke());
+			Util.pitchOn = 0;
 		} else if (order.equals("trusteeship")) {
 			if (OutPoke.isTrusteeship == false) {
 				lf.getGf().getGamePanel().getTrusteeship().setText("取消托管");
@@ -359,6 +365,7 @@ public class GameAction implements ActionListener {
 			Util.drawMark = 0;
 			Util.flag = true;
 			lf.getGf().getGamePanel().getShowPoke().setText("暗牌");
+			lf.getGf().getGamePanel().getShowPoke().setVisible(true);
 			Util.callPlayer = 0;
 			Util.mark = 0;
 			Util.hidePoints = 0;
@@ -366,6 +373,8 @@ public class GameAction implements ActionListener {
 			Util.pitchOn = 0;
 			Util.type = 0;
 			OutPoke.score = 0;
+			OutPoke.boomCount = 0;
+			OutPoke.doubleBoomCount = 0;
 			lf.getGf().getGamePanel().getTrusteeship().setText("托管");
 			OutPoke.isTrusteeship = false;
 			Util.upsetPoke(Util.pokeList);

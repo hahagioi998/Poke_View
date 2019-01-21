@@ -296,7 +296,7 @@ public class GamePanel extends JPanel {
 		}else if(Util.key == 5){
 			String s = "游戏结束,正在清理战场...";
 			g.drawString(s, 370, 320);
-//			System.out.println(Util.key);
+			this.getShowPoke().setVisible(false);
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {

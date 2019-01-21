@@ -281,7 +281,7 @@ public class ActionOutPoke {
 			}
 		} else if (prior.getOutPoke().size() == 2) {
 			if (prior.getOutPoke().get(0).getNumber() != 100
-					|| prior.getOutPoke().get(2).getNumber() != 100) {
+					|| prior.getOutPoke().get(1).getNumber() != 100) {
 				if (temp.size() == 4) {
 					if (temp.get(0).getNumber() == temp.get(1).getNumber()
 							&& temp.get(0).getNumber() == temp.get(2).getNumber()
@@ -306,6 +306,10 @@ public class ActionOutPoke {
 							self.getPlayerPoke().get(i).setPokeY(500);
 						}
 					}
+				}
+			}else if(prior.getOutPoke().get(0).getNumber() == 100 && prior.getOutPoke().get(1).getNumber() == 99){
+				for (int i = 0; i < self.getPlayerPoke().size(); i++) {// 把牌全部归位
+					self.getPlayerPoke().get(i).setPokeY(500);
 				}
 			}
 		}

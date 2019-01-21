@@ -50,11 +50,11 @@ public class SelectAction implements ActionListener {
 				}
 				//∂Øª≠ ±º‰…Ë÷√
 				if(lf.getSd().getSlow().isSelected()){
-					Util.time = 4000;
-				}else if(lf.getSd().getNormal().isSelected()){
 					Util.time = 2000;
-				}else if(lf.getSd().getFast().isSelected()){
+				}else if(lf.getSd().getNormal().isSelected()){
 					Util.time = 1000;
+				}else if(lf.getSd().getFast().isSelected()){
+					Util.time = 500;
 				}
 				lf.getSd().setVisible(false);
 			}	
@@ -65,6 +65,12 @@ public class SelectAction implements ActionListener {
 				lf.getMs().loop();//“Ù¿÷ø™∆Ù
 			}else{
 				lf.getMs().stop();//“Ù¿÷Õ£÷π
+			}
+		}else if(order.equals("remain")){
+			if(lf.getSd().getRemain().isSelected()){
+				lf.getGf().getGamePanel().getRp().setVisible(true);
+			}else{
+				lf.getGf().getGamePanel().getRp().setVisible(false);
 			}
 		}
 
