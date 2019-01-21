@@ -162,12 +162,12 @@ public class DealThread extends Thread {
 					}
 
 				}
-				try {
-					Thread.sleep(Util.time);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				try {
+//					Thread.sleep(Util.time);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 				// 当玩家的points的值不为4的时候,说明都叫地主都一轮结束了
 				if (Util.playerOne.getPoints() != 4 && Util.playerTwo.getPoints() != 4
 						&& Util.playerThree.getPoints() != 4) {
@@ -270,10 +270,12 @@ public class DealThread extends Thread {
 				} else if (Util.landowner == 3) {
 					Util.callPlayer = 1;
 				}
+				Util.timeDown = 20;
 				while (Util.playerOne.getPlayerPoke().size() != 0 && Util.playerTwo.getPlayerPoke().size() != 0
 						&& Util.playerThree.getPlayerPoke().size() != 0) {// 判断条件就是都不为空说明有牌
 
 					if (Util.callPlayer == 0) {// 自己出牌
+						
 						try {
 							Thread.sleep(1);
 						} catch (InterruptedException e) {
@@ -738,14 +740,10 @@ public class DealThread extends Thread {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						Util.timeDown = 20;
 					}
 				}
-				// try {
-				// Thread.sleep(Util.time);
-				// } catch (InterruptedException e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
+				
 				if ((Util.playerOne.getPlayerPoke().size() == 0 && Util.playerTwo.getPlayerPoke().size() != 0
 						&& Util.playerThree.getPlayerPoke().size() != 0)
 						|| (Util.playerOne.getPlayerPoke().size() != 0 && Util.playerTwo.getPlayerPoke().size() == 0

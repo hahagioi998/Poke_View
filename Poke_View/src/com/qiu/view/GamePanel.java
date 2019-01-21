@@ -199,11 +199,20 @@ public class GamePanel extends JPanel {
 			g.drawString(OutPoke.score + "  倍", 460, 260);
 			// 判断出谁是地主,直接画上
 			if (Util.landowner == 1) {
-				g.drawString("地 主", 665, 480);
+//				g.drawString("地 主", 665, 480);
+				g.drawImage(Util.LANDOWNER, 665, 420, 725, 480, 0, 0, 60, 60,null);
+				g.drawImage(Util.FARMER, 135, 70, 195, 130, 0, 0, 60, 60,null);
+				g.drawImage(Util.FARMER, 800, 70, 860, 130, 0, 0, 60, 60,null);
 			} else if (Util.landowner == 2) {
-				g.drawString("地 主", 135, 70);
+//				g.drawString("地 主", 135, 70);
+				g.drawImage(Util.FARMER, 665, 420, 725, 480, 0, 0, 60, 60,null);
+				g.drawImage(Util.LANDOWNER, 135, 70, 195, 130, 0, 0, 60, 60,null);
+				g.drawImage(Util.FARMER, 800, 70, 860, 130, 0, 0, 60, 60,null);
 			} else if (Util.landowner == 3) {
-				g.drawString("地 主", 800, 70);
+//				g.drawString("地 主", 800, 70);
+				g.drawImage(Util.FARMER, 665, 420, 725, 480, 0, 0, 60, 60,null);
+				g.drawImage(Util.FARMER, 135, 70, 195, 130, 0, 0, 60, 60,null);
+				g.drawImage(Util.LANDOWNER, 800, 70, 860, 130, 0, 0, 60, 60,null);
 			}
 			// 按钮不可见
 			showOutPokeButton();
@@ -211,7 +220,7 @@ public class GamePanel extends JPanel {
 			// 轮到谁出牌
 			if (Util.callPlayer == 0) {// 自己出牌
 				if (OutPoke.isTrusteeship) {// 托管开启后,出牌按钮那些不可见
-					showOutPokeButton();
+					showOutPokeButton();					
 					if (Util.isPoke == 2) {
 						g.drawString("要不起!", 160, 320);// 给上一家画要不起
 					}
@@ -219,6 +228,8 @@ public class GamePanel extends JPanel {
 					if (Util.isPoke == 2) {
 						g.drawString("要不起!", 160, 320);// 给上一家画要不起
 					}
+					g.drawImage(Util.TIMEDOWN, 760, 415, 820, 475, 0, 0, 60, 60, null);
+					g.drawString(Util.timeDown+"", 773, 455);
 					outPoke.setVisible(true);
 					if (Util.playerTwo.getOutPoke().size() == 0 && Util.playerThree.getOutPoke().size() == 0) {// 东家和西家的出牌都集合都为空,就让不出的按钮不可见
 						noOut.setVisible(false);

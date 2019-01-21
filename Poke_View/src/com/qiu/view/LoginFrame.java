@@ -8,6 +8,7 @@ import com.qiu.controller.GameWindow;
 import com.qiu.controller.LoginAction;
 import com.qiu.controller.LoginWindow;
 import com.qiu.controller.SelectAction;
+import com.qiu.controller.TimeThread;
 import com.qiu.model.Player;
 import com.qiu.model.PlayerOne;
 import com.qiu.model.PlayerThree;
@@ -31,6 +32,7 @@ public class LoginFrame extends JFrame {
 	SelectDialog sd = new SelectDialog(this);
 	ScoreDialog scd = new ScoreDialog(this);
 	MusicServer ms = new MusicServer();
+//	TimeThread tt = new TimeThread(this);
 
 	//登录界面的构建
 	public LoginFrame(){

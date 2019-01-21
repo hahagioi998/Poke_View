@@ -156,13 +156,15 @@ public class ActionOutPoke {
 		}
 		Util.pokeSort(temp);// 排个序确保没错
 		Util.pokeSort(prior.getOutPoke());// 排个序确保没错
-		boolean k = true;// 用于判断是不是顺子的返回值 1--顺子 2--双顺
+		boolean k = false;// 用于判断是不是顺子的返回值 1--顺子 2--双顺
 		boolean b = false;// 判断是不是双顺
 		// 顺子的判断
 		for (int i = temp.size() - 1; i > 0; i--) {
 			if (temp.get(temp.size() - 1).getNumber() > prior.getOutPoke()
 					.get(prior.getOutPoke().size() - 1).getNumber()) {
-				if (temp.get(i - 1).getNumber() - temp.get(i).getNumber() != 1) {// 不满足条件,坐标归零
+				if (temp.get(i - 1).getNumber() - temp.get(i).getNumber() == 1) {// 不满足条件,坐标归零
+					k = true;
+				}else{
 					k = false;
 				}
 			}

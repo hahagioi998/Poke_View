@@ -24,7 +24,6 @@ public class LoginAction implements ActionListener {
 		String order = e.getActionCommand();//按钮指令的获取
 		if(order.equals("start")){
 			lf.getGf().setVisible(true);//游戏界面可见
-//			new GameFrame().setVisible(true);
 			lf.setVisible(false);//登录界面不可见
 			new DealThread(lf).start();
 		}else if(order.equals("introduce")){

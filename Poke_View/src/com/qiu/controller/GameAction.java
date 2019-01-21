@@ -29,13 +29,13 @@ public class GameAction implements ActionListener {
 		if (order.equals("deal")) {
 			Util.upsetPoke(Util.pokeList);
 			Util.setKey(1);
+			new TimeThread(lf).start();
 			lf.getGf().getStartItem().setText("重发(D)");
 			lf.getGf().getStartItem().setActionCommand("reDeal");
 
-			// Util.show();
 		} else if (order.equals("reDeal")) {// 重新发牌
 			// 窗口监听,提示一下
-			int key = JOptionPane.showConfirmDialog(lf.getGf(), "游戏正在进行,是否确定重新发牌?", "温馨提示",
+			int key = JOptionPane.showConfirmDialog(lf.getGf(), "是否开始新游戏?", "温馨提示",
 					JOptionPane.OK_CANCEL_OPTION);
 			if (key == JOptionPane.OK_OPTION) {
 				Util.pokeList.clear();// 移除集合的所有元素
@@ -124,7 +124,7 @@ public class GameAction implements ActionListener {
 				if (Util.playerTwo.getOutPoke().size() != 0) {// 西家出牌集合不为空,说明有出牌
 					ActionOutPoke.solo(Util.playerOne, Util.playerTwo);
 				} else if (Util.playerThree.getOutPoke().size() != 0 && Util.playerTwo.getOutPoke().size() == 0) {
-					ActionOutPoke.solo(Util.playerOne, Util.playerTwo);
+					ActionOutPoke.solo(Util.playerOne, Util.playerThree);
 				} else {// 不满足上面两个情况,说明现在就该自己出
 					Util.type = 1;// 走1步骤
 					Util.isPoke = 1;// 1就表示要的起
@@ -265,7 +265,8 @@ public class GameAction implements ActionListener {
 					}
 				}
 
-			} else if ((Util.type == 0 && Util.pitchOn > 5) || (Util.type == 6 && Util.pitchOn >= 5)) {// 起来的牌数大于5
+			} else if ((Util.type == 0 && Util.pitchOn > 5) || (Util.type == 6 && Util.pitchOn >= 5)
+					|| (Util.type == 7 && Util.pitchOn > 5)) {// 起来的牌数大于5
 				if (Util.playerTwo.getOutPoke().size() != 0) {
 					ActionOutPoke.beyondFivePoke(Util.playerOne, Util.playerTwo);
 				} else if (Util.playerTwo.getOutPoke().size() == 0 && Util.playerThree.getOutPoke().size() != 0) {
@@ -301,6 +302,11 @@ public class GameAction implements ActionListener {
 							}
 						}
 					}
+					//三顺的判断
+//					for(int i = temp.size() - 1; i > 3; i--){
+//						//三张相同并且
+//						
+//					}
 					if (k) {
 						Util.type = 6;
 						Util.isPoke = 1;

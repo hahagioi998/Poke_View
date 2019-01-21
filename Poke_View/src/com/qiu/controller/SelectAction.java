@@ -59,6 +59,16 @@ public class SelectAction implements ActionListener {
 				lf.getSd().setVisible(false);
 			}	
 		}else if(order.equals("cancel")){
+			lf.getSd().getJtf_PlayerOne().setText(Util.playerOne.getName());
+			lf.getSd().getJtf_PlayerTwo().setText(Util.playerTwo.getName());
+			lf.getSd().getJtf_PlayerThree().setText(Util.playerThree.getName());
+			if(Util.time == 2000){
+				lf.getSd().getSlow().setSelected(true);
+			}else if(Util.time == 1000){
+				lf.getSd().getNormal().setSelected(true);
+			}else if(Util.time == 500){
+				lf.getSd().getFast().setSelected(true);
+			}
 			lf.getSd().setVisible(false);
 		}else if(order.equals("music")){
 			if(lf.getSd().getMusic().isSelected()){
